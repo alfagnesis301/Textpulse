@@ -48,7 +48,7 @@ npm run typecheck
 
 ## Google AdSense preparation
 
-Ad placeholders are rendered by `components/AdSlot.tsx` and display only the label `Advertisement`. They are intentionally separated from tool actions such as Clear, Copy, Download, and CTA buttons.
+Visible ad placeholders are not currently rendered in the interface. Add approved AdSense placements only after the site is ready for monetization review and keep them clearly separated from tool actions such as Clear, Copy, Download, and CTA buttons.
 
 Replace `pub-XXXXXXXXXXXXXXXX` with your real Google AdSense publisher ID after approval:
 
@@ -93,7 +93,7 @@ The contact form uses Netlify Forms. A static form definition lives at `public/f
 - Original educational guide pages are present under `/guides`.
 - About, Contact, Privacy Policy, Terms, Cookie Policy, and Disclaimer pages exist.
 - Navigation and footer links are clear.
-- Ad slots are labeled `Advertisement`.
+- Any future ad slots are clearly labeled and separated from primary actions.
 - There are no fake download buttons, fake navigation items, or prompts to click ads.
 - The tool is useful without requiring signup.
 - Privacy and Cookie Policy copy explains browser-based analysis, localStorage behavior, Google AdSense advertising cookies, opt-out choices, and consent requirements.

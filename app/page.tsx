@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { AdSlot } from "@/components/AdSlot";
 import { FAQ, faqs } from "@/components/FAQ";
 import { Logo } from "@/components/Logo";
 import { TextAnalyzer } from "@/components/TextAnalyzer";
@@ -152,10 +151,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      <div className="mx-auto max-w-7xl px-4 pt-8 sm:px-6 lg:px-8">
-        <AdSlot format="banner" />
-      </div>
-
       <TextAnalyzer />
 
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8" aria-labelledby="what-analyze">
@@ -245,26 +240,23 @@ export default function HomePage() {
       </section>
 
       <section id="publishfit-explained" className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8" aria-labelledby="publishfit-explainer-title">
-        <div className="grid gap-8 lg:grid-cols-[1fr_0.8fr]">
-          <div>
-            <p className="text-sm font-bold uppercase tracking-[0.2em] text-pulse-blue">PublishFit Score explained</p>
-            <h2 id="publishfit-explainer-title" className="mt-3 text-3xl font-extrabold tracking-tight text-slate-950 dark:text-white sm:text-4xl">
-              Pick the channel before judging the draft
-            </h2>
-            <p className="mt-4 text-base leading-7 text-slate-600 dark:text-slate-400">
-              A strong email subject can be too short for a blog intro. A clear meta
-              description can be too long for a social post. PublishFit Score compares your
-              text with the expectations of the selected format, then combines length,
-              clarity, readability, keyword balance, and variety into a single readiness
-              score.
-            </p>
-            <p className="mt-4 text-base leading-7 text-slate-600 dark:text-slate-400">
-              The score is rule-based and transparent. It does not claim to predict rankings,
-              engagement, or academic grading. It gives you a practical checklist before you
-              send, submit, or publish.
-            </p>
-          </div>
-          <AdSlot format="inline" />
+        <div className="max-w-4xl">
+          <p className="text-sm font-bold uppercase tracking-[0.2em] text-pulse-blue">PublishFit Score explained</p>
+          <h2 id="publishfit-explainer-title" className="mt-3 text-3xl font-extrabold tracking-tight text-slate-950 dark:text-white sm:text-4xl">
+            Pick the channel before judging the draft
+          </h2>
+          <p className="mt-4 text-base leading-7 text-slate-600 dark:text-slate-400">
+            A strong email subject can be too short for a blog intro. A clear meta
+            description can be too long for a social post. PublishFit Score compares your
+            text with the expectations of the selected format, then combines length,
+            clarity, readability, keyword balance, and variety into a single readiness
+            score.
+          </p>
+          <p className="mt-4 text-base leading-7 text-slate-600 dark:text-slate-400">
+            The score is rule-based and transparent. It does not claim to predict rankings,
+            engagement, or academic grading. It gives you a practical checklist before you
+            send, submit, or publish.
+          </p>
         </div>
       </section>
 

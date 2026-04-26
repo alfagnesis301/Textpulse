@@ -3,6 +3,23 @@ export type GuideSection = {
   body: string[];
 };
 
+export type GuideTable = {
+  title: string;
+  columns: string[];
+  rows: string[][];
+};
+
+export type GuideBeforeAfter = {
+  before: string;
+  after: string;
+  note: string;
+};
+
+export type GuideCaseStudy = {
+  title: string;
+  body: string;
+};
+
 export type Guide = {
   slug: string;
   title: string;
@@ -11,6 +28,10 @@ export type Guide = {
   readingTime: string;
   category: string;
   sections: GuideSection[];
+  table?: GuideTable;
+  commonMistakes?: string[];
+  caseStudy?: GuideCaseStudy;
+  beforeAfter?: GuideBeforeAfter;
   checklist: string[];
   faq: {
     question: string;
@@ -18,7 +39,11 @@ export type Guide = {
   }[];
 };
 
-export const guides: Guide[] = [
+type GuideEnhancement = Pick<Guide, "table" | "commonMistakes" | "caseStudy" | "beforeAfter"> & {
+  extraFaq?: Guide["faq"];
+};
+
+const baseGuides: Guide[] = [
   {
     slug: "how-to-count-words-accurately",
     title: "How to Count Words Accurately",
@@ -632,6 +657,489 @@ export const guides: Guide[] = [
     ]
   }
 ];
+
+const guideEnhancements: Record<string, GuideEnhancement> = {
+  "how-to-count-words-accurately": {
+    table: {
+      title: "Common counting situations",
+      columns: ["Text element", "Typical treatment", "What to check"],
+      rows: [
+        ["Hyphenated phrase", "One or multiple words", "Confirm the rule used by the final platform."],
+        ["URL or email address", "Often one item", "Remove tracking URLs if they are not part of the draft."],
+        ["Heading", "Usually included", "Exclude only if the assignment says headings do not count."],
+        ["Reference list", "Depends on context", "Academic requirements often define this separately."]
+      ]
+    },
+    commonMistakes: [
+      "Counting copied navigation text or comments as part of the draft.",
+      "Switching tools at the end and treating a small difference as an error.",
+      "Forgetting that references, captions, or appendices may have separate rules."
+    ],
+    caseStudy: {
+      title: "Mini case: client article handoff",
+      body:
+        "A writer drafts a 950 word article in a document editor, then pastes it into a CMS and sees 943 words. The difference comes from a URL, a hyphenated product name, and a hidden comment that was copied into the editor. The practical fix is not to chase an exact universal number, but to clean the text and use the CMS count as the final submission count."
+    },
+    beforeAfter: {
+      before: "This draft includes copied menu labels, two blank sections, and three hidden comments from the source document.",
+      after: "This draft includes only the article body, headings, and final call to action intended for publication.",
+      note: "Clean input makes the count more useful than trying to force every tool to agree."
+    },
+    extraFaq: [
+      {
+        question: "Should emojis count as words?",
+        answer:
+          "Usually no. Emojis can affect character counts, but most word counters do not treat them as words."
+      },
+      {
+        question: "Why does my CMS count differ from my document editor?",
+        answer:
+          "A CMS may treat punctuation, embeds, copied formatting, or hidden content differently from a document editor."
+      }
+    ]
+  },
+  "blog-post-word-count-guide": {
+    table: {
+      title: "Practical blog length examples",
+      columns: ["Approximate length", "Best fit", "What it should include"],
+      rows: [
+        ["300 words", "News update or quick answer", "One clear point, minimal context, direct next step."],
+        ["600 words", "Focused how-to or opinion", "Problem, answer, example, and short checklist."],
+        ["1,000 words", "Useful evergreen post", "Multiple sections, examples, common mistakes, FAQ."],
+        ["2,000 words", "Deep guide or comparison", "Definitions, cases, alternatives, tables, and references."]
+      ]
+    },
+    commonMistakes: [
+      "Adding filler paragraphs just to reach a target word count.",
+      "Publishing one dense block of text without scannable sections.",
+      "Repeating the same keyword instead of adding useful related information."
+    ],
+    caseStudy: {
+      title: "Mini case: expanding a thin post",
+      body:
+        "A 420 word post explains what meta descriptions are but does not show examples. Expanding it to 900 words with a before/after rewrite, a length table, and mistakes to avoid makes the page more useful without padding."
+    },
+    beforeAfter: {
+      before: "Meta descriptions are important for SEO. Keep them short and include keywords.",
+      after: "A meta description should summarize the page benefit in 120-160 characters. For example, replace 'SEO tips for websites' with 'Learn how to write concise SEO titles, meta descriptions, and snippets that match your page content.'",
+      note: "The improved version gives a range, context, and a concrete example."
+    },
+    extraFaq: [
+      {
+        question: "Should every blog post be over 1,000 words?",
+        answer:
+          "No. The topic and search intent matter. A narrow answer can be useful at 600 words, while a comparison may need 2,000."
+      },
+      {
+        question: "How many paragraphs should a blog post have?",
+        answer:
+          "Use enough paragraphs to keep each idea readable. On the web, shorter paragraphs usually improve scanning."
+      }
+    ]
+  },
+  "meta-description-length-checker-guide": {
+    table: {
+      title: "Meta description examples by length",
+      columns: ["Length", "Example", "Risk"],
+      rows: [
+        ["70 characters", "Fast writing tools for better drafts.", "Likely too vague for many pages."],
+        ["135 characters", "Count words, check readability, and review keyword balance before publishing blog posts, snippets, emails, and social copy.", "Strong practical range."],
+        ["190 characters", "Use this complete free browser-based analyzer to count words, check readability, review keyword density, clean text, and evaluate whether your writing is ready for many publishing channels.", "May be truncated or rewritten."]
+      ]
+    },
+    commonMistakes: [
+      "Writing a generic description that could apply to any page.",
+      "Repeating the target keyword in an unnatural way.",
+      "Promising content or features the page does not provide."
+    ],
+    caseStudy: {
+      title: "Mini case: search snippet rewrite",
+      body:
+        "A product page originally used the description 'Best text tool online for writers.' The revised version names the benefit, privacy angle, and use case in one compact sentence, giving searchers a clearer reason to click."
+    },
+    beforeAfter: {
+      before: "Best word counter for everyone. Count words online and improve writing.",
+      after: "Count words, check readability, and review keyword balance privately in your browser before publishing.",
+      note: "The after version is more specific and avoids repeated generic claims."
+    },
+    extraFaq: [
+      {
+        question: "Can a meta description include a call to action?",
+        answer:
+          "Yes, but it should still summarize the page honestly. Avoid clickbait or vague commands."
+      },
+      {
+        question: "Should the brand name be included?",
+        answer:
+          "Include it when brand recognition helps. For small sites, the page benefit may deserve the space."
+      }
+    ]
+  },
+  "seo-title-length-guide": {
+    table: {
+      title: "SEO title rewrite examples",
+      columns: ["Draft", "Issue", "Improved option"],
+      rows: [
+        ["TextPulses - Tools - SEO - Writing - Count Words", "Keyword list", "Free Word Counter and Readability Checker"],
+        ["Everything You Need to Know About Writing Better Titles for Search Engines", "Too long", "SEO Title Length Guide for Clearer Snippets"],
+        ["Guide", "Too vague", "Meta Description Length Guide"]
+      ]
+    },
+    commonMistakes: [
+      "Starting every title with the brand instead of the topic.",
+      "Using a title that is clear to the author but vague to a searcher.",
+      "Adding multiple similar keywords separated by punctuation."
+    ],
+    caseStudy: {
+      title: "Mini case: title trimming",
+      body:
+        "A guide title at 78 characters was readable in a CMS but likely to truncate in search. Trimming the weak phrase 'Everything You Need to Know' created a clearer 48 character title with the main topic intact."
+    },
+    beforeAfter: {
+      before: "Everything You Need to Know About Blog Post Word Counts and Article Length",
+      after: "Blog Post Word Count Guide",
+      note: "The shorter title keeps the topic visible and removes a soft opener."
+    },
+    extraFaq: [
+      {
+        question: "Can I use separators like pipes or colons?",
+        answer:
+          "Yes. Use them sparingly to clarify structure, not to stack unrelated keywords."
+      },
+      {
+        question: "Should the H1 match the SEO title exactly?",
+        answer:
+          "It can, but it does not have to. The H1 can be more natural while the SEO title stays compact."
+      }
+    ]
+  },
+  "youtube-title-description-length-guide": {
+    table: {
+      title: "YouTube copy planning ranges",
+      columns: ["Element", "Practical range", "Revision focus"],
+      rows: [
+        ["Title", "45-70 characters", "Clear topic and hook."],
+        ["First description line", "First 150 characters", "Strong summary before links."],
+        ["Full description", "150-5000 characters", "Context, sources, chapters, and next steps."]
+      ]
+    },
+    commonMistakes: [
+      "Hiding the topic behind a vague curiosity hook.",
+      "Starting the description with generic channel boilerplate.",
+      "Repeating the same keyword instead of explaining the video."
+    ],
+    caseStudy: {
+      title: "Mini case: tutorial title",
+      body:
+        "A tutorial title changed from 'You won't believe this writing trick' to 'How to Check Keyword Density Before Publishing'. The second title is less dramatic, but it tells the right viewer exactly what they will learn."
+    },
+    beforeAfter: {
+      before: "This Changes Everything for Writers",
+      after: "How to Check Readability Before Publishing",
+      note: "The after version keeps curiosity but makes the topic searchable and clear."
+    },
+    extraFaq: [
+      {
+        question: "Should I put episode numbers in the title?",
+        answer:
+          "Use episode numbers when they help a series. If discovery matters more, lead with the topic."
+      },
+      {
+        question: "Do links belong at the top of the description?",
+        answer:
+          "Usually no. Start with a useful summary, then add links, chapters, and resources."
+      }
+    ]
+  },
+  "linkedin-post-length-guide": {
+    table: {
+      title: "LinkedIn post formats",
+      columns: ["Format", "Typical length", "Best use"],
+      rows: [
+        ["Short insight", "150-400 characters", "One idea with a direct takeaway."],
+        ["Mini story", "500-900 characters", "Situation, tension, lesson."],
+        ["Framework post", "900-1300 characters", "Steps, examples, and conclusion."]
+      ]
+    },
+    commonMistakes: [
+      "Opening with a vague lesson before showing the situation.",
+      "Using too many one-line paragraphs without substance.",
+      "Ending with a forced engagement question that does not match the post."
+    ],
+    caseStudy: {
+      title: "Mini case: professional takeaway",
+      body:
+        "A founder post originally described a launch in one long paragraph. Splitting it into the problem, decision, result, and lesson made it easier to scan and clarified why the story mattered."
+    },
+    beforeAfter: {
+      before: "We launched a tool and learned a lot about writing and users and how people need quick feedback before publishing.",
+      after: "We launched a writing tool with one lesson in mind: writers do not only need counts. They need to know whether a draft fits the channel before they publish.",
+      note: "The after version turns a general update into a clear professional point."
+    },
+    extraFaq: [
+      {
+        question: "Are hooks necessary on LinkedIn?",
+        answer:
+          "A strong opening helps, but it should be honest and connected to the rest of the post."
+      },
+      {
+        question: "Should I use hashtags?",
+        answer:
+          "Use a small number when they help categorization. Do not let hashtags replace clear writing."
+      }
+    ]
+  },
+  "email-subject-line-length-guide": {
+    table: {
+      title: "Subject line examples",
+      columns: ["Draft", "Issue", "Improved option"],
+      rows: [
+        ["Important update", "Too vague", "Your draft review is ready"],
+        ["A quick reminder about the upcoming deadline for the content audit", "Too long", "Content audit deadline reminder"],
+        ["Sale sale sale today only", "Low trust", "Last day for the writing toolkit offer"]
+      ]
+    },
+    commonMistakes: [
+      "Using urgency when there is no real deadline.",
+      "Starting with filler like 'quick note' when the topic matters more.",
+      "Writing a subject that does not match the email body."
+    ],
+    caseStudy: {
+      title: "Mini case: support email",
+      body:
+        "A support email subject changed from 'Question' to 'Question about TextPulses contact form'. The second version helps the recipient triage the message before opening it."
+    },
+    beforeAfter: {
+      before: "Quick question",
+      after: "Question about AdSense setup",
+      note: "The after version is still short but gives the inbox enough context."
+    },
+    extraFaq: [
+      {
+        question: "Should I include a person's name in the subject?",
+        answer:
+          "Only when it adds useful context or personalization. Forced personalization can feel automated."
+      },
+      {
+        question: "Do all mobile inboxes truncate at the same point?",
+        answer:
+          "No. Device, app, font size, sender name, and preview text all affect what appears."
+      }
+    ]
+  },
+  "academic-essay-word-count-guide": {
+    table: {
+      title: "Essay length planning examples",
+      columns: ["Target", "Typical structure", "Revision focus"],
+      rows: [
+        ["500 words", "Intro, 2 body points, conclusion", "Keep evidence focused."],
+        ["1,000 words", "Intro, 3-4 body paragraphs, conclusion", "Develop each claim."],
+        ["2,000 words", "Intro, sections, counterpoint, conclusion", "Manage structure and transitions."],
+        ["5,000 words", "Extended argument", "Plan sections before drafting."]
+      ]
+    },
+    commonMistakes: [
+      "Trying to meet the word count by repeating the same claim.",
+      "Using long sentences to sound academic.",
+      "Ignoring whether references, footnotes, or appendices count."
+    ],
+    caseStudy: {
+      title: "Mini case: underdeveloped essay",
+      body:
+        "A 780 word essay meets a rough length target but has only two body paragraphs. Adding a paragraph for counterargument and one for evidence analysis improves structure more than simply adding longer sentences."
+    },
+    beforeAfter: {
+      before: "This shows the policy was important and had many effects on society.",
+      after: "The policy mattered because it changed access, shifted costs, and created a public debate about who should be responsible for implementation.",
+      note: "The after version turns a vague claim into specific lines of argument."
+    },
+    extraFaq: [
+      {
+        question: "Is it okay to be under the word count?",
+        answer:
+          "Small differences may be acceptable, but being far under often suggests missing evidence or analysis."
+      },
+      {
+        question: "Can I use TextPulses for citations?",
+        answer:
+          "No. TextPulses can help with structure and counts, but citation style must be checked separately."
+      }
+    ]
+  },
+  "speech-timing-calculator-guide": {
+    table: {
+      title: "Speech timing estimates",
+      columns: ["Words", "Approximate time at 150 wpm", "Best use"],
+      rows: [
+        ["150 words", "1 minute", "Opening statement or short toast."],
+        ["450 words", "3 minutes", "Brief talk with one example."],
+        ["750 words", "5 minutes", "Standard short presentation."],
+        ["1,500 words", "10 minutes", "Longer speech with sections."]
+      ]
+    },
+    commonMistakes: [
+      "Writing to the exact maximum time with no room for pauses.",
+      "Using written sentences that are hard to speak aloud.",
+      "Forgetting slide transitions, applause, or audience interaction."
+    ],
+    caseStudy: {
+      title: "Mini case: 5 minute talk",
+      body:
+        "A 900 word script looked fine on paper but ran over 6 minutes when read aloud. Cutting one example and shortening the opening brought it closer to 750 words and made the delivery calmer."
+    },
+    beforeAfter: {
+      before: "In today's presentation I am going to attempt to explain several different reasons why this decision is important.",
+      after: "Today I will explain three reasons this decision matters.",
+      note: "The after version is easier to say and saves time."
+    },
+    extraFaq: [
+      {
+        question: "Should I memorize the exact script?",
+        answer:
+          "That depends on the event. Many speakers use a script for timing and notes for delivery."
+      },
+      {
+        question: "What speaking speed should I use?",
+        answer:
+          "150 words per minute is a practical baseline, but rehearsal is the only reliable test."
+      }
+    ]
+  },
+  "keyword-density-guide": {
+    table: {
+      title: "Keyword balance signals",
+      columns: ["Signal", "What it may mean", "Revision response"],
+      rows: [
+        ["Top term above 6%", "Possible overuse", "Replace repeated phrases with specific details."],
+        ["Many repeated bigrams", "Mechanical phrasing", "Rewrite headings and transitions."],
+        ["Low related vocabulary", "Thin coverage", "Add examples, definitions, or adjacent questions."],
+        ["Natural variations", "Healthy coverage", "Keep the wording if it reads clearly."]
+      ]
+    },
+    commonMistakes: [
+      "Treating density as a ranking formula.",
+      "Repeating exact-match phrases in every paragraph.",
+      "Removing necessary terms so aggressively that the topic becomes unclear."
+    ],
+    caseStudy: {
+      title: "Mini case: natural variation",
+      body:
+        "A page about subject lines repeated 'email subject line' in nearly every sentence. Rewriting some mentions as 'inbox text', 'opening line', and 'message title' made the copy read naturally while keeping the topic clear."
+    },
+    beforeAfter: {
+      before: "Our keyword density checker checks keyword density so you can improve keyword density before publishing.",
+      after: "Use the checker to spot repeated terms and revise copy that feels mechanical before publishing.",
+      note: "The after version keeps the intent without repeating the same phrase."
+    },
+    extraFaq: [
+      {
+        question: "Should I remove every repeated keyword?",
+        answer:
+          "No. Some repetition is natural. Revise repetition that feels forced or distracts from the reader's task."
+      },
+      {
+        question: "Are two-word phrases important?",
+        answer:
+          "Yes. Repeated two-word phrases often reveal mechanical wording faster than single-word counts."
+      }
+    ]
+  },
+  "readability-scores-explained": {
+    table: {
+      title: "Readability revision signals",
+      columns: ["Signal", "Possible issue", "Useful edit"],
+      rows: [
+        ["Average sentence above 24 words", "Dense pacing", "Split sentences or remove clauses."],
+        ["Many long words", "Technical load", "Define terms or simplify where appropriate."],
+        ["Very short repeated sentences", "Choppy flow", "Combine related ideas carefully."],
+        ["Long paragraphs", "Hard scanning", "Break by idea or step."]
+      ]
+    },
+    commonMistakes: [
+      "Trying to maximize readability score at the expense of accuracy.",
+      "Removing necessary technical terms for expert readers.",
+      "Ignoring paragraph structure and focusing only on sentence length."
+    ],
+    caseStudy: {
+      title: "Mini case: business update",
+      body:
+        "A policy update scored as difficult because it used long sentences with multiple conditions. Breaking each condition into a separate sentence lowered the reading load without changing the meaning."
+    },
+    beforeAfter: {
+      before: "Because the policy applies across several teams and requires staged adoption, users should review the instructions before implementation begins.",
+      after: "The policy applies across several teams. Review the instructions before implementation begins. Adoption will happen in stages.",
+      note: "The after version is easier to scan while keeping the same information."
+    },
+    extraFaq: [
+      {
+        question: "Can a text be too simple?",
+        answer:
+          "Yes. If simplification removes precision or sounds unnatural for the audience, keep the necessary detail."
+      },
+      {
+        question: "Do readability scores work for every language?",
+        answer:
+          "No. Many formulas are designed around English patterns and may be less reliable for other languages."
+      }
+    ]
+  },
+  "publishfit-score-explained": {
+    table: {
+      title: "PublishFit preset examples",
+      columns: ["Preset", "Primary measure", "Main warning"],
+      rows: [
+        ["Meta Description", "120-160 characters", "Too short or too long for a useful snippet."],
+        ["Email Subject", "30-60 characters", "Hard to scan in an inbox."],
+        ["Blog Article", "600+ words", "Thin content or weak structure."],
+        ["Speech Script", "Speaking time", "Runs too short or too long when delivered aloud."]
+      ]
+    },
+    commonMistakes: [
+      "Choosing the wrong preset and treating the score as universal.",
+      "Optimizing the number without reading the recommendations.",
+      "Assuming a high score guarantees search or social performance."
+    ],
+    caseStudy: {
+      title: "Mini case: same text, different channel",
+      body:
+        "A 155 character sentence scores well as a meta description but poorly as a LinkedIn post because the professional context is too thin. Changing the preset reveals that readiness depends on the destination."
+    },
+    beforeAfter: {
+      before: "This tool counts words and helps writers.",
+      after: "Count words, check readability, and see whether your draft fits SEO snippets, social posts, emails, essays, and speeches.",
+      note: "The after version is stronger for a meta description because it names use cases and value."
+    },
+    extraFaq: [
+      {
+        question: "Why does my score change when I switch presets?",
+        answer:
+          "Each preset has different length expectations and recommendations because each publishing channel has different constraints."
+      },
+      {
+        question: "Should I always aim for 100?",
+        answer:
+          "No. Aim for a useful draft. A score in the good range can still be ready if the text fits the real audience and context."
+      }
+    ]
+  }
+};
+
+export const guides: Guide[] = baseGuides.map((guide) => {
+  const enhancement = guideEnhancements[guide.slug];
+
+  if (!enhancement) {
+    return guide;
+  }
+
+  return {
+    ...guide,
+    table: enhancement.table,
+    commonMistakes: enhancement.commonMistakes,
+    caseStudy: enhancement.caseStudy,
+    beforeAfter: enhancement.beforeAfter,
+    faq: [...guide.faq, ...(enhancement.extraFaq ?? [])]
+  };
+});
 
 export function getGuide(slug: string) {
   return guides.find((guide) => guide.slug === slug);

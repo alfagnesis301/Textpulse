@@ -18,7 +18,7 @@ export default function AboutPage() {
         {
           title: "Who operates TextPulses",
           body: [
-            "TextPulses is an independently operated writing utility available at textpulses.com.",
+            "TextPulses is operated by Ricardo Diaz, an independent web publisher based in the United Kingdom.",
             "The site can be contacted at hello@textpulses.com for support, corrections, privacy questions, business inquiries, and reports of inaccurate guidance."
           ]
         },

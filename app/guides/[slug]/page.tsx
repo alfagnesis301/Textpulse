@@ -111,7 +111,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
 
       <article className="mt-8">
         <p className="text-sm font-bold uppercase tracking-[0.2em] text-pulse-blue">
-          {guide.category} · {guide.readingTime}
+          {guide.category} - {guide.readingTime}
         </p>
         <h1 className="mt-3 text-4xl font-black tracking-tight text-slate-950 dark:text-white sm:text-5xl">
           {guide.title}
@@ -137,6 +137,87 @@ export default async function GuidePage({ params }: GuidePageProps) {
             </section>
           ))}
         </div>
+
+        {guide.table ? (
+          <section className="mt-8 rounded-2xl border border-slate-200 bg-white/88 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/88">
+            <h2 className="text-2xl font-extrabold tracking-tight text-slate-950 dark:text-white">
+              {guide.table.title}
+            </h2>
+            <div className="mt-4 overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800">
+              <table className="w-full text-left text-sm">
+                <thead className="bg-slate-50 text-xs uppercase tracking-[0.12em] text-slate-500 dark:bg-slate-950 dark:text-slate-400">
+                  <tr>
+                    {guide.table.columns.map((column) => (
+                      <th key={column} className="px-4 py-3">
+                        {column}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                  {guide.table.rows.map((row) => (
+                    <tr key={row.join("-")}>
+                      {row.map((cell) => (
+                        <td key={cell} className="px-4 py-3 leading-6 text-slate-700 dark:text-slate-300">
+                          {cell}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        ) : null}
+
+        {guide.beforeAfter ? (
+          <section className="mt-8 rounded-2xl border border-slate-200 bg-white/88 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/88">
+            <h2 className="text-2xl font-extrabold tracking-tight text-slate-950 dark:text-white">
+              Before and after
+            </h2>
+            <div className="mt-4 grid gap-4 md:grid-cols-2">
+              <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4 dark:border-amber-900/60 dark:bg-amber-950/30">
+                <h3 className="text-sm font-bold uppercase tracking-[0.14em] text-amber-800 dark:text-amber-200">
+                  Before
+                </h3>
+                <p className="mt-3 leading-7 text-slate-800 dark:text-slate-200">{guide.beforeAfter.before}</p>
+              </div>
+              <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 dark:border-emerald-900/60 dark:bg-emerald-950/30">
+                <h3 className="text-sm font-bold uppercase tracking-[0.14em] text-emerald-800 dark:text-emerald-200">
+                  After
+                </h3>
+                <p className="mt-3 leading-7 text-slate-800 dark:text-slate-200">{guide.beforeAfter.after}</p>
+              </div>
+            </div>
+            <p className="mt-4 text-sm leading-6 text-slate-600 dark:text-slate-400">{guide.beforeAfter.note}</p>
+          </section>
+        ) : null}
+
+        {guide.caseStudy ? (
+          <section className="mt-8 rounded-2xl border border-violet-100 bg-violet-50/80 p-6 dark:border-violet-900/60 dark:bg-violet-950/30">
+            <p className="text-sm font-bold uppercase tracking-[0.2em] text-pulse-violet">Mini case</p>
+            <h2 className="mt-2 text-2xl font-extrabold tracking-tight text-slate-950 dark:text-white">
+              {guide.caseStudy.title}
+            </h2>
+            <p className="mt-4 text-base leading-8 text-slate-700 dark:text-slate-300">{guide.caseStudy.body}</p>
+          </section>
+        ) : null}
+
+        {guide.commonMistakes?.length ? (
+          <section className="mt-8 rounded-2xl border border-slate-200 bg-white/88 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/88">
+            <h2 className="text-2xl font-extrabold tracking-tight text-slate-950 dark:text-white">
+              Common mistakes
+            </h2>
+            <ul className="mt-4 grid gap-3 text-base leading-7 text-slate-700 dark:text-slate-300">
+              {guide.commonMistakes.map((item) => (
+                <li key={item} className="flex gap-3">
+                  <span aria-hidden="true" className="mt-3 h-2 w-2 shrink-0 rounded-full bg-amber-500" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : null}
 
         <section className="mt-8 rounded-2xl border border-blue-100 bg-blue-50/80 p-6 dark:border-blue-900/60 dark:bg-blue-950/30">
           <h2 className="text-2xl font-extrabold tracking-tight text-slate-950 dark:text-white">

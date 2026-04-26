@@ -74,7 +74,7 @@ export default function TermsPage() {
         {
           title: "Governing law",
           body: [
-            "These terms are intended to be interpreted under the laws applicable to the site operator, unless mandatory local consumer law provides otherwise.",
+            "These terms are governed by the laws of England and Wales, unless mandatory local consumer law requires otherwise.",
             "Because TextPulses is available internationally, users are responsible for complying with local laws that apply to their use of the site."
           ]
         },

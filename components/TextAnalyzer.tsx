@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { AdSlot } from "@/components/AdSlot";
 import { CleanTextTools } from "@/components/CleanTextTools";
 import { KeywordDensity } from "@/components/KeywordDensity";
 import { MetricsCard } from "@/components/MetricsCard";
@@ -302,7 +301,7 @@ export function TextAnalyzer() {
             <h3 className="text-sm font-extrabold text-slate-950 dark:text-white">Reading level</h3>
             <p className="mt-2 text-2xl font-black text-slate-950 dark:text-white">{analysis.readingLevel.level}</p>
             <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
-              {analysis.readingLevel.grade} · {analysis.readingLevel.description}
+              {analysis.readingLevel.grade} - {analysis.readingLevel.description}
             </p>
           </div>
 
@@ -342,8 +341,6 @@ export function TextAnalyzer() {
               </p>
             )}
           </div>
-
-          <AdSlot format="sidebar" className="hidden xl:flex" />
         </aside>
       </div>
 

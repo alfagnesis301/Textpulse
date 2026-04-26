@@ -28,7 +28,7 @@ export default function GuidesPage() {
             className="rounded-2xl border border-slate-200 bg-white/88 p-5 shadow-sm hover:-translate-y-0.5 hover:shadow-soft dark:border-slate-800 dark:bg-slate-900/88"
           >
             <p className="text-xs font-bold uppercase tracking-[0.16em] text-pulse-violet">
-              {guide.category} · {guide.readingTime}
+              {guide.category} - {guide.readingTime}
             </p>
             <h2 className="mt-3 text-xl font-extrabold text-slate-950 dark:text-white">
               <Link href={`/guides/${guide.slug}`} className="hover:text-pulse-blue">
