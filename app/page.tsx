@@ -52,7 +52,7 @@ const audiences = [
 export default function HomePage() {
   return (
     <main>
-      <section className="bg-grid border-b border-slate-200 dark:border-slate-800">
+      <section className="hero-soft-bg border-b border-slate-200 dark:border-slate-800">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 pb-10 pt-12 sm:px-6 lg:grid-cols-[1.02fr_0.98fr] lg:px-8 lg:pb-14 lg:pt-16">
           <div className="flex flex-col justify-center">
             <div className="mb-6">

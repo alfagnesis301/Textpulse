@@ -62,17 +62,18 @@ select:focus-visible {
   outline-offset: 3px;
 }
 
-.bg-grid {
-  background-image:
-    linear-gradient(rgba(37, 99, 235, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(37, 99, 235, 0.08) 1px, transparent 1px);
-  background-size: 44px 44px;
+.hero-soft-bg {
+  background:
+    linear-gradient(135deg, rgba(37, 99, 235, 0.12), transparent 38%),
+    linear-gradient(225deg, rgba(124, 58, 237, 0.1), transparent 42%),
+    linear-gradient(180deg, #f8fafc 0%, #eef4ff 54%, #f7f3ff 100%);
 }
 
-.dark .bg-grid {
-  background-image:
-    linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+.dark .hero-soft-bg {
+  background:
+    linear-gradient(135deg, rgba(37, 99, 235, 0.16), transparent 38%),
+    linear-gradient(225deg, rgba(124, 58, 237, 0.14), transparent 42%),
+    linear-gradient(180deg, #020617 0%, #07111f 56%, #0d1024 100%);
 }
 
 .text-balance {
