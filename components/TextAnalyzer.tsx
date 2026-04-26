@@ -10,12 +10,12 @@ import { WritingHealthPanel } from "@/components/WritingHealthPanel";
 import { analyzeText } from "@/lib/textAnalysis";
 import { evaluatePublishFit, type PublishFitPresetId } from "@/lib/publishFitRules";
 
-const TEXT_STORAGE_KEY = "textpulse-local-draft";
-const AUTOSAVE_STORAGE_KEY = "textpulse-autosave";
-const THEME_STORAGE_KEY = "textpulse-theme";
-const PRESET_STORAGE_KEY = "textpulse-publishfit-preset";
+const TEXT_STORAGE_KEY = "textpulses-local-draft";
+const AUTOSAVE_STORAGE_KEY = "textpulses-autosave";
+const THEME_STORAGE_KEY = "textpulses-theme";
+const PRESET_STORAGE_KEY = "textpulses-publishfit-preset";
 
-const sampleText = `TextPulse helps writers move from rough draft to publish-ready copy with clearer signals. A simple count is useful, but publishing decisions often need more context: length, readability, repetition, keyword balance, and fit for the channel.
+const sampleText = `TextPulses helps writers move from rough draft to publish-ready copy with clearer signals. A simple count is useful, but publishing decisions often need more context: length, readability, repetition, keyword balance, and fit for the channel.
 
 Before sending an email, publishing a blog post, or writing a social caption, paste the text into the editor and review the recommendations. The analysis runs in the browser, so private drafts stay on your device unless you choose to save them locally.`;
 
@@ -207,7 +207,7 @@ export function TextAnalyzer() {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = "textpulse-analysis.txt";
+    link.download = "textpulses-analysis.txt";
     link.click();
     URL.revokeObjectURL(url);
     setActionStatus("Text file created.");
@@ -245,7 +245,7 @@ export function TextAnalyzer() {
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1.25fr)_minmax(330px,0.75fr)]">
         <div className="rounded-2xl border border-slate-200 bg-white/90 p-4 shadow-soft dark:border-slate-800 dark:bg-slate-900/90 sm:p-5">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <label htmlFor="textpulse-editor" className="text-base font-extrabold text-slate-950 dark:text-white">
+            <label htmlFor="textpulses-editor" className="text-base font-extrabold text-slate-950 dark:text-white">
               Text editor
             </label>
             <div
@@ -257,10 +257,10 @@ export function TextAnalyzer() {
           </div>
 
           <textarea
-            id="textpulse-editor"
+            id="textpulses-editor"
             value={text}
             onChange={(event) => setText(event.target.value)}
-            placeholder="Paste or write your text here. TextPulse analyzes it privately in your browser."
+            placeholder="Paste or write your text here. TextPulses analyzes it privately in your browser."
             className="mt-4 min-h-[420px] w-full resize-y rounded-2xl border border-slate-200 bg-slate-50 p-5 text-base leading-7 text-slate-950 shadow-inner placeholder:text-slate-400 dark:border-slate-700 dark:bg-slate-950 dark:text-white dark:placeholder:text-slate-500"
           />
 

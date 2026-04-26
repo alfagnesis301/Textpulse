@@ -3,7 +3,7 @@ import { createMetadata } from "@/lib/seo";
 
 export const metadata = createMetadata({
   title: "Cookie Policy",
-  description: "Learn how TextPulse uses browser storage and how cookies may be used if advertising or analytics are added.",
+  description: "Learn how TextPulses uses browser storage and how cookies may be used if advertising or analytics are added.",
   path: "/cookie-policy"
 });
 
@@ -12,13 +12,13 @@ export default function CookiePolicyPage() {
     <LegalPage
       eyebrow="Cookie Policy"
       title="Cookie Policy"
-      intro="This policy explains the browser storage currently used by TextPulse and how cookies may be used if optional services are added in the future."
+      intro="This policy explains the browser storage currently used by TextPulses and how cookies may be used if optional services are added in the future."
       sections={[
         {
           title: "Current storage",
           body: [
-            "TextPulse uses localStorage for product preferences such as light or dark mode, selected PublishFit preset, and Auto-save locally status.",
-            "Draft text is not stored unless you manually enable Auto-save locally. When that setting is off, TextPulse removes the saved local draft key."
+            "TextPulses uses localStorage for product preferences such as light or dark mode, selected PublishFit preset, and Auto-save locally status.",
+            "Draft text is not stored unless you manually enable Auto-save locally. When that setting is off, TextPulses removes the saved local draft key."
           ]
         },
         {
@@ -39,7 +39,7 @@ export default function CookiePolicyPage() {
           title: "Consent management",
           body: [
             "For visitors in regions such as the UK, EU, and EEA, non-essential advertising or analytics cookies may require consent before use.",
-            "TextPulse includes space in the policy and codebase to add a consent management platform or cookie banner before non-essential third-party scripts are enabled."
+            "TextPulses includes space in the policy and codebase to add a consent management platform or cookie banner before non-essential third-party scripts are enabled."
           ]
         }
       ]}

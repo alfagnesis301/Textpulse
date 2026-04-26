@@ -12,7 +12,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-white/70 bg-white/82 backdrop-blur-xl dark:border-slate-800 dark:bg-slate-950/82">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
-        <Link href="/" aria-label="TextPulse home">
+        <Link href="/" aria-label="TextPulses home">
           <Logo />
         </Link>
         <nav className="hidden items-center gap-1 md:flex" aria-label="Primary navigation">

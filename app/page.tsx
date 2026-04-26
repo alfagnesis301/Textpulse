@@ -146,7 +146,7 @@ export default function HomePage() {
             More context than a basic counter
           </h2>
           <p className="mt-4 text-base leading-7 text-slate-600 dark:text-slate-400">
-            TextPulse is designed for people who publish. It keeps simple counts fast while
+            TextPulses is designed for people who publish. It keeps simple counts fast while
             adding the quality signals that help you decide whether a draft is ready for the
             next step.
           </p>
@@ -164,12 +164,12 @@ export default function HomePage() {
       <section className="bg-white/60 py-14 dark:bg-slate-950/50" aria-labelledby="why-different">
         <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
           <div>
-            <p className="text-sm font-bold uppercase tracking-[0.2em] text-pulse-violet">Why TextPulse is different</p>
+            <p className="text-sm font-bold uppercase tracking-[0.2em] text-pulse-violet">Why TextPulses is different</p>
             <h2 id="why-different" className="mt-3 text-3xl font-extrabold tracking-tight text-slate-950 dark:text-white sm:text-4xl">
               Publish-ready writing, not just counting
             </h2>
             <p className="mt-4 text-base leading-7 text-slate-600 dark:text-slate-400">
-              A word count tells you size. TextPulse also helps you understand whether the
+              A word count tells you size. TextPulses also helps you understand whether the
               draft fits the format, feels readable, and avoids obvious repetition before it
               goes live.
             </p>
@@ -216,7 +216,7 @@ export default function HomePage() {
               Useful for everyday publishing work
             </h2>
             <p className="mt-4 text-base leading-7 text-slate-300">
-              TextPulse supports quick checks for drafts, assignments, captions, scripts,
+              TextPulses supports quick checks for drafts, assignments, captions, scripts,
               emails, snippets, and long-form web content.
             </p>
           </div>
@@ -236,7 +236,7 @@ export default function HomePage() {
           Your draft should stay under your control
         </h2>
         <p className="mt-4 text-base leading-7 text-slate-600 dark:text-slate-400">
-          TextPulse performs analysis in your browser. It uses localStorage for preferences
+          TextPulses performs analysis in your browser. It uses localStorage for preferences
           such as theme, selected preset, and Auto-save locally status. Draft text is stored
           locally only if you manually enable Auto-save locally.
         </p>
@@ -249,7 +249,7 @@ export default function HomePage() {
           <h2 className="text-xl font-extrabold text-slate-950 dark:text-white">Accuracy disclaimer</h2>
           <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
             Estimates are provided for convenience and may vary depending on language,
-            formatting, and reading speed. Use TextPulse as a practical writing aid, not as
+            formatting, and reading speed. Use TextPulses as a practical writing aid, not as
             a guarantee of publication performance, search ranking, or editorial acceptance.
           </p>
         </div>

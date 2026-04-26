@@ -3,7 +3,7 @@ import { createMetadata, siteConfig } from "@/lib/seo";
 
 export const metadata = createMetadata({
   title: "Contact",
-  description: "Contact TextPulse for support, feedback, business inquiries, or product questions.",
+  description: "Contact TextPulses for support, feedback, business inquiries, or product questions.",
   path: "/contact"
 });
 
@@ -16,7 +16,7 @@ export default function ContactPage() {
       </h1>
       <p className="mt-5 text-lg leading-8 text-slate-700 dark:text-slate-300">
         For support, feedback, or business inquiries, contact us. This form creates an
-        email in your mail app and does not submit data to a TextPulse backend.
+        email in your mail app and does not submit data to a TextPulses backend.
       </p>
       <p className="mt-4 text-sm font-semibold text-slate-600 dark:text-slate-400">
         Email: <a className="text-pulse-blue hover:underline" href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a>

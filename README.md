@@ -1,6 +1,6 @@
-# TextPulse
+# TextPulses
 
-TextPulse is a privacy-first word counter and publish-ready text analyzer built with Next.js, TypeScript, and Tailwind CSS.
+TextPulses is a privacy-first word counter and publish-ready text analyzer built with Next.js, TypeScript, and Tailwind CSS.
 
 It counts words, characters, sentences, paragraphs, lines, unique words, reading time, speaking time, handwriting time, keyword density, phrase frequency, and writing health signals. Its unique PublishFit Score checks whether a draft fits common publishing channels such as blog articles, SEO titles, meta descriptions, YouTube text, LinkedIn posts, X/Twitter posts, Instagram captions, email subjects, academic essays, and speeches.
 
@@ -14,7 +14,7 @@ It counts words, characters, sentences, paragraphs, lines, unique words, reading
 
 ## Privacy model
 
-Text analysis runs in the browser. TextPulse does not send editor text to a server for counting or scoring.
+Text analysis runs in the browser. TextPulses does not send editor text to a server for counting or scoring.
 
 LocalStorage is used for preferences such as theme, selected PublishFit preset, and Auto-save locally status. Draft text is stored only when the user manually enables Auto-save locally.
 

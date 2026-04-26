@@ -1,13 +1,13 @@
 const faqs = [
   {
-    question: "Is TextPulse free to use?",
+    question: "Is TextPulses free to use?",
     answer:
-      "Yes. TextPulse is a free writing utility designed for quick word counts, character counts, readability checks, keyword density review, and PublishFit scoring."
+      "Yes. TextPulses is a free writing utility designed for quick word counts, character counts, readability checks, keyword density review, and PublishFit scoring."
   },
   {
-    question: "Does TextPulse send my text to a server?",
+    question: "Does TextPulses send my text to a server?",
     answer:
-      "No. The analyzer runs in your browser. Your text is not transmitted to TextPulse servers for counting or scoring."
+      "No. The analyzer runs in your browser. Your text is not transmitted to TextPulses servers for counting or scoring."
   },
   {
     question: "What is PublishFit Score?",
@@ -20,19 +20,19 @@ const faqs = [
       "No. Readability and timing values are estimates for convenience. They can vary by language, formatting, reading speed, audience, and delivery style."
   },
   {
-    question: "Can I use TextPulse for SEO writing?",
+    question: "Can I use TextPulses for SEO writing?",
     answer:
       "Yes. You can check title length, meta description length, keyword balance, overused phrases, and general clarity before publishing."
   },
   {
-    question: "Can TextPulse replace an editor or teacher?",
+    question: "Can TextPulses replace an editor or teacher?",
     answer:
       "No. It can highlight useful signals, but human judgment is still important for accuracy, tone, originality, and context."
   },
   {
     question: "What happens if I enable Auto-save locally?",
     answer:
-      "TextPulse stores your current text in your own browser localStorage. It is not uploaded, but anyone with access to the same browser profile may be able to see it."
+      "TextPulses stores your current text in your own browser localStorage. It is not uploaded, but anyone with access to the same browser profile may be able to see it."
   },
   {
     question: "Will this site show ads?",

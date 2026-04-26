@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 
 export const siteConfig = {
-  name: "TextPulse",
+  name: "TextPulses",
   slogan: "Count smarter. Write sharper. Publish faster.",
-  url: "https://textpulse.example",
+  url: "https://textpulses.com",
   description:
     "Free privacy-first word counter, readability checker, keyword density analyzer, and PublishFit Score for blogs, SEO snippets, social posts, emails, essays, and speeches.",
-  contactEmail: "hello@textpulse.example"
+  contactEmail: "hello@textpulses.com"
 };
 
 export function createMetadata({

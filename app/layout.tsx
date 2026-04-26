@@ -7,8 +7,8 @@ import { siteConfig } from "@/lib/seo";
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: "TextPulse - Free Word Counter & Publish-Ready Text Analyzer",
-    template: "%s | TextPulse"
+    default: "TextPulses - Free Word Counter & Publish-Ready Text Analyzer",
+    template: "%s | TextPulses"
   },
   description: siteConfig.description,
   applicationName: siteConfig.name,
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     icon: "/favicon.svg"
   },
   openGraph: {
-    title: "TextPulse - Free Word Counter & Publish-Ready Text Analyzer",
+    title: "TextPulses - Free Word Counter & Publish-Ready Text Analyzer",
     description: siteConfig.description,
     url: siteConfig.url,
     siteName: siteConfig.name,
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "TextPulse - Free Word Counter & Publish-Ready Text Analyzer",
+    title: "TextPulses - Free Word Counter & Publish-Ready Text Analyzer",
     description: siteConfig.description
   }
 };

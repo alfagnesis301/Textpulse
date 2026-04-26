@@ -1,8 +1,8 @@
 {
-  "name": "textpulse",
+  "name": "textpulses",
   "version": "1.0.0",
   "private": true,
-  "description": "TextPulse is a privacy-first word counter and publish-ready text analyzer built with Next.js.",
+  "description": "TextPulses is a privacy-first word counter and publish-ready text analyzer built with Next.js.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

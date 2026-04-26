@@ -51,7 +51,7 @@ export function PublishFitPanel({ result, presetId, onPresetChange }: PublishFit
             PublishFit Score
           </h2>
           <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600 dark:text-slate-400">
-            Choose a channel and TextPulse checks length, clarity, readability, keyword balance,
+            Choose a channel and TextPulses checks length, clarity, readability, keyword balance,
             and publication readiness using transparent browser-side rules.
           </p>
         </div>

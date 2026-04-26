@@ -3,7 +3,7 @@ import { createMetadata } from "@/lib/seo";
 
 export const metadata = createMetadata({
   title: "Disclaimer",
-  description: "Read the TextPulse disclaimer for writing estimates, readability metrics, keyword analysis, and PublishFit Score.",
+  description: "Read the TextPulses disclaimer for writing estimates, readability metrics, keyword analysis, and PublishFit Score.",
   path: "/disclaimer"
 });
 
@@ -12,7 +12,7 @@ export default function DisclaimerPage() {
     <LegalPage
       eyebrow="Disclaimer"
       title="Disclaimer"
-      intro="TextPulse is a practical writing aid. It provides estimates and signals, not guarantees."
+      intro="TextPulses is a practical writing aid. It provides estimates and signals, not guarantees."
       sections={[
         {
           title: "Approximate metrics",
@@ -31,7 +31,7 @@ export default function DisclaimerPage() {
         {
           title: "Human review still matters",
           body: [
-            "TextPulse can help surface issues quickly, but it cannot understand every audience, assignment, legal requirement, brand guideline, or cultural context.",
+            "TextPulses can help surface issues quickly, but it cannot understand every audience, assignment, legal requirement, brand guideline, or cultural context.",
             "Review important text manually and seek qualified advice where accuracy, compliance, or risk matters."
           ]
         }

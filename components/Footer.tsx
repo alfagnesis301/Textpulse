@@ -17,7 +17,7 @@ export function Footer() {
         <div>
           <Logo />
           <p className="mt-4 max-w-xl text-sm leading-6 text-slate-600 dark:text-slate-400">
-            {siteConfig.slogan} TextPulse provides browser-based writing metrics, channel
+            {siteConfig.slogan} TextPulses provides browser-based writing metrics, channel
             fit checks, and practical estimates for planning content.
           </p>
           <p className="mt-4 text-xs leading-5 text-slate-500 dark:text-slate-500">
@@ -36,7 +36,7 @@ export function Footer() {
                 PublishFit Score
               </Link>
               <Link className="text-slate-600 hover:text-pulse-blue dark:text-slate-400" href="/about">
-                About TextPulse
+                About TextPulses
               </Link>
             </div>
           </div>
@@ -53,7 +53,7 @@ export function Footer() {
         </div>
       </div>
       <div className="border-t border-slate-200 px-4 py-5 text-center text-xs text-slate-500 dark:border-slate-800 dark:text-slate-500">
-        &copy; {new Date().getFullYear()} TextPulse. Free browser-based text analysis.
+        &copy; {new Date().getFullYear()} TextPulses. Free browser-based text analysis.
       </div>
     </footer>
   );

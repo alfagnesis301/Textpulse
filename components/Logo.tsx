@@ -6,7 +6,7 @@ type LogoProps = {
 
 export function Logo({ variant = "horizontal", className = "", labelClassName = "" }: LogoProps) {
   return (
-    <div className={`inline-flex items-center gap-3 ${className}`} aria-label="TextPulse">
+    <div className={`inline-flex items-center gap-3 ${className}`} aria-label="TextPulses">
       <svg
         className="h-10 w-10 shrink-0"
         viewBox="0 0 48 48"
@@ -15,12 +15,12 @@ export function Logo({ variant = "horizontal", className = "", labelClassName = 
         xmlns="http://www.w3.org/2000/svg"
       >
         <defs>
-          <linearGradient id="textpulse-mark-gradient" x1="7" y1="7" x2="41" y2="41">
+          <linearGradient id="textpulses-mark-gradient" x1="7" y1="7" x2="41" y2="41">
             <stop offset="0" stopColor="#2563EB" />
             <stop offset="1" stopColor="#7C3AED" />
           </linearGradient>
         </defs>
-        <rect width="48" height="48" rx="14" fill="url(#textpulse-mark-gradient)" />
+        <rect width="48" height="48" rx="14" fill="url(#textpulses-mark-gradient)" />
         <path
           d="M13 14h18M22 14v20"
           stroke="white"
@@ -39,7 +39,7 @@ export function Logo({ variant = "horizontal", className = "", labelClassName = 
       </svg>
       {variant === "horizontal" ? (
         <span className={`text-xl font-extrabold tracking-tight text-slate-950 dark:text-white ${labelClassName}`}>
-          TextPulse
+          TextPulses
         </span>
       ) : null}
     </div>

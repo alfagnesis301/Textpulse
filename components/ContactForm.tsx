@@ -10,7 +10,7 @@ export function ContactForm() {
 
   const createEmail = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const subject = encodeURIComponent(`TextPulse inquiry from ${name || "website visitor"}`);
+    const subject = encodeURIComponent(`TextPulses inquiry from ${name || "website visitor"}`);
     const body = encodeURIComponent(
       [`Name: ${name}`, `Email: ${email}`, "", message].join("\n")
     );
