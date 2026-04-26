@@ -20,7 +20,7 @@ export function ContactForm() {
     });
 
     try {
-      const response = await fetch("/", {
+      const response = await fetch("/__forms.html", {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"
@@ -45,7 +45,6 @@ export function ContactForm() {
     <form
       name="contact"
       method="POST"
-      data-netlify="true"
       onSubmit={submitMessage}
       className="mt-8 rounded-2xl border border-slate-200 bg-white/90 p-6 shadow-soft dark:border-slate-800 dark:bg-slate-900/90"
     >
