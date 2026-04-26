@@ -1,4 +1,4 @@
-const faqs = [
+export const faqs = [
   {
     question: "Is TextPulses free to use?",
     answer:
@@ -37,7 +37,7 @@ const faqs = [
   {
     question: "Will this site show ads?",
     answer:
-      "The layout includes clearly labeled advertisement placements for future AdSense use. They should only be activated after approval and with the appropriate privacy and consent setup."
+      "The layout includes clearly labeled advertisement placements for Google AdSense. Ads should only appear after approval and with the appropriate privacy and consent setup."
   }
 ];
 

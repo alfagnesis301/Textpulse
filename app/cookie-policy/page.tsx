@@ -12,34 +12,43 @@ export default function CookiePolicyPage() {
     <LegalPage
       eyebrow="Cookie Policy"
       title="Cookie Policy"
-      intro="This policy explains the browser storage currently used by TextPulses and how cookies may be used if optional services are added in the future."
+      intro="This policy explains how TextPulses uses browser storage, cookies, advertising technologies, and consent controls."
+      updated="April 26, 2026"
       sections={[
         {
-          title: "Current storage",
+          title: "Preference storage",
           body: [
             "TextPulses uses localStorage for product preferences such as light or dark mode, selected PublishFit preset, and Auto-save locally status.",
             "Draft text is not stored unless you manually enable Auto-save locally. When that setting is off, TextPulses removes the saved local draft key."
           ]
         },
         {
-          title: "Essential and preference storage",
+          title: "Essential and functional technologies",
           body: [
-            "Preference storage helps keep the tool comfortable to use. For example, the site can remember your selected theme or chosen PublishFit preset.",
-            "These preferences are stored in your own browser and can usually be cleared through your browser settings."
+            "Some technologies are needed for the site to work, protect submissions, remember user choices, or keep the tool usable. These may include hosting, security, form handling, and local preference storage.",
+            "You can usually clear localStorage and cookies through your browser settings. Clearing them may reset preferences such as theme or Auto-save locally."
           ]
         },
         {
-          title: "Future advertising cookies",
+          title: "Google AdSense and advertising cookies",
           body: [
-            "If Google AdSense or similar advertising is activated, advertising partners may use cookies or similar technologies to deliver, measure, limit, and personalize ads where allowed.",
-            "Ad placements should remain clearly labeled and separate from navigation, downloads, form submissions, or primary tool actions."
+            "TextPulses may display ads through Google AdSense. Google and other advertising partners may use cookies, web beacons, or similar technologies to deliver ads, personalize ads where permitted, measure ad performance, prevent fraud, limit ad frequency, and improve advertising systems.",
+            "Google advertising cookies can allow Google and its partners to serve ads based on visits to TextPulses and other websites. Users can manage personalized ads through Google's Ads Settings at https://adssettings.google.com.",
+            "Ad placements on TextPulses should remain clearly labeled and separate from navigation, downloads, form submissions, or primary tool actions."
           ]
         },
         {
           title: "Consent management",
           body: [
-            "For visitors in regions such as the UK, EU, and EEA, non-essential advertising or analytics cookies may require consent before use.",
-            "TextPulses includes space in the policy and codebase to add a consent management platform or cookie banner before non-essential third-party scripts are enabled."
+            "For visitors in regions such as the UK, EEA, and Switzerland, non-essential advertising or analytics cookies may require consent before use.",
+            "Before serving personalized Google ads to users in the EEA, the UK, or Switzerland, TextPulses should use a Google-certified consent management platform that integrates with the IAB Transparency and Consent Framework."
+          ]
+        },
+        {
+          title: "How to control cookies",
+          body: [
+            "You can block, delete, or limit cookies in your browser settings. You can also manage personalized advertising choices through Google Ads Settings and supported industry opt-out tools such as aboutads.info.",
+            "Blocking some technologies may affect preferences, form protection, or ad relevance, but the core text analyzer is designed to work without sending private drafts to a server."
           ]
         }
       ]}

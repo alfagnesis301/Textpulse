@@ -13,7 +13,15 @@ export default function AboutPage() {
       eyebrow="About TextPulses"
       title="A practical writing utility for publish-ready drafts"
       intro="TextPulses was created for writers who need fast, private feedback before sharing text in public or professional channels."
+      updated="April 26, 2026"
       sections={[
+        {
+          title: "Who operates TextPulses",
+          body: [
+            "TextPulses is an independently operated writing utility available at textpulses.com.",
+            "The site can be contacted at hello@textpulses.com for support, corrections, privacy questions, business inquiries, and reports of inaccurate guidance."
+          ]
+        },
         {
           title: "What TextPulses does",
           body: [
@@ -26,6 +34,13 @@ export default function AboutPage() {
           body: [
             "Many counters stop at totals. TextPulses connects those totals to publishing decisions so you can see whether a draft is too short, too long, repetitive, difficult to read, or ready for a specific channel.",
             "The tool is intentionally rule-based. It provides clear signals without pretending to know your audience, brand voice, search performance, or grading context."
+          ]
+        },
+        {
+          title: "How rules and guides are maintained",
+          body: [
+            "PublishFit rules are based on practical writing ranges, readability signals, sentence length, lexical variety, and keyword balance. They are reviewed as the product changes and should be treated as editorial guidance, not guaranteed outcomes.",
+            "Educational guides are written to explain how to use counts and scores responsibly. If you spot a mistake, outdated recommendation, or unclear explanation, please report it through the contact page."
           ]
         },
         {

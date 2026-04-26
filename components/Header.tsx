@@ -4,6 +4,7 @@ import { Logo } from "@/components/Logo";
 const navItems = [
   { href: "/#tool", label: "Analyzer" },
   { href: "/#publishfit", label: "PublishFit" },
+  { href: "/guides", label: "Guides" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" }
 ];

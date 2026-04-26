@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { AdSlot } from "@/components/AdSlot";
-import { FAQ } from "@/components/FAQ";
+import { FAQ, faqs } from "@/components/FAQ";
 import { Logo } from "@/components/Logo";
 import { TextAnalyzer } from "@/components/TextAnalyzer";
+import { guides } from "@/lib/guides";
 import { createMetadata } from "@/lib/seo";
 
 export const metadata = createMetadata({
@@ -50,8 +51,26 @@ const audiences = [
 ];
 
 export default function HomePage() {
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer
+      }
+    }))
+  };
+  const featuredGuides = guides.slice(0, 6);
+
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <section className="hero-soft-bg border-b border-slate-200 dark:border-slate-800">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 pb-10 pt-12 sm:px-6 lg:grid-cols-[1.02fr_0.98fr] lg:px-8 lg:pb-14 lg:pt-16">
           <div className="flex flex-col justify-center">
@@ -181,6 +200,47 @@ export default function HomePage() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8" aria-labelledby="featured-guides">
+        <div className="flex flex-col justify-between gap-5 lg:flex-row lg:items-end">
+          <div className="max-w-3xl">
+            <p className="text-sm font-bold uppercase tracking-[0.2em] text-pulse-blue">Writing guides</p>
+            <h2 id="featured-guides" className="mt-3 text-3xl font-extrabold tracking-tight text-slate-950 dark:text-white sm:text-4xl">
+              Learn the ranges behind better publishing decisions
+            </h2>
+            <p className="mt-4 text-base leading-7 text-slate-600 dark:text-slate-400">
+              Use these original guides to understand word count, readability, SEO snippets,
+              subject lines, speeches, keyword density, and PublishFit Score.
+            </p>
+          </div>
+          <Link
+            href="/guides"
+            className="rounded-2xl bg-slate-950 px-5 py-3 text-sm font-extrabold text-white shadow-sm hover:-translate-y-0.5 hover:bg-pulse-blue dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200"
+          >
+            View all guides
+          </Link>
+        </div>
+        <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {featuredGuides.map((guide) => (
+            <article
+              key={guide.slug}
+              className="rounded-2xl border border-slate-200 bg-white/88 p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900/88"
+            >
+              <p className="text-xs font-bold uppercase tracking-[0.16em] text-pulse-violet">
+                {guide.category}
+              </p>
+              <h3 className="mt-3 text-lg font-extrabold text-slate-950 dark:text-white">
+                <Link href={`/guides/${guide.slug}`} className="hover:text-pulse-blue">
+                  {guide.title}
+                </Link>
+              </h3>
+              <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+                {guide.description}
+              </p>
+            </article>
+          ))}
         </div>
       </section>
 

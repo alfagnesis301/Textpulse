@@ -35,6 +35,9 @@ export function Footer() {
               <Link className="text-slate-600 hover:text-pulse-blue dark:text-slate-400" href="/#publishfit">
                 PublishFit Score
               </Link>
+              <Link className="text-slate-600 hover:text-pulse-blue dark:text-slate-400" href="/guides">
+                Writing guides
+              </Link>
               <Link className="text-slate-600 hover:text-pulse-blue dark:text-slate-400" href="/about">
                 About TextPulses
               </Link>

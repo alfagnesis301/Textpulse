@@ -13,6 +13,7 @@ export default function DisclaimerPage() {
       eyebrow="Disclaimer"
       title="Disclaimer"
       intro="TextPulses is a practical writing aid. It provides estimates and signals, not guarantees."
+      updated="April 26, 2026"
       sections={[
         {
           title: "Approximate metrics",
@@ -33,6 +34,13 @@ export default function DisclaimerPage() {
           body: [
             "TextPulses can help surface issues quickly, but it cannot understand every audience, assignment, legal requirement, brand guideline, or cultural context.",
             "Review important text manually and seek qualified advice where accuracy, compliance, or risk matters."
+          ]
+        },
+        {
+          title: "Advertising and external links",
+          body: [
+            "TextPulses may display advertisements or link to third-party resources. Advertisement labels, external links, and third-party tools do not imply endorsement.",
+            "Users should evaluate third-party products, services, and claims independently before relying on them."
           ]
         }
       ]}

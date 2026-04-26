@@ -52,26 +52,42 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    name: siteConfig.name,
-    applicationCategory: "BusinessApplication",
-    operatingSystem: "Any modern web browser",
-    description: siteConfig.description,
-    offers: {
-      "@type": "Offer",
-      price: "0",
-      priceCurrency: "USD"
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      name: siteConfig.name,
+      applicationCategory: "BusinessApplication",
+      operatingSystem: "Any modern web browser",
+      description: siteConfig.description,
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "USD"
+      },
+      featureList: [
+        "Word and character counting",
+        "Readability estimates",
+        "Keyword density analysis",
+        "PublishFit Score by writing channel",
+        "Browser-based private text analysis"
+      ]
     },
-    featureList: [
-      "Word and character counting",
-      "Readability estimates",
-      "Keyword density analysis",
-      "PublishFit Score by writing channel",
-      "Browser-based private text analysis"
-    ]
-  };
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: siteConfig.name,
+      url: siteConfig.url,
+      email: siteConfig.contactEmail
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: siteConfig.name,
+      url: siteConfig.url,
+      description: siteConfig.description
+    }
+  ];
 
   return (
     <html lang="en" suppressHydrationWarning>
