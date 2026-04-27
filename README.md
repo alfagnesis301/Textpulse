@@ -50,14 +50,22 @@ npm run typecheck
 
 Visible ad placeholders are not currently rendered in the interface because `NEXT_PUBLIC_ADS_ENABLED` is unset by default. Future placements should use `components/SafeAdSlot.tsx`, which returns `null` unless `NEXT_PUBLIC_ADS_ENABLED=true`.
 
-Replace `pub-0000000000000000` with your real Google AdSense publisher ID after approval or when AdSense provides it:
+The AdSense publisher ID is configured as `pub-7051995204409435` and `ads.txt` contains:
 
-- `public/ads.txt`
-- Any future AdSense script or ad unit code added inside approved ad locations
+```txt
+google.com, pub-7051995204409435, DIRECT, f08c47fec0942fa0
+```
+
+The AdSense loader is present in `components/AdSenseScript.tsx`, but it only renders when both environment variables are set:
+
+```bash
+NEXT_PUBLIC_ADSENSE_ENABLED=true
+NEXT_PUBLIC_CMP_READY=true
+```
 
 Do not display fake ads, disguise ads as navigation, or encourage ad clicks.
 
-Before serving personalized ads to visitors in the EEA, UK, or Switzerland, configure a Google-certified consent management platform that supports the IAB Transparency and Consent Framework.
+Before serving personalized ads to visitors in the EEA, UK, or Switzerland, configure a Google-certified consent management platform that supports the IAB Transparency and Consent Framework. Do not set `NEXT_PUBLIC_CMP_READY=true` until that CMP is configured.
 
 ## Google Analytics
 
@@ -98,7 +106,7 @@ The contact form uses Netlify Forms. A static form definition lives at `public/f
 - There are no fake download buttons, fake navigation items, or prompts to click ads.
 - The tool is useful without requiring signup.
 - Privacy and Cookie Policy copy explains browser-based analysis, localStorage behavior, Google AdSense advertising cookies, opt-out choices, and consent requirements.
-- `ads.txt` exists and publisher ID is ready to replace after approval.
+- `ads.txt` exists with the configured publisher ID.
 - `robots.txt` and `sitemap.xml` are available.
 - Submit the sitemap in Google Search Console after the production domain is stable.
 - Configure a Google-certified CMP before serving personalized ads in the EEA, UK, or Switzerland.

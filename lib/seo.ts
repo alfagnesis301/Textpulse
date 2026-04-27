@@ -6,7 +6,9 @@ export const siteConfig = {
   url: "https://textpulses.com",
   description:
     "Free privacy-first word counter, readability checker, keyword density analyzer, and PublishFit Score for blogs, SEO snippets, social posts, emails, essays, and speeches.",
-  contactEmail: "hello@textpulses.com"
+  contactEmail: "hello@textpulses.com",
+  adsensePublisherId: "pub-7051995204409435",
+  adsenseClientId: "ca-pub-7051995204409435"
 };
 
 export function createMetadata({
