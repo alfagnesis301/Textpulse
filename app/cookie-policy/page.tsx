@@ -13,7 +13,7 @@ export default function CookiePolicyPage() {
       eyebrow="Cookie Policy"
       title="Cookie Policy"
       intro="This policy explains how TextPulses uses browser storage, cookies, advertising technologies, and consent controls."
-      updated="April 26, 2026"
+      updated="April 27, 2026"
       sections={[
         {
           title: "Preference storage",
@@ -42,6 +42,14 @@ export default function CookiePolicyPage() {
           body: [
             "For visitors in regions such as the UK, EEA, and Switzerland, non-essential advertising or analytics cookies may require consent before use.",
             "Before serving personalized Google ads to users in the EEA, the UK, or Switzerland, TextPulses should use a Google-certified consent management platform that integrates with the IAB Transparency and Consent Framework."
+          ]
+        },
+        {
+          title: "Consent choices",
+          body: [
+            "Where a consent banner or consent management platform is available, visitors should be able to accept, reject, or manage non-essential technologies.",
+            "Essential technologies may be used to operate the website, remember basic preferences, protect forms, or maintain security. Non-essential advertising or analytics technologies should follow the consent choices required in the visitor's region.",
+            "If Google AdSense is enabled, TextPulses should use a Google-certified consent management platform where required for Google publisher products."
           ]
         },
         {

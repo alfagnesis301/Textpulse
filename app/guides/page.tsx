@@ -20,6 +20,12 @@ export default function GuidesPage() {
         Learn how to use word counts, readability estimates, keyword density, and channel
         length ranges without treating them as rigid formulas.
       </p>
+      <Link
+        href="/methodology"
+        className="mt-6 inline-flex rounded-2xl border border-slate-200 bg-white px-5 py-3 text-sm font-extrabold text-slate-800 shadow-sm hover:-translate-y-0.5 hover:border-pulse-blue dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
+      >
+        How TextPulses calculates signals
+      </Link>
 
       <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {guides.map((guide) => (
@@ -37,6 +43,9 @@ export default function GuidesPage() {
             </h2>
             <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
               {guide.description}
+            </p>
+            <p className="mt-3 text-xs font-semibold text-slate-500 dark:text-slate-500">
+              Last updated: {guide.updated}
             </p>
             <Link
               href={`/guides/${guide.slug}`}

@@ -5,6 +5,7 @@ import { siteConfig } from "@/lib/seo";
 const routes = [
   "",
   "/guides",
+  "/methodology",
   "/about",
   "/contact",
   "/privacy-policy",

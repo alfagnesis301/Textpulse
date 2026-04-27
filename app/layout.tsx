@@ -79,13 +79,6 @@ export default function RootLayout({
       name: siteConfig.name,
       url: siteConfig.url,
       email: siteConfig.contactEmail
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      name: siteConfig.name,
-      url: siteConfig.url,
-      description: siteConfig.description
     }
   ];
 

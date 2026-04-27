@@ -13,7 +13,7 @@ export default function DisclaimerPage() {
       eyebrow="Disclaimer"
       title="Disclaimer"
       intro="TextPulses is a practical writing aid. It provides estimates and signals, not guarantees."
-      updated="April 26, 2026"
+      updated="April 27, 2026"
       sections={[
         {
           title: "Approximate metrics",

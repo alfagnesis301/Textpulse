@@ -12,11 +12,13 @@ export function ContactForm() {
     event.preventDefault();
     setStatus("sending");
 
-    const formData = new URLSearchParams({
-      "form-name": "contact",
-      name,
-      email,
-      message
+    const formData = new FormData(event.currentTarget);
+    const encoded = new URLSearchParams();
+
+    formData.forEach((value, key) => {
+      if (typeof value === "string") {
+        encoded.append(key, value);
+      }
     });
 
     try {
@@ -25,7 +27,7 @@ export function ContactForm() {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"
         },
-        body: formData.toString()
+        body: encoded.toString()
       });
 
       if (!response.ok) {
@@ -45,11 +47,19 @@ export function ContactForm() {
     <form
       name="contact"
       method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
       action="/forms/contact.html"
       onSubmit={submitMessage}
       className="mt-8 rounded-2xl border border-slate-200 bg-white/90 p-6 shadow-soft dark:border-slate-800 dark:bg-slate-900/90"
     >
       <input type="hidden" name="form-name" value="contact" />
+      <p hidden>
+        <label>
+          Do not fill this out:
+          <input name="bot-field" />
+        </label>
+      </p>
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="grid gap-2 text-sm font-bold text-slate-700 dark:text-slate-200">
           Name
@@ -59,6 +69,7 @@ export function ContactForm() {
             onChange={(event) => setName(event.target.value)}
             className="rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-950 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
             autoComplete="name"
+            maxLength={120}
             required
           />
         </label>
@@ -71,6 +82,7 @@ export function ContactForm() {
             onChange={(event) => setEmail(event.target.value)}
             className="rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-950 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
             autoComplete="email"
+            maxLength={180}
             required
           />
         </label>
@@ -82,9 +94,16 @@ export function ContactForm() {
           value={message}
           onChange={(event) => setMessage(event.target.value)}
           className="min-h-40 rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-950 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
+          minLength={20}
+          maxLength={3000}
+          rows={8}
           required
         />
       </label>
+      <p className="mt-4 text-sm leading-6 text-slate-600 dark:text-slate-400">
+        Please do not send sensitive private drafts, passwords, confidential documents, medical
+        information, legal documents, or financial details.
+      </p>
       <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-sm leading-6 text-slate-600 dark:text-slate-400" aria-live="polite">
           {status === "sent"

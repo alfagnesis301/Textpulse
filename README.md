@@ -4,7 +4,7 @@ TextPulses is a privacy-first word counter and publish-ready text analyzer built
 
 It counts words, characters, sentences, paragraphs, lines, unique words, reading time, speaking time, handwriting time, keyword density, phrase frequency, and writing health signals. Its unique PublishFit Score checks whether a draft fits common publishing channels such as blog articles, SEO titles, meta descriptions, YouTube text, LinkedIn posts, X/Twitter posts, Instagram captions, email subjects, academic essays, and speeches.
 
-The site also includes original writing guides for word count, SEO titles, meta descriptions, readability, keyword density, social posts, email subjects, essays, speech timing, and PublishFit Score.
+The site also includes original writing guides for word count, SEO titles, meta descriptions, readability, keyword density, social posts, email subjects, essays, speech timing, PublishFit Score, and a methodology page explaining how the browser-side signals are calculated.
 
 ## Tech stack
 
@@ -48,9 +48,9 @@ npm run typecheck
 
 ## Google AdSense preparation
 
-Visible ad placeholders are not currently rendered in the interface. Add approved AdSense placements only after the site is ready for monetization review and keep them clearly separated from tool actions such as Clear, Copy, Download, and CTA buttons.
+Visible ad placeholders are not currently rendered in the interface because `NEXT_PUBLIC_ADS_ENABLED` is unset by default. Future placements should use `components/SafeAdSlot.tsx`, which returns `null` unless `NEXT_PUBLIC_ADS_ENABLED=true`.
 
-Replace `pub-XXXXXXXXXXXXXXXX` with your real Google AdSense publisher ID after approval:
+Replace `pub-0000000000000000` with your real Google AdSense publisher ID after approval or when AdSense provides it:
 
 - `public/ads.txt`
 - Any future AdSense script or ad unit code added inside approved ad locations
@@ -91,6 +91,7 @@ The contact form uses Netlify Forms. A static form definition lives at `public/f
 
 - Original homepage content is present.
 - Original educational guide pages are present under `/guides`.
+- `/methodology` explains how TextPulses calculates writing signals.
 - About, Contact, Privacy Policy, Terms, Cookie Policy, and Disclaimer pages exist.
 - Navigation and footer links are clear.
 - Any future ad slots are clearly labeled and separated from primary actions.

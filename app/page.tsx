@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { FAQ, faqs } from "@/components/FAQ";
+import { WebsiteJsonLd } from "@/components/JsonLd";
 import { Logo } from "@/components/Logo";
+import { SafeAdSlot } from "@/components/SafeAdSlot";
 import { TextAnalyzer } from "@/components/TextAnalyzer";
 import { guides } from "@/lib/guides";
 import { createMetadata } from "@/lib/seo";
@@ -70,6 +72,7 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
+      <WebsiteJsonLd />
       <section className="hero-soft-bg border-b border-slate-200 dark:border-slate-800">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 pb-10 pt-12 sm:px-6 lg:grid-cols-[1.02fr_0.98fr] lg:px-8 lg:pb-14 lg:pt-16">
           <div className="flex flex-col justify-center">
@@ -98,6 +101,12 @@ export default function HomePage() {
                 className="rounded-2xl border border-slate-200 bg-white px-6 py-3 text-sm font-extrabold text-slate-800 shadow-sm hover:-translate-y-0.5 hover:border-pulse-blue dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
               >
                 See PublishFit
+              </Link>
+              <Link
+                href="/methodology"
+                className="rounded-2xl border border-blue-100 bg-blue-50 px-6 py-3 text-sm font-extrabold text-pulse-blue shadow-sm hover:-translate-y-0.5 hover:border-pulse-blue dark:border-blue-900/60 dark:bg-blue-950/30 dark:text-blue-200"
+              >
+                How it works
               </Link>
             </div>
             <div className="mt-7 flex flex-wrap gap-2">
@@ -152,6 +161,7 @@ export default function HomePage() {
       </section>
 
       <TextAnalyzer />
+      <SafeAdSlot id="home-after-tool-ad" position="content" />
 
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8" aria-labelledby="what-analyze">
         <div className="max-w-3xl">
@@ -257,6 +267,20 @@ export default function HomePage() {
             engagement, or academic grading. It gives you a practical checklist before you
             send, submit, or publish.
           </p>
+          <div className="mt-5 flex flex-wrap gap-3">
+            <Link
+              href="/guides/publishfit-score-explained"
+              className="rounded-2xl bg-slate-950 px-5 py-3 text-sm font-extrabold text-white shadow-sm hover:-translate-y-0.5 hover:bg-pulse-blue dark:bg-white dark:text-slate-950"
+            >
+              Read PublishFit guide
+            </Link>
+            <Link
+              href="/methodology"
+              className="rounded-2xl border border-slate-200 bg-white px-5 py-3 text-sm font-extrabold text-slate-800 shadow-sm hover:-translate-y-0.5 hover:border-pulse-blue dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
+            >
+              View methodology
+            </Link>
+          </div>
         </div>
       </section>
 

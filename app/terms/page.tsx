@@ -13,7 +13,7 @@ export default function TermsPage() {
       eyebrow="Terms"
       title="Terms of Use"
       intro="These terms describe the basic conditions for using TextPulses. If you do not agree with them, please do not use the site."
-      updated="April 26, 2026"
+      updated="April 27, 2026"
       sections={[
         {
           title: "Operator and contact",

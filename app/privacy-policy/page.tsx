@@ -13,7 +13,7 @@ export default function PrivacyPolicyPage() {
       eyebrow="Privacy Policy"
       title="Privacy Policy"
       intro="This policy explains how TextPulses handles text, preferences, browser storage, contact submissions, advertising, and third-party services."
-      updated="April 26, 2026"
+      updated="April 27, 2026"
       sections={[
         {
           title: "Text analysis stays in your browser",
@@ -42,6 +42,14 @@ export default function PrivacyPolicyPage() {
             "TextPulses may display advertisements through Google AdSense or related Google advertising services. Third-party vendors, including Google, use cookies to serve ads based on a user's prior visits to this website or other websites.",
             "Google's use of advertising cookies enables Google and its partners to serve ads to users based on visits to TextPulses and/or other sites on the Internet. Other third-party vendors or ad networks may also use cookies or similar technologies to serve ads, measure performance, prevent fraud, limit frequency, and support ad delivery.",
             "Users can opt out of personalized advertising by visiting Google's Ads Settings at https://adssettings.google.com. Users may also learn about opting out of some third-party vendors' personalized advertising by visiting https://www.aboutads.info."
+          ]
+        },
+        {
+          title: "Advertising and consent status",
+          body: [
+            "TextPulses may show advertising only after the site is configured with the required advertising, privacy, and consent controls.",
+            "For visitors in regions where consent is required, advertising and analytics technologies should not be loaded until the required choice has been collected through an appropriate consent mechanism.",
+            "TextPulses does not ask users to paste sensitive personal drafts into the contact form. The main analyzer is designed to process text locally in the browser."
           ]
         },
         {
