@@ -56,16 +56,11 @@ The AdSense publisher ID is configured as `pub-7051995204409435` and `ads.txt` c
 google.com, pub-7051995204409435, DIRECT, f08c47fec0942fa0
 ```
 
-The AdSense loader is present in `components/AdSenseScript.tsx`, but it only renders when both environment variables are set:
-
-```bash
-NEXT_PUBLIC_ADSENSE_ENABLED=true
-NEXT_PUBLIC_CMP_READY=true
-```
+The AdSense verification script is rendered in the global `<head>` through `components/AdSenseScript.tsx` so Google can verify site ownership.
 
 Do not display fake ads, disguise ads as navigation, or encourage ad clicks.
 
-Before serving personalized ads to visitors in the EEA, UK, or Switzerland, configure a Google-certified consent management platform that supports the IAB Transparency and Consent Framework. Do not set `NEXT_PUBLIC_CMP_READY=true` until that CMP is configured.
+Before serving personalized ads to visitors in the EEA, UK, or Switzerland, configure a Google-certified consent management platform that supports the IAB Transparency and Consent Framework. Visible ad placements remain controlled separately by `NEXT_PUBLIC_ADS_ENABLED`.
 
 ## Google Analytics
 
