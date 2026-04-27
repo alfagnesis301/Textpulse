@@ -251,23 +251,27 @@ export default async function GuidePage({ params }: GuidePageProps) {
         </section>
 
         <section className="mt-8 rounded-2xl border border-slate-200 bg-white/88 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/88">
-          <h2 className="text-2xl font-extrabold tracking-tight text-slate-950 dark:text-white">
+          <h2 id="related-guides-title" className="text-2xl font-extrabold tracking-tight text-slate-950 dark:text-white">
             Related guides
           </h2>
-          <div className="mt-4 grid gap-4 md:grid-cols-3">
+          <ul
+            className="mt-4 grid list-none gap-4 p-0 md:grid-cols-3"
+            aria-labelledby="related-guides-title"
+          >
             {relatedGuides.map((related) => (
-              <Link
-                key={related.slug}
-                href={`/guides/${related.slug}`}
-                className="rounded-2xl border border-slate-200 bg-slate-50 p-4 hover:border-pulse-blue dark:border-slate-800 dark:bg-slate-950/70"
-              >
-                <h3 className="font-extrabold text-slate-950 dark:text-white">{related.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">
-                  {related.description}
-                </p>
-              </Link>
+              <li key={related.slug}>
+                <Link
+                  href={`/guides/${related.slug}`}
+                  className="block h-full rounded-2xl border border-slate-200 bg-slate-50 p-4 no-underline hover:border-pulse-blue dark:border-slate-800 dark:bg-slate-950/70"
+                >
+                  <strong className="block font-extrabold text-slate-950 dark:text-white">{related.title}</strong>
+                  <span className="mt-2 block text-sm leading-6 text-slate-600 dark:text-slate-400">
+                    {related.description}
+                  </span>
+                </Link>
+              </li>
             ))}
-          </div>
+          </ul>
         </section>
 
         <section className="mt-8 rounded-2xl border border-slate-200 bg-white/88 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/88">

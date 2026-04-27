@@ -22,8 +22,8 @@ export default function ContactPage() {
         </p>
         <p>
           TextPulses is a browser-based writing utility. The main analyzer is designed so your
-          draft does not need to be uploaded for word count, readability, keyword density, or
-          PublishFit scoring.
+          draft does not need to be uploaded for word count, readability, keyword density,
+          cleanup actions, or PublishFit scoring.
         </p>
       </div>
       <p className="mt-4 text-sm font-semibold text-slate-600 dark:text-slate-400">
@@ -36,9 +36,9 @@ export default function ContactPage() {
       <section className="mt-8 rounded-2xl border border-amber-200 bg-amber-50 p-5 dark:border-amber-900/60 dark:bg-amber-950/30">
         <h2 className="text-lg font-extrabold text-slate-950 dark:text-white">Before you send</h2>
         <p className="mt-3 text-sm leading-6 text-slate-700 dark:text-slate-300">
-          Please do not send sensitive private drafts, passwords, personal documents,
-          confidential client work, medical information, legal documents, or financial
-          information through this form.
+          Please do not send sensitive private drafts, passwords, confidential client work,
+          medical information, legal documents, financial information, or private academic
+          submissions through this form.
         </p>
       </section>
 
@@ -60,14 +60,19 @@ export default function ContactPage() {
         </ul>
       </section>
 
-      <ContactForm />
+      <section className="mt-8" aria-labelledby="contact-form-title">
+        <h2 id="contact-form-title" className="text-2xl font-extrabold text-slate-950 dark:text-white">
+          Contact form
+        </h2>
+        <ContactForm />
+      </section>
 
       <section className="mt-8 rounded-2xl border border-slate-200 bg-white/88 p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900/88">
         <h2 className="text-lg font-extrabold text-slate-950 dark:text-white">Corrections</h2>
         <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
-          If you believe a guide contains unclear or outdated advice, include the page URL and
-          the section that needs review. TextPulses aims to keep its writing guidance practical,
-          transparent, and easy to understand.
+          If you believe a guide contains unclear, outdated, or inaccurate advice, include the
+          page URL and the section that needs review. TextPulses aims to keep its writing
+          guidance practical, transparent, and easy to understand.
         </p>
       </section>
     </main>
