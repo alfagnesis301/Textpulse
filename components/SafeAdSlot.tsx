@@ -1,15 +1,33 @@
+"use client";
+import { useEffect } from "react";
+import { siteConfig } from "@/lib/seo";
+
+declare global {
+  interface Window {
+    adsbygoogle: unknown[];
+  }
+}
+
 type SafeAdSlotProps = {
   id: string;
+  slotId?: string;
   position?: "inline" | "sidebar" | "footer" | "content";
   className?: string;
 };
 
 const ADS_ENABLED = process.env.NEXT_PUBLIC_ADS_ENABLED === "true";
 
-export function SafeAdSlot({ id, position = "content", className = "" }: SafeAdSlotProps) {
-  if (!ADS_ENABLED) {
-    return null;
-  }
+export function SafeAdSlot({ id, slotId, position = "content", className = "" }: SafeAdSlotProps) {
+  useEffect(() => {
+    if (!ADS_ENABLED || !slotId) return;
+    try {
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    } catch {
+      // ad blocker or script not loaded
+    }
+  }, [slotId]);
+
+  if (!ADS_ENABLED || !slotId) return null;
 
   const sizeClass = position === "sidebar" ? "min-h-[300px]" : "min-h-[220px]";
 
@@ -23,12 +41,14 @@ export function SafeAdSlot({ id, position = "content", className = "" }: SafeAdS
         Advertisement
       </div>
       <div className={`grid ${sizeClass} place-items-center rounded-xl bg-white/75 dark:bg-slate-950/60`}>
-        {/*
-          Insert Google AdSense ad unit markup only after approval.
-          Do not load personalized ads before valid consent where required.
-          Keep this slot away from navigation, forms, download buttons,
-          editor controls, copy buttons, and primary CTAs.
-        */}
+        <ins
+          className="adsbygoogle"
+          style={{ display: "block" }}
+          data-ad-client={siteConfig.adsenseClientId}
+          data-ad-slot={slotId}
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        />
       </div>
     </aside>
   );

@@ -3,17 +3,19 @@ import { FAQ, faqs } from "@/components/FAQ";
 import { WebsiteJsonLd } from "@/components/JsonLd";
 import { Logo } from "@/components/Logo";
 import { SafeAdSlot } from "@/components/SafeAdSlot";
+import { SeoSnippetChecker } from "@/components/SeoSnippetChecker";
 import { TextAnalyzer } from "@/components/TextAnalyzer";
 import { guides } from "@/lib/guides";
 import { createMetadata } from "@/lib/seo";
 
 export const metadata = createMetadata({
-  title: "Free Word Counter & Publish-Ready Text Analyzer",
+  title: "SEO Title & Meta Description Length Checker – Free | TextPulses",
   description:
-    "Count words, check readability, analyze keyword balance, and see whether your text fits blogs, SEO snippets, social posts, emails, essays, and speeches."
+    "Check SEO title length (ideal: 50–60 chars) and meta description length (max 160 chars). Free word counter, readability checker, and publish-ready text analyzer.",
+  path: ""
 });
 
-const trustBadges = ["Private browser-based analysis", "No signup required", "Free writing utility"];
+const trustBadges = ["Private browser-based analysis", "No signup required", "SEO title & meta description checker"];
 
 const analyzeItems = [
   {
@@ -83,11 +85,11 @@ export default function HomePage() {
               {`Count smarter. Write sharper. Publish faster.`}
             </p>
             <h1 className="mt-4 max-w-4xl text-balance text-4xl font-black tracking-tight text-slate-950 dark:text-white sm:text-5xl lg:text-6xl">
-              Free Word Counter & Publish-Ready Text Analyzer
+              Free Word Counter & SEO Title Length Checker
             </h1>
             <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-700 dark:text-slate-300">
-              Count words, check readability, analyze keyword balance, and see if your text
-              fits blogs, SEO snippets, social posts, emails, essays, and speeches.
+              Check SEO title length, meta description length, word count, readability, and
+              keyword balance. See if your text fits blogs, social posts, emails, and more.
             </p>
             <div className="mt-7 flex flex-wrap items-center gap-3">
               <Link
@@ -160,6 +162,7 @@ export default function HomePage() {
         </div>
       </section>
 
+      <SeoSnippetChecker />
       <TextAnalyzer />
       <SafeAdSlot id="home-after-tool-ad" position="content" />
 

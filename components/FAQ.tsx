@@ -1,5 +1,25 @@
 export const faqs = [
   {
+    question: "What is the ideal length of an SEO title?",
+    answer:
+      "Google typically displays the first 50–60 characters of a title tag. Titles longer than 60 characters may be truncated in search results with an ellipsis (…). For best results, keep your title between 50 and 60 characters and place the most important keyword near the beginning."
+  },
+  {
+    question: "What is the maximum length of a meta description?",
+    answer:
+      "Google shows approximately 155–160 characters (or around 960 pixels) of a meta description in search results. Descriptions longer than 160 characters are likely to be cut off. The ideal range is 140–160 characters for full visibility. Keeping your description within this range helps avoid truncation and improves click-through rate."
+  },
+  {
+    question: "What happens if my title tag is too long?",
+    answer:
+      "If your title tag exceeds around 60 characters, Google will truncate it in search results and replace the end with an ellipsis (…). This can hide important keywords and reduce your click-through rate (CTR). Use the SEO Snippet Checker above to keep your title within the recommended character count."
+  },
+  {
+    question: "Does character count or pixel width matter more for SEO titles?",
+    answer:
+      "Google measures title display width in pixels, not characters. However, since most characters are approximately the same width, 50–60 characters is a reliable practical rule. Wide characters like 'W' or 'M' can push you over the pixel limit even under 60 characters. Keeping titles between 50 and 55 characters provides a safe margin for most fonts."
+  },
+  {
     question: "Is TextPulses free to use?",
     answer:
       "Yes. TextPulses is a free writing utility designed for quick word counts, character counts, readability checks, keyword density review, and PublishFit scoring."
@@ -47,8 +67,11 @@ export function FAQ() {
       <div className="text-center">
         <p className="text-sm font-bold uppercase tracking-[0.2em] text-pulse-blue">FAQ</p>
         <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-950 dark:text-white sm:text-4xl">
-          Practical answers before you paste a draft
+          Frequently Asked Questions about SEO Lengths
         </h2>
+        <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-slate-600 dark:text-slate-400">
+          Practical answers about SEO title length, meta description length, and how to use TextPulses before you publish.
+        </p>
       </div>
       <div className="mt-10 grid gap-4">
         {faqs.map((item) => (
