@@ -177,7 +177,8 @@ export function GuideJsonLd({
             dateModified,
             author: {
               "@type": "Organization",
-              name: "TextPulses Editorial"
+              name: "TextPulses Editorial",
+              url: siteConfig.url
             },
             publisher: {
               "@type": "Organization",

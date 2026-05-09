@@ -55,12 +55,11 @@ export default async function GuidePage({ params }: GuidePageProps) {
   const url = `${siteConfig.url}/guides/${guide.slug}`;
   const relatedGuides = getRelatedGuides(guide);
   const pageTitle = guide.h1 ?? guide.title;
-  const schemaTitle = guide.seoTitle ?? guide.title;
-  const schemaDescription = guide.seoDescription ?? guide.description;
+  const schemaDescription = guide.articleDescription ?? guide.seoDescription ?? guide.description;
   const breadcrumbItems = [
-    { name: "Home", url: siteConfig.url },
+    { name: "Home", url: `${siteConfig.url}/` },
     { name: "Guides", url: `${siteConfig.url}/guides` },
-    { name: pageTitle, url }
+    { name: guide.breadcrumbName ?? pageTitle, url }
   ];
   const tableOfContents = [
     { href: "#quick-answer", label: "Quick answer" },
@@ -80,7 +79,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
   return (
     <main className="mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8">
       <GuideJsonLd
-        title={schemaTitle}
+        title={pageTitle}
         description={schemaDescription}
         url={url}
         datePublished="2026-04-27"
@@ -328,15 +327,17 @@ export default async function GuidePage({ params }: GuidePageProps) {
           >
             {relatedGuides.map((related) => (
               <li key={related.slug}>
-                <Link
-                  href={`/guides/${related.slug}`}
-                  className="block h-full rounded-2xl border border-slate-200 bg-slate-50 p-4 no-underline hover:border-pulse-blue dark:border-slate-800 dark:bg-slate-950/70"
-                >
-                  <strong className="block font-extrabold text-slate-950 dark:text-white">{related.title}</strong>
-                  <span className="mt-2 block text-sm leading-6 text-slate-600 dark:text-slate-400">
+                <div className="block h-full rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-950/70">
+                  <Link
+                    href={`/guides/${related.slug}`}
+                    className="font-extrabold text-slate-950 hover:text-pulse-blue dark:text-white"
+                  >
+                    {related.title}
+                  </Link>
+                  <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">
                     {related.description}
-                  </span>
-                </Link>
+                  </p>
+                </div>
               </li>
             ))}
           </ul>

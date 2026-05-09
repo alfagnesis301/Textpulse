@@ -39,6 +39,8 @@ export type Guide = {
   h1?: string;
   description: string;
   seoDescription?: string;
+  articleDescription?: string;
+  breadcrumbName?: string;
   ogImage?: string;
   updated: string;
   readingTime: string;
@@ -1690,6 +1692,9 @@ const seoOptimizedGuides: Record<string, Partial<Guide>> = {
       "How long should a LinkedIn post be? The sweet spot is 150-1,300 characters. Full guide with character limits, examples by post type, and engagement data for 2026.",
     seoDescription:
       "How long should a LinkedIn post be? The sweet spot is 150-1,300 characters. Full guide with character limits, examples by post type, and engagement data for 2026.",
+    articleDescription:
+      "A practical guide with character limits, length-by-format data, and revision examples for posts that get read instead of scrolled past.",
+    breadcrumbName: "How Long Should a LinkedIn Post Be?",
     updated: "May 9, 2026",
     readingTime: "10 min read",
     quickAnswer: [
@@ -1807,24 +1812,29 @@ const seoOptimizedGuides: Record<string, Partial<Guide>> = {
           "A practical range is 150-1,300 characters for most posts. Shorter posts work for one clear insight, while longer posts need a story, framework, or useful example."
       },
       {
+        question: "How long can a LinkedIn post be?",
+        answer:
+          "LinkedIn Help states that a standard post can be up to 3,000 characters. If your draft needs more space, LinkedIn articles are better suited to long-form publishing."
+      },
+      {
+        question: "What is the ideal LinkedIn post length for engagement?",
+        answer:
+          "There is no guaranteed engagement length. For practical drafting, 150-1,300 characters is a useful range because it gives enough space for a point, example, and takeaway without forcing a long read."
+      },
+      {
+        question: "How many characters are visible before see more on LinkedIn?",
+        answer:
+          "The visible cutoff can change by device, layout, and post format. Put the strongest hook and context in the first one or two lines so the post still makes sense before expansion."
+      },
+      {
         question: "Are long LinkedIn posts bad?",
         answer:
           "No. Long posts can work when every section adds context, structure, or value. They become weak when length comes from repetition or unnecessary setup."
       },
       {
-        question: "What is the best LinkedIn post length for a story?",
+        question: "What is the LinkedIn comment character limit?",
         answer:
-          "A mini story often works around 500-900 characters because it gives enough room for situation, tension, decision, and lesson."
-      },
-      {
-        question: "Should every LinkedIn post ask a question?",
-        answer:
-          "No. A relevant question can invite discussion, but a clear takeaway is often stronger than a forced engagement prompt."
-      },
-      {
-        question: "How do I know if my LinkedIn post is too long?",
-        answer:
-          "It is probably too long if the setup repeats itself, the main point arrives late, or paragraphs can be removed without changing the lesson."
+          "LinkedIn documents a 1,000-character limit for comments in group conversations. Regular post comment limits can vary by surface, so keep comments concise and verify in the composer before relying on a strict number."
       }
     ]
   },
@@ -1836,6 +1846,9 @@ const seoOptimizedGuides: Record<string, Partial<Guide>> = {
       "What is the ideal SEO title length? Aim for 50-60 characters or under 580 pixels. Full 2026 guide with examples, mobile vs desktop limits, and rewriting tips.",
     seoDescription:
       "What is the ideal SEO title length? Aim for 50-60 characters or under 580 pixels. Full 2026 guide with examples, mobile vs desktop limits, and rewriting tips.",
+    articleDescription:
+      "The complete guide to title tag length, pixel width limits, and the rules Google applies when deciding whether to truncate your headline.",
+    breadcrumbName: "SEO Title Length Guide",
     updated: "May 9, 2026",
     readingTime: "10 min read",
     quickAnswer: [
@@ -1945,29 +1958,34 @@ const seoOptimizedGuides: Record<string, Partial<Guide>> = {
     ],
     faq: [
       {
-        question: "What is the ideal SEO title length in 2026?",
+        question: "What is the ideal length of an SEO title?",
         answer:
           "A practical target is 50-60 characters or roughly under 580 pixels, but Google may display, truncate, or rewrite titles depending on the query and layout."
       },
       {
-        question: "Is 60 characters a strict SEO title limit?",
+        question: "What is the maximum SEO title length?",
         answer:
-          "No. It is a useful planning range, not a fixed rule. Pixel width and search result layout matter too."
+          "There is no universal character maximum that guarantees display. Titles above roughly 60 characters or 580 pixels have a higher truncation risk, especially when important words sit near the end."
       },
       {
-        question: "Should my brand name be in every SEO title?",
+        question: "Is a longer SEO title always bad?",
         answer:
-          "Use the brand when it helps recognition or trust. For smaller sites, the topic and page type often deserve priority."
+          "No. A longer title can still be useful if it is clear and accurate, but it is more likely to be truncated or rewritten."
       },
       {
-        question: "Can the H1 be different from the SEO title?",
+        question: "Should the H1 match the SEO title exactly?",
         answer:
-          "Yes. The SEO title can be compact for search results, while the H1 can be more natural and descriptive on the page."
+          "It can, but it does not have to. The SEO title can be compact for search results, while the H1 can be more natural and descriptive on the page."
       },
       {
-        question: "What should I remove from an overlong title first?",
+        question: "How long should a title be for mobile SEO?",
         answer:
-          "Remove repeated keywords, vague openers, unnecessary adjectives, and brand wording that does not add trust."
+          "Mobile layouts can show less context, so put the main topic early and keep the title concise. The 50-60 character range is a practical mobile-friendly starting point."
+      },
+      {
+        question: "What happens if my title is too long?",
+        answer:
+          "Google may truncate the visible title or rewrite it using other page signals. The page can still rank, but the searcher may not see your full page promise."
       }
     ]
   },
@@ -1979,6 +1997,9 @@ const seoOptimizedGuides: Record<string, Partial<Guide>> = {
       "Meta description length: 120-160 characters for desktop, 105-130 for mobile. 2026 guide with free character checker, examples, and Google snippet rules.",
     seoDescription:
       "Meta description length: 120-160 characters for desktop, 105-130 for mobile. 2026 guide with free character checker, examples, and Google snippet rules.",
+    articleDescription:
+      "The complete guide to meta description length for SEO, including mobile vs desktop limits, character vs pixel rules, and a free meta description checker.",
+    breadcrumbName: "Meta Description Length Guide",
     updated: "May 9, 2026",
     readingTime: "10 min read",
     quickAnswer: [
@@ -2091,9 +2112,14 @@ const seoOptimizedGuides: Record<string, Partial<Guide>> = {
     ],
     faq: [
       {
-        question: "What is the ideal meta description length in 2026?",
+        question: "What is the ideal meta description length?",
         answer:
           "A practical range is 120-160 characters for many desktop snippets and about 105-130 characters for a safer mobile-first summary."
+      },
+      {
+        question: "How many characters should a meta description be?",
+        answer:
+          "Most meta descriptions should be long enough to summarize the page clearly, usually around 120-160 characters. Very short descriptions can feel vague, while very long descriptions are more likely to be truncated or rewritten."
       },
       {
         question: "Will Google always show my meta description?",
@@ -2106,12 +2132,17 @@ const seoOptimizedGuides: Record<string, Partial<Guide>> = {
           "Yes. A unique description helps each page communicate its specific purpose and avoids generic duplicate snippets."
       },
       {
-        question: "Can I include a call to action in a meta description?",
+        question: "How long should a meta description be for mobile?",
         answer:
-          "Yes, if it still summarizes the page honestly. Avoid vague or clickbait-style commands."
+          "For mobile, keep the strongest message within roughly the first 105-130 characters because smaller layouts may show less text."
       },
       {
-        question: "How can I check meta description length for free?",
+        question: "What happens if my meta description is too long?",
+        answer:
+          "It may be truncated, rewritten, or ignored for some queries. Keep the main topic and value near the front so the snippet still makes sense if the ending is cut."
+      },
+      {
+        question: "How do I check meta description length?",
         answer:
           "Paste the description into TextPulses and choose the Meta Description preset to review character count, repeated words, and practical fit."
       }
