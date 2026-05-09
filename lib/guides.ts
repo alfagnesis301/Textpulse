@@ -35,6 +35,7 @@ export type GuideInternalLink = {
 export type Guide = {
   slug: string;
   title: string;
+  relatedTitle?: string;
   seoTitle?: string;
   h1?: string;
   description: string;
@@ -1686,6 +1687,7 @@ const finalAdditions: Record<string, GuideSection[]> = {
 const seoOptimizedGuides: Record<string, Partial<Guide>> = {
   "linkedin-post-length-guide": {
     title: "How Long Should a LinkedIn Post Be? Ideal Length Guide (2026)",
+    relatedTitle: "LinkedIn Post Length Guide",
     seoTitle: "How Long Should a LinkedIn Post Be? Ideal Length Guide (2026)",
     h1: "How Long Should a LinkedIn Post Be? The 2026 Length Guide",
     description:
@@ -1840,6 +1842,7 @@ const seoOptimizedGuides: Record<string, Partial<Guide>> = {
   },
   "seo-title-length-guide": {
     title: "SEO Title Length: Ideal Character & Pixel Limits (2026 Guide)",
+    relatedTitle: "SEO Title Length Guide",
     seoTitle: "SEO Title Length: Ideal Character & Pixel Limits (2026 Guide)",
     h1: "SEO Title Length: How Long Should a Title Be in 2026?",
     description:
@@ -1991,6 +1994,7 @@ const seoOptimizedGuides: Record<string, Partial<Guide>> = {
   },
   "meta-description-length-checker-guide": {
     title: "Meta Description Length: Ideal Characters & Free Checker (2026)",
+    relatedTitle: "Meta Description Length Checker Guide",
     seoTitle: "Meta Description Length: Ideal Characters & Free Checker (2026)",
     h1: "Meta Description Length: How Many Characters in 2026?",
     description:

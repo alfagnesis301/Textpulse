@@ -332,7 +332,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
                     href={`/guides/${related.slug}`}
                     className="font-extrabold text-slate-950 hover:text-pulse-blue dark:text-white"
                   >
-                    {related.title}
+                    {related.relatedTitle ?? related.title}
                   </Link>
                   <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">
                     {related.description}
