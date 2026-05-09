@@ -17,6 +17,10 @@ export function createMetadata({
   path = "",
   type = "website",
   image = "/og/textpulses-og.svg",
+  openGraphTitle,
+  openGraphDescription,
+  twitterTitle,
+  twitterDescription,
   robots = {
     index: true,
     follow: true
@@ -27,6 +31,10 @@ export function createMetadata({
   path?: string;
   type?: "website" | "article";
   image?: string;
+  openGraphTitle?: string;
+  openGraphDescription?: string;
+  twitterTitle?: string;
+  twitterDescription?: string;
   robots?: Metadata["robots"];
 }): Metadata {
   const canonical = `${siteConfig.url}${path}`;
@@ -40,8 +48,8 @@ export function createMetadata({
       canonical
     },
     openGraph: {
-      title,
-      description,
+      title: openGraphTitle ?? title,
+      description: openGraphDescription ?? description,
       url: canonical,
       siteName: siteConfig.name,
       type,
@@ -56,8 +64,8 @@ export function createMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title,
-      description,
+      title: twitterTitle ?? title,
+      description: twitterDescription ?? description,
       images: [imageUrl]
     }
   };

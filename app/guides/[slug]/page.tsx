@@ -30,6 +30,10 @@ export async function generateMetadata({ params }: GuidePageProps) {
     path: `/guides/${guide.slug}`,
     type: "article",
     image: guide.ogImage ?? "/og/textpulses-og.svg",
+    openGraphTitle: guide.ogTitle,
+    openGraphDescription: guide.ogDescription,
+    twitterTitle: guide.twitterTitle,
+    twitterDescription: guide.twitterDescription,
     robots: {
       index: true,
       follow: true
@@ -63,15 +67,17 @@ export default async function GuidePage({ params }: GuidePageProps) {
   ];
   const tableOfContents = [
     { href: "#quick-answer", label: "Quick answer" },
-    { href: "#why-this-matters", label: "Why this matters" },
-    { href: "#practical-range", label: "Practical range" },
+    { href: "#why-this-matters", label: guide.whyMattersTitle ?? "Why this matters" },
+    { href: "#practical-range", label: guide.ruleOfThumbTitle ?? "Practical range" },
     ...guide.sections.map((section) => ({
       href: `#${slugify(section.title)}`,
       label: section.title
     })),
     { href: "#example-table", label: guide.table.title },
     { href: "#before-after", label: "Before and after examples" },
-    { href: "#textpulses-check", label: "How to check this in TextPulses" },
+    { href: "#common-mistakes", label: "Common mistakes" },
+    { href: "#practical-checklist", label: "Practical checklist" },
+    { href: "#textpulses-check", label: guide.howToCheckTitle ?? "How to check this in TextPulses" },
     { href: "#related-guides-title", label: "Related guides" },
     { href: "#faq", label: "FAQ" }
   ];
@@ -146,7 +152,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
 
         <section id="why-this-matters" className="mt-8 rounded-2xl border border-slate-200 bg-white/88 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/88">
           <h2 className="text-2xl font-extrabold tracking-tight text-slate-950 dark:text-white">
-            Why this matters
+            {guide.whyMattersTitle ?? "Why this matters"}
           </h2>
           <div className="mt-4 grid gap-4 text-base leading-8 text-slate-700 dark:text-slate-300">
             {guide.whyMatters.map((paragraph) => (
@@ -157,7 +163,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
 
         <section id="practical-range" className="mt-8 rounded-2xl border border-slate-200 bg-white/88 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/88">
           <h2 className="text-2xl font-extrabold tracking-tight text-slate-950 dark:text-white">
-            Practical range or rule of thumb
+            {guide.ruleOfThumbTitle ?? "Practical range or rule of thumb"}
           </h2>
           <div className="mt-4 grid gap-4 text-base leading-8 text-slate-700 dark:text-slate-300">
             {guide.ruleOfThumb.map((paragraph) => (
@@ -254,7 +260,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
           <p className="mt-4 text-base leading-8 text-slate-700 dark:text-slate-300">{guide.caseStudy.body}</p>
         </section>
 
-        <section className="mt-8 rounded-2xl border border-slate-200 bg-white/88 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/88">
+        <section id="common-mistakes" className="mt-8 rounded-2xl border border-slate-200 bg-white/88 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/88">
           <h2 className="text-2xl font-extrabold tracking-tight text-slate-950 dark:text-white">
             Common mistakes
           </h2>
@@ -268,7 +274,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
           </ul>
         </section>
 
-        <section className="mt-8 rounded-2xl border border-blue-100 bg-blue-50/80 p-6 dark:border-blue-900/60 dark:bg-blue-950/30">
+        <section id="practical-checklist" className="mt-8 rounded-2xl border border-blue-100 bg-blue-50/80 p-6 dark:border-blue-900/60 dark:bg-blue-950/30">
           <h2 className="text-2xl font-extrabold tracking-tight text-slate-950 dark:text-white">
             Practical checklist
           </h2>
@@ -284,7 +290,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
 
         <section id="textpulses-check" className="mt-8 rounded-2xl border border-slate-200 bg-white/88 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/88">
           <h2 className="text-2xl font-extrabold tracking-tight text-slate-950 dark:text-white">
-            How to check this in TextPulses
+            {guide.howToCheckTitle ?? "How to check this in TextPulses"}
           </h2>
           <div className="mt-4 grid gap-4 text-base leading-8 text-slate-700 dark:text-slate-300">
             {guide.howToCheck.map((paragraph) => (

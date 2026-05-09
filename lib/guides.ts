@@ -41,13 +41,19 @@ export type Guide = {
   description: string;
   seoDescription?: string;
   articleDescription?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  twitterTitle?: string;
+  twitterDescription?: string;
   breadcrumbName?: string;
   ogImage?: string;
   updated: string;
   readingTime: string;
   category: string;
   quickAnswer: string[];
+  whyMattersTitle?: string;
   whyMatters: string[];
+  ruleOfThumbTitle?: string;
   ruleOfThumb: string[];
   sections: GuideSection[];
   table: GuideTable;
@@ -55,6 +61,7 @@ export type Guide = {
   caseStudy: GuideCaseStudy;
   commonMistakes: string[];
   checklist: string[];
+  howToCheckTitle?: string;
   howToCheck: string[];
   relatedSlugs: string[];
   internalLinks?: GuideInternalLink[];
@@ -2149,6 +2156,204 @@ const seoOptimizedGuides: Record<string, Partial<Guide>> = {
         question: "How do I check meta description length?",
         answer:
           "Paste the description into TextPulses and choose the Meta Description preset to review character count, repeated words, and practical fit."
+      }
+    ]
+  },
+  "readability-scores-explained": {
+    title: "Readability Scores Explained",
+    relatedTitle: "Readability Scores Explained",
+    seoTitle: "Readability Scores Explained: Flesch, Gunning Fog & SMOG",
+    h1: "Readability Scores Explained: How to Measure and Improve Text Clarity",
+    description: "Understand readability scores and how to make text easier to read.",
+    seoDescription:
+      "Learn how readability scores work, including Flesch Reading Ease, Flesch-Kincaid, Gunning Fog, and SMOG. Check and improve text readability online.",
+    articleDescription:
+      "Learn how readability scores work, including Flesch Reading Ease, Flesch-Kincaid, Gunning Fog, and SMOG. Check and improve text readability online.",
+    ogTitle: "Readability Scores Explained: Flesch, Gunning Fog & SMOG",
+    ogDescription:
+      "Learn how readability scores work, including Flesch Reading Ease, Flesch-Kincaid, Gunning Fog, and SMOG.",
+    twitterTitle: "Readability Scores Explained: Flesch, Gunning Fog & SMOG",
+    twitterDescription: "Learn how to check and improve readability using common readability scores.",
+    breadcrumbName: "Readability Scores Explained",
+    updated: "May 9, 2026",
+    readingTime: "10 min read",
+    category: "Readability",
+    quickAnswer: [
+      "A readability score is a quick estimate of how easy or difficult a text is to read. Most formulas look at sentence length, word length, syllables, or complex words. Higher Flesch Reading Ease scores usually mean easier text, while higher Flesch-Kincaid, Gunning Fog, and SMOG scores usually mean more difficult text.",
+      "Readability formulas are useful signals, not complete editorial judgments. They do not measure accuracy, originality, persuasion, expertise, or whether the text is appropriate for every audience."
+    ],
+    whyMatters: [
+      "Readability scores matter because readers often scan before they commit. Web content, emails, documentation, marketing pages, product instructions, education material, and simplified legal or technical text all benefit from clear sentences and predictable structure.",
+      "For SEO, readable content can make pages easier to scan and more useful to visitors. That can support better engagement and comprehension, but a readability score does not guarantee rankings or replace search intent, accuracy, or helpful content."
+    ],
+    whyMattersTitle: "Why readability scores matter",
+    ruleOfThumb: [
+      "For general web content, a Flesch Reading Ease score around 60-80 is often a useful target. Marketing content may work well around 60-75. Technical, legal, academic, or expert content may naturally score lower because precision sometimes requires specialized terms.",
+      "Use a readability score checker online to find friction, then decide whether the edit preserves meaning. Clarity and accuracy matter more than chasing a perfect number."
+    ],
+    ruleOfThumbTitle: "What is a good readability score?",
+    sections: [
+      {
+        title: "What is a readability score?",
+        body: [
+          "A readability score is an automatic estimate of how easy or difficult a text may be to read. Common formulas look at signals such as sentence length, word length, syllables per word, and the number of complex words.",
+          "A score can help you compare drafts or spot obvious friction, but it cannot tell whether the writing is persuasive, original, factually correct, or editorially complete. Treat it as a practical readability test online, not as a full quality score."
+        ]
+      },
+      {
+        title: "Flesch Reading Ease",
+        body: [
+          "Flesch Reading Ease is a 0-100 style score where higher scores usually mean easier reading. It uses average sentence length and average syllables per word to estimate how difficult the text may feel.",
+          "As a rough guide, 90-100 is usually very easy, 80-89 easy, 70-79 fairly easy, 60-69 standard, 50-59 fairly difficult, 30-49 difficult, and 0-29 very difficult. These ranges are approximate because audience, topic, formatting, and language all matter.",
+          "It is useful for checking general reading ease, especially when a draft is intended for a broad audience. Because it is formula-based, it should be interpreted approximately and reviewed alongside audience, topic, and purpose."
+        ]
+      },
+      {
+        title: "Flesch-Kincaid Grade Level",
+        body: [
+          "Flesch-Kincaid Grade Level returns an approximate U.S. school grade level. A score near 8 suggests the text may be understandable for someone around eighth grade, while a higher score suggests more difficult reading.",
+          "This can help teams adapt public content, help pages, onboarding copy, or educational material for broad audiences. It should not be the only editorial criterion, especially when technical precision matters."
+        ]
+      },
+      {
+        title: "Gunning Fog Index",
+        body: [
+          "The Gunning Fog Index estimates the years of formal education a reader may need to understand a text on first reading. It tends to penalize long sentences and complex words.",
+          "It is useful for diagnosing dense business, corporate, legalistic, academic, or policy writing. A high score is often a signal to shorten sentences, define terms, and break long paragraphs."
+        ]
+      },
+      {
+        title: "SMOG Index",
+        body: [
+          "The SMOG Index is often used in health, education, and public communication because it focuses on polysyllabic words and grade-level difficulty.",
+          "It can be helpful when clarity is critical and misunderstanding carries real consequences. Like every readability formula, it should support human review rather than replace it."
+        ]
+      },
+      {
+        title: "How to improve readability",
+        body: [
+          "The fastest way to improve readability is to shorten long sentences, replace unnecessary complex words, break dense paragraphs, and use headings that show the structure of the page.",
+          "Use active voice where it feels natural, define technical terms, remove filler phrases, keep one idea per paragraph, and read the text aloud. If you stumble or lose the point, the reader may struggle too."
+        ]
+      }
+    ],
+    table: {
+      title: "Readability score comparison table",
+      columns: ["Formula", "Output", "Best for", "Lower or higher is better?"],
+      rows: [
+        ["Flesch Reading Ease", "0-100 score", "General reading ease", "Higher is easier"],
+        ["Flesch-Kincaid Grade Level", "US grade level", "Matching school or reader level", "Lower is easier"],
+        ["Gunning Fog Index", "Years of education", "Dense business or academic text", "Lower is easier"],
+        ["SMOG Index", "Grade level", "Health and public communication", "Lower is easier"]
+      ]
+    },
+    examples: [
+      {
+        title: "Dense business sentence simplified",
+        before:
+          "Due to the implementation requirements associated with cross-functional adoption, users should conduct a comprehensive review of procedural documentation prior to beginning execution.",
+        after:
+          "Before you start, review the procedure. The process affects several teams, so adoption will happen in stages.",
+        why:
+          "The revision keeps the meaning but shortens the sentence, removes filler, and separates one dense idea into clearer steps."
+      },
+      {
+        title: "Technical wording clarified without removing accuracy",
+        before:
+          "The interface facilitates asynchronous collaboration for stakeholders across multiple operational contexts.",
+        after:
+          "The interface helps teams review work at different times, even when they are not in the same workflow.",
+        why:
+          "The improved version replaces vague corporate wording with concrete language while preserving the intended idea."
+      }
+    ],
+    caseStudy: {
+      title: "Improving a support article",
+      body:
+        "A support article had accurate information but long paragraphs and several 35-word sentences. After splitting the longest sentences, adding headings, and turning setup steps into bullets, the article became easier to scan without removing required technical details."
+    },
+    commonMistakes: [
+      "Chasing a high score at the cost of accuracy.",
+      "Removing necessary technical terms.",
+      "Making content too basic for expert readers.",
+      "Ignoring structure and only editing words.",
+      "Treating readability formulas as absolute truth.",
+      "Using one score for every audience.",
+      "Forgetting that formulas work best as signals, not final judgments."
+    ],
+    checklist: [
+      "Shorten long sentences.",
+      "Replace complex words when a simpler word keeps the meaning.",
+      "Use active voice where natural.",
+      "Break dense paragraphs.",
+      "Add headings.",
+      "Use bullets for steps.",
+      "Define technical terms.",
+      "Remove filler phrases.",
+      "Keep one idea per paragraph.",
+      "Read the text aloud."
+    ],
+    howToCheck: [
+      "Paste your text into TextPulses to check readability, sentence length, word count, repeated phrases, and publishing fit before you send or publish.",
+      "Start with the longest sentences, then review paragraph structure, repeated terms, and whether the selected PublishFit preset matches the audience and channel."
+    ],
+    howToCheckTitle: "How to check readability in TextPulses",
+    relatedSlugs: ["seo-title-length-guide", "meta-description-length-checker-guide", "linkedin-post-length-guide"],
+    internalLinks: [
+      {
+        href: "/guides/seo-title-length-guide",
+        label: "SEO Title Length Guide",
+        context:
+          "When the body copy is clear, review the page title with the SEO Title Length Guide so the search result promise is also concise."
+      },
+      {
+        href: "/guides/meta-description-length-checker-guide",
+        label: "Meta Description Length Checker Guide",
+        context:
+          "Use the Meta Description Length Checker Guide to summarize the readable page in a search snippet that stays clear on desktop and mobile."
+      },
+      {
+        href: "/guides/linkedin-post-length-guide",
+        label: "LinkedIn Post Length Guide",
+        context:
+          "If you repurpose a clear article into a social update, the LinkedIn Post Length Guide helps adapt the structure for a feed."
+      }
+    ],
+    faq: [
+      {
+        question: "What is a readability score?",
+        answer:
+          "A readability score is an estimate of how easy or difficult a text is to read. Most formulas use sentence length, word length, syllables, or complex words to produce a score."
+      },
+      {
+        question: "What is a good readability score?",
+        answer:
+          "For general web content, a Flesch Reading Ease score between 60 and 80 is usually a good target. Technical, legal, academic, or expert content may naturally score lower."
+      },
+      {
+        question: "What is the difference between Flesch Reading Ease and Flesch-Kincaid?",
+        answer:
+          "Flesch Reading Ease gives a 0-100 score where higher is easier. Flesch-Kincaid gives an approximate U.S. grade level where lower is easier."
+      },
+      {
+        question: "Does readability affect SEO?",
+        answer:
+          "Readability is not a simple direct ranking factor, but clear content can improve user engagement, comprehension, and satisfaction. It can also make pages easier to scan and more useful to readers."
+      },
+      {
+        question: "How can I improve my readability score?",
+        answer:
+          "Shorten long sentences, simplify unnecessary complex words, break up dense paragraphs, use clear headings, and keep one main idea per paragraph."
+      },
+      {
+        question: "Is a higher readability score always better?",
+        answer:
+          "No. A higher score usually means easier reading, but very simple writing may not fit expert, technical, legal, or academic audiences. Match the score to the reader and purpose."
+      },
+      {
+        question: "Which readability formula should I use?",
+        answer:
+          "Use Flesch Reading Ease for general clarity, Flesch-Kincaid for grade level, Gunning Fog for dense professional text, and SMOG for health or public communication."
       }
     ]
   }
