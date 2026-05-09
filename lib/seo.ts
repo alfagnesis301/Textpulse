@@ -14,17 +14,28 @@ export const siteConfig = {
 export function createMetadata({
   title,
   description,
-  path = ""
+  path = "",
+  type = "website",
+  image = "/og/textpulses-og.svg",
+  robots = {
+    index: true,
+    follow: true
+  }
 }: {
   title: string;
   description: string;
   path?: string;
+  type?: "website" | "article";
+  image?: string;
+  robots?: Metadata["robots"];
 }): Metadata {
   const canonical = `${siteConfig.url}${path}`;
+  const imageUrl = image.startsWith("http") ? image : `${siteConfig.url}${image}`;
 
   return {
     title,
     description,
+    robots,
     alternates: {
       canonical
     },
@@ -33,12 +44,21 @@ export function createMetadata({
       description,
       url: canonical,
       siteName: siteConfig.name,
-      type: "website"
+      type,
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: `${siteConfig.name} writing analysis guide`
+        }
+      ]
     },
     twitter: {
       card: "summary_large_image",
       title,
-      description
+      description,
+      images: [imageUrl]
     }
   };
 }

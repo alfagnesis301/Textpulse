@@ -26,10 +26,20 @@ export type GuideFaq = {
   answer: string;
 };
 
+export type GuideInternalLink = {
+  href: string;
+  label: string;
+  context: string;
+};
+
 export type Guide = {
   slug: string;
   title: string;
+  seoTitle?: string;
+  h1?: string;
   description: string;
+  seoDescription?: string;
+  ogImage?: string;
   updated: string;
   readingTime: string;
   category: string;
@@ -44,6 +54,7 @@ export type Guide = {
   checklist: string[];
   howToCheck: string[];
   relatedSlugs: string[];
+  internalLinks?: GuideInternalLink[];
   faq: GuideFaq[];
 };
 
@@ -1670,14 +1681,458 @@ const finalAdditions: Record<string, GuideSection[]> = {
   ]
 };
 
-export const guides: Guide[] = baseGuides.map((guide) => ({
-  ...guide,
-  sections: [
+const seoOptimizedGuides: Record<string, Partial<Guide>> = {
+  "linkedin-post-length-guide": {
+    title: "How Long Should a LinkedIn Post Be? Ideal Length Guide (2026)",
+    seoTitle: "How Long Should a LinkedIn Post Be? Ideal Length Guide (2026)",
+    h1: "How Long Should a LinkedIn Post Be? The 2026 Length Guide",
+    description:
+      "How long should a LinkedIn post be? The sweet spot is 150-1,300 characters. Full guide with character limits, examples by post type, and engagement data for 2026.",
+    seoDescription:
+      "How long should a LinkedIn post be? The sweet spot is 150-1,300 characters. Full guide with character limits, examples by post type, and engagement data for 2026.",
+    updated: "May 9, 2026",
+    readingTime: "10 min read",
+    quickAnswer: [
+      "For most LinkedIn posts, the practical sweet spot is about 150 to 1,300 characters. Short posts can work when they make one sharp point. Longer posts can work when they deliver a clear story, framework, example, or professional lesson without repeating the same idea.",
+      "LinkedIn allows much longer posts, but the visible opening matters most. The first one or two lines should give people a reason to stop, understand the topic, and decide whether the rest is worth reading."
+    ],
+    whyMatters: [
+      "LinkedIn posts are scanned in a busy feed. Readers see your opening line beside names, job titles, images, comments, and other posts. If the point is buried, the ideal character count will not save the post.",
+      "Length also changes the job of the copy. A 200-character post needs one precise observation. A 900-character post needs rhythm, paragraph breaks, and a payoff. A 1,300-character framework needs enough structure that the reader can follow the argument quickly."
+    ],
+    ruleOfThumb: [
+      "Use 150-400 characters for one focused insight, 500-900 characters for a mini story, and 900-1,300 characters for a framework, lesson, or post with examples. Treat these as practical planning ranges, not platform rules.",
+      "If the post feels too short, add a concrete example or reason the idea matters. If it feels too long, cut repeated context, vague setup, and lines that only restate the lesson."
+    ],
+    sections: [
+      {
+        title: "LinkedIn post length by format",
+        body: [
+          "A short insight post should make one useful point and stop. It may be only a few lines, but it still needs specificity. A mini story usually needs more space because the reader must understand the situation, tension, decision, and lesson.",
+          "Framework posts can be longer because each step earns its place. If a post teaches a repeatable process, the reader expects examples, order, and a clear takeaway. The issue is not length by itself; the issue is whether every section helps the reader."
+        ]
+      },
+      {
+        title: "How to use the first lines",
+        body: [
+          "The first line should not be a generic statement such as 'content matters' or 'leadership is hard.' It should name a situation, contrast, mistake, or observation. A specific opening gives the reader a reason to continue.",
+          "The second line can clarify the angle. If the first line creates attention, the second should confirm value. Together, they should tell the reader what kind of post they are entering: story, lesson, checklist, opinion, or announcement."
+        ]
+      },
+      {
+        title: "Engagement signals without clickbait",
+        body: [
+          "Do not confuse engagement with bait. A post can invite comments naturally by asking about a real tradeoff, asking how others handle a problem, or sharing a useful conclusion. Forced questions at the end often feel disconnected from the post.",
+          "Useful LinkedIn writing respects the reader's time. It makes a point, supports it with enough context, and leaves the reader with something they can apply or question."
+        ]
+      },
+      {
+        title: "Mobile scanability",
+        body: [
+          "Many LinkedIn posts are read on phones. Short paragraphs help, but excessive one-line paragraphs can feel theatrical if they do not add meaning. Use spacing to reveal structure, not to artificially stretch a weak idea.",
+          "Before publishing, scan only the first line of each paragraph. If those lines do not create a logical path from problem to insight to takeaway, reorganize the post before worrying about exact character count."
+        ]
+      }
+    ],
+    table: {
+      title: "LinkedIn post length ranges by use case",
+      columns: ["Post type", "Practical range", "Best use", "What to check"],
+      rows: [
+        ["Short insight", "150-400 characters", "One clear idea or opinion", "Is the point specific enough?"],
+        ["Mini story", "500-900 characters", "Situation, tension, lesson", "Does the story lead to a real takeaway?"],
+        ["Framework post", "900-1,300 characters", "Steps, examples, process", "Can each step be scanned quickly?"],
+        ["Announcement", "150-700 characters", "Launches, updates, milestones", "Does it explain why the update matters?"],
+        ["Thought leadership", "700-1,300 characters", "Opinion with context", "Is the claim supported without overexplaining?"]
+      ]
+    },
+    examples: [
+      {
+        title: "Generic advice made specific",
+        before: "Content quality is important. You should write better posts and be consistent.",
+        after:
+          "Most weak LinkedIn posts do not fail because they are short. They fail because the first line gives no reason to keep reading. A better post makes one clear point, explains why it matters, and gives the reader a specific takeaway.",
+        why:
+          "The improved version turns a broad opinion into a specific observation with a clear reason and useful next step."
+      },
+      {
+        title: "Long setup tightened",
+        before:
+          "Over the last few months I have been thinking a lot about writing online and how people should communicate their thoughts in a better way, especially because there is so much content now.",
+        after:
+          "The hardest part of writing on LinkedIn is not finding more words. It is deciding which one point deserves the reader's attention today.",
+        why:
+          "The after version removes soft setup, keeps the idea, and creates a stronger opening for the same topic."
+      }
+    ],
+    caseStudy: {
+      title: "Turning a launch note into a useful post",
+      body:
+        "A founder drafts a 1,600-character launch update that explains every product detail. After review, the post becomes 850 characters: one problem, one decision, one result, and one lesson for other builders. The shorter version is not less informative; it is easier to scan and more clearly tied to the reader's work."
+    },
+    commonMistakes: [
+      "Opening with a generic lesson before showing the specific situation.",
+      "Using many one-line paragraphs that do not add meaning.",
+      "Writing a forced engagement question that does not match the post.",
+      "Hiding the useful takeaway until the final line.",
+      "Adding background that protects the writer but slows the reader down."
+    ],
+    checklist: [
+      "Make the point clear in the first one or two lines.",
+      "Choose the post format before judging length.",
+      "Use paragraph breaks to reveal structure.",
+      "Cut repeated context before cutting the strongest example.",
+      "Check sentence rhythm, readability, and repeated phrases before publishing."
+    ],
+    howToCheck: [
+      "Paste your LinkedIn draft into TextPulses to check character count, readability, sentence rhythm, and repeated phrases before publishing.",
+      "Choose the LinkedIn Post preset in PublishFit. If the draft is too short, add a concrete example or practical takeaway. If it is too long, remove repeated setup and keep the clearest insight."
+    ],
+    relatedSlugs: ["seo-title-length-guide", "meta-description-length-checker-guide", "readability-scores-explained"],
+    internalLinks: [
+      {
+        href: "/guides/seo-title-length-guide",
+        label: "SEO title length guide",
+        context: "If you also publish articles from LinkedIn ideas, use the SEO title length guide to turn the same topic into a search-friendly page title."
+      },
+      {
+        href: "/guides/meta-description-length-checker-guide",
+        label: "meta description length checker guide",
+        context: "When a LinkedIn post becomes a blog page, the meta description length checker guide can help summarize it for search snippets."
+      }
+    ],
+    faq: [
+      {
+        question: "How long should a LinkedIn post be in 2026?",
+        answer:
+          "A practical range is 150-1,300 characters for most posts. Shorter posts work for one clear insight, while longer posts need a story, framework, or useful example."
+      },
+      {
+        question: "Are long LinkedIn posts bad?",
+        answer:
+          "No. Long posts can work when every section adds context, structure, or value. They become weak when length comes from repetition or unnecessary setup."
+      },
+      {
+        question: "What is the best LinkedIn post length for a story?",
+        answer:
+          "A mini story often works around 500-900 characters because it gives enough room for situation, tension, decision, and lesson."
+      },
+      {
+        question: "Should every LinkedIn post ask a question?",
+        answer:
+          "No. A relevant question can invite discussion, but a clear takeaway is often stronger than a forced engagement prompt."
+      },
+      {
+        question: "How do I know if my LinkedIn post is too long?",
+        answer:
+          "It is probably too long if the setup repeats itself, the main point arrives late, or paragraphs can be removed without changing the lesson."
+      }
+    ]
+  },
+  "seo-title-length-guide": {
+    title: "SEO Title Length: Ideal Character & Pixel Limits (2026 Guide)",
+    seoTitle: "SEO Title Length: Ideal Character & Pixel Limits (2026 Guide)",
+    h1: "SEO Title Length: How Long Should a Title Be in 2026?",
+    description:
+      "What is the ideal SEO title length? Aim for 50-60 characters or under 580 pixels. Full 2026 guide with examples, mobile vs desktop limits, and rewriting tips.",
+    seoDescription:
+      "What is the ideal SEO title length? Aim for 50-60 characters or under 580 pixels. Full 2026 guide with examples, mobile vs desktop limits, and rewriting tips.",
+    updated: "May 9, 2026",
+    readingTime: "10 min read",
+    quickAnswer: [
+      "A practical SEO title length in 2026 is usually 50-60 characters, or roughly under 580 pixels. Google does not use a fixed character limit for every search result, because visible title length depends on letters, device, query, layout, and rewriting.",
+      "Use the range as a safety check, not a guarantee. The strongest SEO title puts the main topic early, describes the page honestly, and avoids repeated keyword stacks."
+    ],
+    whyMatters: [
+      "The title is often the first promise a searcher sees. If it is vague, the page may look irrelevant. If it is too long, important words can be truncated. If it is overloaded, it can look less trustworthy.",
+      "A good title also helps internal editorial discipline. It forces the page to answer one clear search task instead of trying to target every related phrase in one line."
+    ],
+    ruleOfThumb: [
+      "Aim for 50-60 characters or a compact title that would fit under a typical desktop pixel width. Put the primary topic near the front and use one useful modifier such as guide, checklist, examples, checker, or year when it truly helps.",
+      "If you need more context, move it into the meta description, introduction, or headings. Do not cram synonyms into the title."
+    ],
+    sections: [
+      {
+        title: "Character limits vs pixel limits",
+        body: [
+          "Character count is easy to measure, but Google displays titles by available space. Wide letters use more pixels than narrow letters, so two titles with the same character count can display differently.",
+          "That is why 50-60 characters is a practical range rather than a law. A 58-character title with many wide letters may truncate, while a 63-character title with narrower wording may still appear cleanly in some contexts."
+        ]
+      },
+      {
+        title: "Mobile vs desktop title display",
+        body: [
+          "Desktop and mobile results do not always show the same amount of title text. Search layout, query bolding, browser width, and result type can all influence what is visible.",
+          "Write the title so the most important words appear early. If the end is cut, the searcher should still understand the topic and page type."
+        ]
+      },
+      {
+        title: "A practical SEO title formula",
+        body: [
+          "A useful formula is: main topic + specific angle or page type + brand when helpful. For example, 'Meta Description Length: Ideal Characters & Free Checker' tells the searcher the topic, the answer type, and the tool value.",
+          "The formula should not make every page sound identical. It is a review checklist: can the title stand alone, name the page clearly, and match the content behind it?"
+        ]
+      },
+      {
+        title: "How to rewrite an overlong title",
+        body: [
+          "Start by removing soft openers such as 'everything you need to know,' repeated keywords, unnecessary dates, and brand wording that does not add trust. Keep the actual topic and benefit.",
+          "Then compare two versions: one clear but slightly long, and one short but possibly vague. The best final title usually combines the clarity of the first with the discipline of the second."
+        ]
+      }
+    ],
+    table: {
+      title: "SEO title examples and rewrite notes",
+      columns: ["Weak title", "Better title", "Why it is better"],
+      rows: [
+        ["SEO Tips", "SEO Title Length: Ideal Character & Pixel Limits", "Specific topic and useful angle"],
+        ["Best Writing Tool", "Free Word Counter and PublishFit Text Analyzer", "Describes the page instead of using a vague claim"],
+        ["Meta Descriptions Meta Description Guide Meta Description Tips", "Meta Description Length: Ideal Characters & Free Checker", "Removes keyword repetition"],
+        ["Everything You Need to Know About LinkedIn Posts in 2026", "LinkedIn Post Length Guide: Ideal Character Ranges", "Keeps the topic visible earlier"],
+        ["TextPulses - SEO - Writing - Tools", "Free Word Counter & SEO Title Length Checker", "Names the actual tool and task"]
+      ]
+    },
+    examples: [
+      {
+        title: "Keyword stack rewritten",
+        before: "SEO Title Length SEO Title Checker SEO Title Tips 2026",
+        after: "SEO Title Length: Ideal Character & Pixel Limits",
+        why:
+          "The improved title keeps the primary topic and adds a useful angle without repeating the same phrase."
+      },
+      {
+        title: "Overlong title shortened",
+        before: "Everything You Need to Know About Writing SEO Titles That Do Not Get Cut Off in Google Search Results",
+        after: "SEO Title Length: How Long Should a Title Be?",
+        why:
+          "The after version answers the search intent directly and keeps the main phrase early."
+      }
+    ],
+    caseStudy: {
+      title: "Improving a guide title before publishing",
+      body:
+        "A guide originally used a 92-character title that included the topic, year, examples, checker, and brand. The rewrite kept the query phrase and one useful qualifier, then moved the extra context into the meta description. The title became easier to scan without losing the page promise."
+    },
+    commonMistakes: [
+      "Treating 60 characters as a guarantee instead of a practical warning.",
+      "Starting with the brand when the topic matters more to unknown searchers.",
+      "Repeating the same keyword in multiple forms.",
+      "Writing a clever title that hides the actual page type.",
+      "Forgetting that mobile searchers may see less context."
+    ],
+    checklist: [
+      "Keep the main topic near the beginning.",
+      "Aim for 50-60 characters or a compact pixel width.",
+      "Use one clear benefit, format, or qualifier.",
+      "Avoid repeated keywords and vague superlatives.",
+      "Pair the title with a meta description that adds context instead of repeating it."
+    ],
+    howToCheck: [
+      "Paste your SEO title into TextPulses to check character count, repeated words, readability, and PublishFit status before publishing.",
+      "If the title is too long, remove soft openers and repeated terms first. If it is too vague, add the page type or specific benefit."
+    ],
+    relatedSlugs: ["meta-description-length-checker-guide", "linkedin-post-length-guide", "readability-scores-explained"],
+    internalLinks: [
+      {
+        href: "/guides/meta-description-length-checker-guide",
+        label: "writing a meta description that fits Google's snippet",
+        context: "After rewriting the title, review the companion snippet by writing a meta description that fits Google's snippet."
+      },
+      {
+        href: "/guides/linkedin-post-length-guide",
+        label: "ideal LinkedIn post length",
+        context: "If the page topic will also become a social update, compare it with the ideal LinkedIn post length before posting."
+      }
+    ],
+    faq: [
+      {
+        question: "What is the ideal SEO title length in 2026?",
+        answer:
+          "A practical target is 50-60 characters or roughly under 580 pixels, but Google may display, truncate, or rewrite titles depending on the query and layout."
+      },
+      {
+        question: "Is 60 characters a strict SEO title limit?",
+        answer:
+          "No. It is a useful planning range, not a fixed rule. Pixel width and search result layout matter too."
+      },
+      {
+        question: "Should my brand name be in every SEO title?",
+        answer:
+          "Use the brand when it helps recognition or trust. For smaller sites, the topic and page type often deserve priority."
+      },
+      {
+        question: "Can the H1 be different from the SEO title?",
+        answer:
+          "Yes. The SEO title can be compact for search results, while the H1 can be more natural and descriptive on the page."
+      },
+      {
+        question: "What should I remove from an overlong title first?",
+        answer:
+          "Remove repeated keywords, vague openers, unnecessary adjectives, and brand wording that does not add trust."
+      }
+    ]
+  },
+  "meta-description-length-checker-guide": {
+    title: "Meta Description Length: Ideal Characters & Free Checker (2026)",
+    seoTitle: "Meta Description Length: Ideal Characters & Free Checker (2026)",
+    h1: "Meta Description Length: How Many Characters in 2026?",
+    description:
+      "Meta description length: 120-160 characters for desktop, 105-130 for mobile. 2026 guide with free character checker, examples, and Google snippet rules.",
+    seoDescription:
+      "Meta description length: 120-160 characters for desktop, 105-130 for mobile. 2026 guide with free character checker, examples, and Google snippet rules.",
+    updated: "May 9, 2026",
+    readingTime: "10 min read",
+    quickAnswer: [
+      "A practical meta description length in 2026 is 120-160 characters for many desktop snippets and about 105-130 characters when you want a safer mobile-first summary. Google can still rewrite snippets, so the goal is clarity rather than a perfect fixed number.",
+      "Use the meta description to summarize the page honestly, place the main benefit early, and give searchers enough context to decide whether the page matches their intent."
+    ],
+    whyMatters: [
+      "A meta description is not a ranking guarantee, but it shapes the page promise. It helps editors, CMS users, and searchers understand what the page is meant to answer.",
+      "Weak descriptions often fail because they are generic. A sentence like 'learn more about our services' wastes space that could explain the specific tool, guide, or outcome."
+    ],
+    ruleOfThumb: [
+      "Aim for 120-160 characters for a complete desktop-friendly description, and keep the strongest message within roughly the first 105-130 characters for mobile safety.",
+      "If the description is too long, cut filler first. If it is too short, add the audience, action, page type, or primary benefit."
+    ],
+    sections: [
+      {
+        title: "Desktop vs mobile snippet length",
+        body: [
+          "Desktop snippets often allow more visible text than mobile snippets, but Google does not promise a universal character count. Query, layout, device, and page content all influence what appears.",
+          "A practical workflow is to write one clear description that works even if the final words are truncated. Put the page topic and benefit near the front so mobile users still see the essential promise."
+        ]
+      },
+      {
+        title: "How Google may rewrite snippets",
+        body: [
+          "Google may use your meta description, but it can also generate a snippet from visible page content when that better matches the query. This is normal and does not mean the description is useless.",
+          "The best response is not to stuff more keywords into the tag. Write a truthful summary, make the page content match that summary, and use headings that reinforce the same topic."
+        ]
+      },
+      {
+        title: "What to cut when the description is too long",
+        body: [
+          "Remove repeated brand names, vague openers, filler adjectives, secondary benefits, and phrases such as 'in this article' when they do not add meaning. Keep the exact page value.",
+          "If every word feels important, compare the description with the title. The description should add context to the title, not repeat it word for word."
+        ]
+      },
+      {
+        title: "What to add when the description is too short",
+        body: [
+          "Add the page format, audience, practical action, or outcome. For a tool page, describe what the user can check. For a guide, describe what decision the guide helps the reader make.",
+          "Specific verbs such as check, compare, calculate, review, plan, or rewrite often create more useful snippets than broad claims such as discover or improve."
+        ]
+      }
+    ],
+    table: {
+      title: "Meta description examples by page type",
+      columns: ["Page type", "Weak description", "Stronger description"],
+      rows: [
+        ["Tool page", "Use our free tool online.", "Count words, check readability, and review keyword balance before publishing your draft."],
+        ["SEO guide", "Learn SEO tips here.", "Learn the ideal SEO title length, pixel limits, and how to avoid Google truncation."],
+        ["Meta guide", "Meta description help.", "Check practical meta description length ranges for desktop and mobile snippets."],
+        ["Contact page", "Contact us today.", "Contact TextPulses for support, corrections, privacy questions, or business inquiries."],
+        ["Product page", "Best software for teams.", "Compare features, use cases, and pricing notes to decide whether this software fits your team."]
+      ]
+    },
+    examples: [
+      {
+        title: "Generic description improved",
+        before: "Meta description guide for SEO and websites.",
+        after:
+          "Learn how to write concise meta descriptions that summarize the page, fit practical length ranges, and avoid keyword stuffing.",
+        why:
+          "The improved version explains the topic, outcome, and quality standard in one natural sentence."
+      },
+      {
+        title: "Overlong description trimmed",
+        before:
+          "TextPulses is a very useful and helpful online website that lets users count words and characters and also check many other important writing things before publishing.",
+        after:
+          "Count words, check readability, and review keyword balance before publishing your draft.",
+        why:
+          "The after version removes vague praise and keeps the concrete actions a searcher can understand quickly."
+      }
+    ],
+    caseStudy: {
+      title: "Using the checker before publishing",
+      body:
+        "A guide page uses a 196-character description that explains the topic twice. After pasting it into TextPulses, the editor sees that it is too long and repeated. The revised version keeps the main keyword, adds the page benefit, and fits the practical 120-160 character range."
+    },
+    commonMistakes: [
+      "Writing a generic description that could apply to any page.",
+      "Repeating the same keyword until the snippet sounds unnatural.",
+      "Promising examples, tools, or data the page does not provide.",
+      "Using the same description across many pages.",
+      "Saving the useful detail until the end where it may be truncated."
+    ],
+    checklist: [
+      "Put the main page benefit near the front.",
+      "Aim for 120-160 characters, with the key message visible early.",
+      "Make the description match the actual page content.",
+      "Avoid repeated keywords and exaggerated claims.",
+      "Use TextPulses as a free character checker before publishing."
+    ],
+    howToCheck: [
+      "Paste your meta description into TextPulses to check character count, practical snippet fit, repeated words, and the Meta Description PublishFit status.",
+      "If it is too long, cut filler and repeated terms. If it is too short, add the page type, user task, or strongest benefit."
+    ],
+    relatedSlugs: ["seo-title-length-guide", "linkedin-post-length-guide", "readability-scores-explained"],
+    internalLinks: [
+      {
+        href: "/guides/seo-title-length-guide",
+        label: "how long an SEO title should be",
+        context: "A strong snippet starts with the page title, so review how long an SEO title should be before finalizing the description."
+      },
+      {
+        href: "/guides/linkedin-post-length-guide",
+        label: "LinkedIn post length guide",
+        context: "If the same page will be promoted socially, use the LinkedIn post length guide to adapt the summary for a feed."
+      }
+    ],
+    faq: [
+      {
+        question: "What is the ideal meta description length in 2026?",
+        answer:
+          "A practical range is 120-160 characters for many desktop snippets and about 105-130 characters for a safer mobile-first summary."
+      },
+      {
+        question: "Will Google always show my meta description?",
+        answer:
+          "No. Google may rewrite snippets based on the query and visible page content."
+      },
+      {
+        question: "Should every page have a unique meta description?",
+        answer:
+          "Yes. A unique description helps each page communicate its specific purpose and avoids generic duplicate snippets."
+      },
+      {
+        question: "Can I include a call to action in a meta description?",
+        answer:
+          "Yes, if it still summarizes the page honestly. Avoid vague or clickbait-style commands."
+      },
+      {
+        question: "How can I check meta description length for free?",
+        answer:
+          "Paste the description into TextPulses and choose the Meta Description preset to review character count, repeated words, and practical fit."
+      }
+    ]
+  }
+};
+
+export const guides: Guide[] = baseGuides.map((guide) => {
+  const expandedSections = [
     ...guide.sections,
     ...(depthAdditions[guide.slug] ?? []),
     ...(finalAdditions[guide.slug] ?? [])
-  ]
-}));
+  ];
+  const optimizedGuide = seoOptimizedGuides[guide.slug];
+
+  return {
+    ...guide,
+    sections: expandedSections,
+    ...(optimizedGuide ?? {})
+  };
+});
 
 export function getGuide(slug: string) {
   return guides.find((guide) => guide.slug === slug);

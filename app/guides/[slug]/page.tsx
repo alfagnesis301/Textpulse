@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArticleJsonLd, BreadcrumbJsonLd, FaqJsonLd } from "@/components/JsonLd";
+import { GuideJsonLd } from "@/components/JsonLd";
 import { guides, getGuide, getRelatedGuides } from "@/lib/guides";
 import { createMetadata, siteConfig } from "@/lib/seo";
 
@@ -25,10 +25,23 @@ export async function generateMetadata({ params }: GuidePageProps) {
   }
 
   return createMetadata({
-    title: guide.title,
-    description: guide.description,
-    path: `/guides/${guide.slug}`
+    title: guide.seoTitle ?? guide.title,
+    description: guide.seoDescription ?? guide.description,
+    path: `/guides/${guide.slug}`,
+    type: "article",
+    image: guide.ogImage ?? "/og/textpulses-og.svg",
+    robots: {
+      index: true,
+      follow: true
+    }
   });
+}
+
+function slugify(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
 }
 
 export default async function GuidePage({ params }: GuidePageProps) {
@@ -41,24 +54,40 @@ export default async function GuidePage({ params }: GuidePageProps) {
 
   const url = `${siteConfig.url}/guides/${guide.slug}`;
   const relatedGuides = getRelatedGuides(guide);
+  const pageTitle = guide.h1 ?? guide.title;
+  const schemaTitle = guide.seoTitle ?? guide.title;
+  const schemaDescription = guide.seoDescription ?? guide.description;
+  const breadcrumbItems = [
+    { name: "Home", url: siteConfig.url },
+    { name: "Guides", url: `${siteConfig.url}/guides` },
+    { name: pageTitle, url }
+  ];
+  const tableOfContents = [
+    { href: "#quick-answer", label: "Quick answer" },
+    { href: "#why-this-matters", label: "Why this matters" },
+    { href: "#practical-range", label: "Practical range" },
+    ...guide.sections.map((section) => ({
+      href: `#${slugify(section.title)}`,
+      label: section.title
+    })),
+    { href: "#example-table", label: guide.table.title },
+    { href: "#before-after", label: "Before and after examples" },
+    { href: "#textpulses-check", label: "How to check this in TextPulses" },
+    { href: "#related-guides-title", label: "Related guides" },
+    { href: "#faq", label: "FAQ" }
+  ];
 
   return (
     <main className="mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8">
-      <ArticleJsonLd
-        title={guide.title}
-        description={guide.description}
+      <GuideJsonLd
+        title={schemaTitle}
+        description={schemaDescription}
         url={url}
         datePublished="2026-04-27"
-        dateModified="2026-04-27"
+        dateModified="2026-05-09"
+        faqItems={guide.faq}
+        breadcrumbItems={breadcrumbItems}
       />
-      <BreadcrumbJsonLd
-        items={[
-          { name: "Home", url: siteConfig.url },
-          { name: "Guides", url: `${siteConfig.url}/guides` },
-          { name: guide.title, url }
-        ]}
-      />
-      <FaqJsonLd items={guide.faq} />
 
       <nav aria-label="Breadcrumb" className="text-sm font-semibold text-slate-500 dark:text-slate-400">
         <Link href="/" className="hover:text-pulse-blue">
@@ -68,6 +97,8 @@ export default async function GuidePage({ params }: GuidePageProps) {
         <Link href="/guides" className="hover:text-pulse-blue">
           Guides
         </Link>
+        <span className="mx-2">/</span>
+        <span className="text-slate-700 dark:text-slate-300">{pageTitle}</span>
       </nav>
 
       <article className="mt-8">
@@ -75,7 +106,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
           {guide.category} - {guide.readingTime}
         </p>
         <h1 className="mt-3 text-4xl font-black tracking-tight text-slate-950 dark:text-white sm:text-5xl">
-          {guide.title}
+          {pageTitle}
         </h1>
         <p className="mt-5 text-lg leading-8 text-slate-700 dark:text-slate-300">
           {guide.description}
@@ -85,7 +116,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
           <p>Written and reviewed by TextPulses Editorial.</p>
         </div>
 
-        <section className="mt-10 rounded-2xl border border-blue-100 bg-blue-50/80 p-6 dark:border-blue-900/60 dark:bg-blue-950/30">
+        <section id="quick-answer" className="mt-10 rounded-2xl border border-blue-100 bg-blue-50/80 p-6 dark:border-blue-900/60 dark:bg-blue-950/30">
           <h2 className="text-2xl font-extrabold tracking-tight text-slate-950 dark:text-white">
             Quick answer
           </h2>
@@ -96,7 +127,25 @@ export default async function GuidePage({ params }: GuidePageProps) {
           </div>
         </section>
 
-        <section className="mt-8 rounded-2xl border border-slate-200 bg-white/88 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/88">
+        <nav
+          aria-label="Table of contents"
+          className="mt-8 rounded-2xl border border-slate-200 bg-white/88 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/88"
+        >
+          <h2 className="text-xl font-extrabold tracking-tight text-slate-950 dark:text-white">
+            Table of contents
+          </h2>
+          <ul className="mt-4 grid gap-2 text-sm font-semibold text-slate-700 dark:text-slate-300 sm:grid-cols-2">
+            {tableOfContents.map((item) => (
+              <li key={item.href}>
+                <a href={item.href} className="hover:text-pulse-blue">
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <section id="why-this-matters" className="mt-8 rounded-2xl border border-slate-200 bg-white/88 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/88">
           <h2 className="text-2xl font-extrabold tracking-tight text-slate-950 dark:text-white">
             Why this matters
           </h2>
@@ -107,7 +156,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
           </div>
         </section>
 
-        <section className="mt-8 rounded-2xl border border-slate-200 bg-white/88 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/88">
+        <section id="practical-range" className="mt-8 rounded-2xl border border-slate-200 bg-white/88 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/88">
           <h2 className="text-2xl font-extrabold tracking-tight text-slate-950 dark:text-white">
             Practical range or rule of thumb
           </h2>
@@ -122,6 +171,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
           {guide.sections.map((section) => (
             <section
               key={section.title}
+              id={slugify(section.title)}
               className="rounded-2xl border border-slate-200 bg-white/88 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/88"
             >
               <h2 className="text-2xl font-extrabold tracking-tight text-slate-950 dark:text-white">
@@ -136,7 +186,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
           ))}
         </div>
 
-        <section className="mt-8 rounded-2xl border border-slate-200 bg-white/88 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/88">
+        <section id="example-table" className="mt-8 rounded-2xl border border-slate-200 bg-white/88 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/88">
           <h2 className="text-2xl font-extrabold tracking-tight text-slate-950 dark:text-white">
             {guide.table.title}
           </h2>
@@ -166,7 +216,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
           </div>
         </section>
 
-        <section className="mt-8 rounded-2xl border border-slate-200 bg-white/88 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/88">
+        <section id="before-after" className="mt-8 rounded-2xl border border-slate-200 bg-white/88 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/88">
           <h2 className="text-2xl font-extrabold tracking-tight text-slate-950 dark:text-white">
             Before and after examples
           </h2>
@@ -233,7 +283,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
           </ul>
         </section>
 
-        <section className="mt-8 rounded-2xl border border-slate-200 bg-white/88 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/88">
+        <section id="textpulses-check" className="mt-8 rounded-2xl border border-slate-200 bg-white/88 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/88">
           <h2 className="text-2xl font-extrabold tracking-tight text-slate-950 dark:text-white">
             How to check this in TextPulses
           </h2>
@@ -243,12 +293,30 @@ export default async function GuidePage({ params }: GuidePageProps) {
             ))}
           </div>
           <Link
-            href="/#tool"
+            href="/"
             className="mt-4 inline-flex rounded-2xl bg-gradient-to-r from-pulse-blue to-pulse-violet px-5 py-3 text-sm font-extrabold text-white shadow-glow hover:-translate-y-0.5"
           >
             Open the analyzer
           </Link>
         </section>
+
+        {guide.internalLinks && guide.internalLinks.length > 0 ? (
+          <section className="mt-8 rounded-2xl border border-slate-200 bg-white/88 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/88">
+            <h2 className="text-2xl font-extrabold tracking-tight text-slate-950 dark:text-white">
+              Related SEO tasks
+            </h2>
+            <ul className="mt-4 grid gap-4">
+              {guide.internalLinks.map((item) => (
+                <li key={item.href} className="leading-7 text-slate-700 dark:text-slate-300">
+                  {item.context}{" "}
+                  <Link href={item.href} className="font-extrabold text-pulse-blue hover:text-pulse-violet">
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : null}
 
         <section className="mt-8 rounded-2xl border border-slate-200 bg-white/88 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/88">
           <h2 id="related-guides-title" className="text-2xl font-extrabold tracking-tight text-slate-950 dark:text-white">
@@ -274,7 +342,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
           </ul>
         </section>
 
-        <section className="mt-8 rounded-2xl border border-slate-200 bg-white/88 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/88">
+        <section id="faq" className="mt-8 rounded-2xl border border-slate-200 bg-white/88 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/88">
           <h2 className="text-2xl font-extrabold tracking-tight text-slate-950 dark:text-white">
             FAQ
           </h2>

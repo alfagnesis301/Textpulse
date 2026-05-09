@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">TextPulses writing analysis guide</title>
+  <desc id="desc">A blue and violet TextPulses open graph image for writing and SEO guides.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#EFF6FF"/>
+      <stop offset="48%" stop-color="#F5F3FF"/>
+      <stop offset="100%" stop-color="#ECFDF5"/>
+    </linearGradient>
+    <linearGradient id="pulse" x1="0" x2="1">
+      <stop offset="0%" stop-color="#2563EB"/>
+      <stop offset="100%" stop-color="#7C3AED"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="20" stdDeviation="24" flood-color="#0F172A" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="76" y="72" width="1048" height="486" rx="36" fill="#FFFFFF" opacity="0.9" filter="url(#shadow)"/>
+  <g transform="translate(126 122)">
+    <rect width="92" height="92" rx="24" fill="url(#pulse)"/>
+    <path d="M25 57h15l8-24 13 44 10-20h16" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M31 25h31M46 25v45" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
+  </g>
+  <text x="246" y="171" fill="#0F172A" font-family="Inter, Arial, sans-serif" font-size="58" font-weight="800">TextPulses</text>
+  <text x="126" y="286" fill="#0F172A" font-family="Inter, Arial, sans-serif" font-size="62" font-weight="900">Writing &amp; SEO Guides</text>
+  <text x="126" y="354" fill="#334155" font-family="Inter, Arial, sans-serif" font-size="31" font-weight="600">Count smarter. Write sharper. Publish faster.</text>
+  <g transform="translate(126 432)">
+    <rect width="214" height="54" rx="27" fill="#DBEAFE"/>
+    <text x="28" y="36" fill="#1D4ED8" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="800">Word count</text>
+    <rect x="236" width="240" height="54" rx="27" fill="#EDE9FE"/>
+    <text x="264" y="36" fill="#6D28D9" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="800">SEO snippets</text>
+    <rect x="500" width="246" height="54" rx="27" fill="#D1FAE5"/>
+    <text x="528" y="36" fill="#047857" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="800">PublishFit</text>
+  </g>
+</svg>

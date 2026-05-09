@@ -141,3 +141,82 @@ export function BreadcrumbJsonLd({ items }: { items: BreadcrumbItem[] }) {
     />
   );
 }
+
+export function GuideJsonLd({
+  title,
+  description,
+  url,
+  dateModified,
+  datePublished,
+  faqItems,
+  breadcrumbItems,
+  image = `${siteConfig.url}/og/textpulses-og.svg`
+}: {
+  title: string;
+  description: string;
+  url: string;
+  dateModified: string;
+  datePublished: string;
+  faqItems: FaqItem[];
+  breadcrumbItems: BreadcrumbItem[];
+  image?: string;
+}) {
+  return (
+    <JsonLdScript
+      data={{
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Article",
+            "@id": `${url}#article`,
+            headline: title,
+            description,
+            url,
+            image,
+            datePublished,
+            dateModified,
+            author: {
+              "@type": "Organization",
+              name: "TextPulses Editorial"
+            },
+            publisher: {
+              "@type": "Organization",
+              name: siteConfig.name,
+              url: siteConfig.url,
+              logo: {
+                "@type": "ImageObject",
+                url: `${siteConfig.url}/favicon.svg`
+              }
+            },
+            mainEntityOfPage: {
+              "@type": "WebPage",
+              "@id": url
+            }
+          },
+          {
+            "@type": "FAQPage",
+            "@id": `${url}#faq`,
+            mainEntity: faqItems.map((item) => ({
+              "@type": "Question",
+              name: item.question,
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: item.answer
+              }
+            }))
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": `${url}#breadcrumb`,
+            itemListElement: breadcrumbItems.map((item, index) => ({
+              "@type": "ListItem",
+              position: index + 1,
+              name: item.name,
+              item: item.url
+            }))
+          }
+        ]
+      }}
+    />
+  );
+}

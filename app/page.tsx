@@ -53,6 +53,33 @@ const audiences = [
   "Professionals"
 ];
 
+const popularGuides = [
+  {
+    title: "SEO Title Length Guide",
+    href: "/guides/seo-title-length-guide",
+    description:
+      "Learn the ideal SEO title length, pixel limits, and how to avoid Google truncation."
+  },
+  {
+    title: "Meta Description Length Checker Guide",
+    href: "/guides/meta-description-length-checker-guide",
+    description:
+      "Check the best meta description length for desktop and mobile snippets."
+  },
+  {
+    title: "LinkedIn Post Length Guide",
+    href: "/guides/linkedin-post-length-guide",
+    description:
+      "Find the ideal LinkedIn post length by format, character count, and use case."
+  },
+  {
+    title: "Readability Scores Explained",
+    href: "/guides/readability-scores-explained",
+    description:
+      "Understand readability scores and how to make text easier to read."
+  }
+];
+
 export default function HomePage() {
   const faqJsonLd = {
     "@context": "https://schema.org",
@@ -164,6 +191,45 @@ export default function HomePage() {
 
       <SeoSnippetChecker />
       <TextAnalyzer />
+
+      <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8" aria-labelledby="popular-guides">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-3xl">
+            <p className="text-sm font-bold uppercase tracking-[0.2em] text-pulse-blue">Popular writing & SEO guides</p>
+            <h2 id="popular-guides" className="mt-3 text-3xl font-extrabold tracking-tight text-slate-950 dark:text-white sm:text-4xl">
+              Practical guides for search snippets and publishing
+            </h2>
+            <p className="mt-4 text-base leading-7 text-slate-600 dark:text-slate-400">
+              Start with the pages most writers check before publishing: title length,
+              meta descriptions, LinkedIn posts, and readability.
+            </p>
+          </div>
+          <Link
+            href="/guides"
+            className="w-fit rounded-2xl border border-slate-200 bg-white px-5 py-3 text-sm font-extrabold text-slate-800 shadow-sm hover:-translate-y-0.5 hover:border-pulse-blue dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
+          >
+            Browse all guides
+          </Link>
+        </div>
+        <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          {popularGuides.map((guide) => (
+            <article
+              key={guide.href}
+              className="rounded-2xl border border-slate-200 bg-white/88 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-pulse-blue hover:shadow-soft dark:border-slate-800 dark:bg-slate-900/88"
+            >
+              <h3 className="text-lg font-extrabold text-slate-950 dark:text-white">
+                <Link href={guide.href} className="hover:text-pulse-blue">
+                  {guide.title}
+                </Link>
+              </h3>
+              <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+                {guide.description}
+              </p>
+            </article>
+          ))}
+        </div>
+      </section>
+
       <SafeAdSlot id="home-after-tool-ad" position="content" />
 
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8" aria-labelledby="what-analyze">
