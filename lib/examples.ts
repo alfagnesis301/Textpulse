@@ -15,17 +15,57 @@ export const examplePages: ExamplePage[] = [
     description: "Original before and after SEO title examples with practical editing notes.",
     toolHref: "/tools/seo-title-checker",
     rows: [
-      ["Best Project Software For Everyone", "Project Planning Software for Small Creative Teams"],
-      ["Tips for Better Website Content and SEO", "Website Content Checklist for Service Pages"],
-      ["Our New Product Is Finally Here", "Launch Notes: Faster Team Scheduling for Agencies"],
-      ["Affordable Consultant in Your Area", "Operations Consultant for Growing Austin Teams"],
-      ["Complete Guide to Email Marketing", "Email Marketing Guide for Small Retail Brands"],
-      ["Improve Your Writing Today", "Readability Checker for Web Drafts"],
-      ["Everything About Remote Work", "Remote Work Policy Template for Hybrid Teams"],
-      ["The Ultimate CRM Comparison", "CRM Comparison Checklist for Nonprofits"],
-      ["New Features and Updates", "May Product Update: Export Cleaner Reports"],
-      ["How to Make More Sales", "Sales Page Copy Review Checklist"]
-    ].map(([before, after]) => ({ before, after, why }))
+      {
+        before: "Best Project Software For Everyone",
+        after: "Project Planning Software for Small Creative Teams",
+        why: "The before title makes a broad best-for-everyone claim that is hard to support and does not name a useful audience. The after version narrows the reader to small creative teams, which better matches comparison or product-intent searches. It avoids an exaggerated superlative, but this pattern is not right if the page truly compares enterprise software."
+      },
+      {
+        before: "Tips for Better Website Content and SEO",
+        after: "Website Content Checklist for Service Pages",
+        why: "The before title is vague because tips, content, and SEO could describe thousands of pages. The after version names a concrete format and use case: a checklist for service pages. It helps readers looking for a practical workflow, but it should not be used if the page is only a broad opinion article."
+      },
+      {
+        before: "Our New Product Is Finally Here",
+        after: "Launch Notes: Faster Team Scheduling for Agencies",
+        why: "The before title centers the publisher rather than the searcher and hides what changed. The after version states the page type, feature benefit, and audience in one line. It avoids vague launch hype, but it only works when the page actually contains launch notes or release details."
+      },
+      {
+        before: "Affordable Consultant in Your Area",
+        after: "Operations Consultant for Growing Austin Teams",
+        why: "The before title is generic and could look duplicated across local pages. The after version adds specialty, audience, and location, which supports local service intent. It avoids thin location swapping, but it should not be used unless the page genuinely serves Austin teams."
+      },
+      {
+        before: "Complete Guide to Email Marketing",
+        after: "Email Marketing Guide for Small Retail Brands",
+        why: "The before title overpromises completeness and does not explain who the guide is for. The after version keeps the guide format while narrowing the audience to small retail brands. It reduces broad keyword competition, but it is not suitable for a general encyclopedia-style guide."
+      },
+      {
+        before: "Improve Your Writing Today",
+        after: "Readability Checker for Web Drafts",
+        why: "The before title is motivational but does not describe the tool or task. The after version names the feature and the draft type, helping users who want a checker rather than generic writing advice. It avoids vagueness, but it would be too narrow for a page about editing services."
+      },
+      {
+        before: "Everything About Remote Work",
+        after: "Remote Work Policy Template for Hybrid Teams",
+        why: "The before title is too broad and risks promising coverage the page cannot deliver. The after version identifies a template and a hybrid-team use case, which matches readers looking for a practical document. Do not use this pattern if the page does not provide an actual template or policy structure."
+      },
+      {
+        before: "The Ultimate CRM Comparison",
+        after: "CRM Comparison Checklist for Nonprofits",
+        why: "The before title leans on a common exaggerated phrase and gives no selection criteria. The after title turns the page into a checklist for nonprofits, making the evaluation context clearer. It avoids empty authority claims, but it should not be used for a vendor-neutral comparison unless nonprofit needs are actually covered."
+      },
+      {
+        before: "New Features and Updates",
+        after: "May Product Update: Export Cleaner Reports",
+        why: "The before title is easy to duplicate across monthly update pages and does not reveal the change. The after version adds date context and the main feature improvement. It helps readers looking for release details, but it should be changed if several updates share equal importance."
+      },
+      {
+        before: "How to Make More Sales",
+        after: "Sales Page Copy Review Checklist",
+        why: "The before title makes a broad outcome promise that the page may not be able to prove. The after version reframes the page as a review checklist for sales-page copy, which is more specific and safer. It avoids a guarantee-style claim, but it is not ideal for a case study with measured sales results."
+      }
+    ]
   },
   {
     slug: "meta-description-examples",

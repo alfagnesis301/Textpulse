@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
   const tool = getToolPage(slug);
   if (!tool) return {};
-  return createMetadata({ title: `${tool.metaTitle} | TextPulses`, description: tool.description, path: `/tools/${tool.slug}` });
+  return createMetadata({ title: tool.metaTitle, description: tool.description, path: `/tools/${tool.slug}` });
 }
 
 export default async function ToolPage({ params }: Props) {
@@ -63,10 +63,7 @@ export default async function ToolPage({ params }: Props) {
           <article className="rounded-2xl border border-slate-200 bg-white/88 p-5 dark:border-slate-800 dark:bg-slate-900/88">
             <h2 className="text-2xl font-extrabold text-slate-950 dark:text-white">How to use this tool</h2>
             <ol className="mt-4 grid list-decimal gap-2 pl-5 text-sm leading-6 text-slate-600 dark:text-slate-400">
-              <li>Paste or type the draft into the analyzer.</li>
-              <li>Review metrics and the Publish Readiness Report.</li>
-              <li>Apply the three practical edits suggested by the report.</li>
-              <li>Copy or download the report for your final review checklist.</li>
+              {tool.howTo.map((item) => <li key={item}>{item}</li>)}
             </ol>
           </article>
         </div>

@@ -3,7 +3,7 @@ import { toolPages } from "@/lib/tools";
 import { createMetadata } from "@/lib/seo";
 
 export const metadata = createMetadata({
-  title: "Writing Tools | TextPulses",
+  title: "Writing Tools",
   description: "Browser-based writing, SEO, readability, and publish readiness tools from TextPulses.",
   path: "/tools"
 });

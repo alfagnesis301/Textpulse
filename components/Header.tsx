@@ -4,8 +4,11 @@ import { Logo } from "@/components/Logo";
 const navItems = [
   { href: "/tools/word-counter", label: "Word counter" },
   { href: "/tools/blog-post-readiness-checker", label: "PublishFit Score" },
+  { href: "/tools", label: "All tools" },
+  { href: "/examples", label: "Examples" },
   { href: "/guides", label: "Writing guides" },
   { href: "/methodology", label: "Methodology" },
+  { href: "/editorial-policy", label: "Editorial Policy" },
   { href: "/about", label: "About TextPulses" },
   { href: "/privacy-policy", label: "Privacy Policy" },
   { href: "/terms", label: "Terms" },

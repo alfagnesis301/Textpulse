@@ -9,7 +9,7 @@ import { guides } from "@/lib/guides";
 import { createMetadata } from "@/lib/seo";
 
 export const metadata = createMetadata({
-  title: "SEO Title & Meta Description Length Checker – Free | TextPulses",
+  title: "SEO Title & Meta Description Length Checker – Free",
   description:
     "Check SEO title length (ideal: 50–60 chars) and meta description length (max 160 chars). Free word counter, readability checker, and publish-ready text analyzer.",
   path: ""

@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
   const page = getExamplePage(slug);
   if (!page) return {};
-  return createMetadata({ title: `${page.title} | TextPulses`, description: page.description, path: `/examples/${page.slug}` });
+  return createMetadata({ title: page.title, description: page.description, path: `/examples/${page.slug}` });
 }
 
 export default async function ExamplePage({ params }: Props) {

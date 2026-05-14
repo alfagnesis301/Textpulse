@@ -37,18 +37,19 @@ export function createMetadata({
   twitterDescription?: string;
   robots?: Metadata["robots"];
 }): Metadata {
+  const cleanTitle = title.replace(/\s+\|\s+TextPulses$/i, "");
   const canonical = `${siteConfig.url}${path}`;
   const imageUrl = image.startsWith("http") ? image : `${siteConfig.url}${image}`;
 
   return {
-    title,
+    title: cleanTitle,
     description,
     robots,
     alternates: {
       canonical
     },
     openGraph: {
-      title: openGraphTitle ?? title,
+      title: openGraphTitle ?? cleanTitle,
       description: openGraphDescription ?? description,
       url: canonical,
       siteName: siteConfig.name,
@@ -64,7 +65,7 @@ export function createMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: twitterTitle ?? title,
+      title: twitterTitle ?? cleanTitle,
       description: twitterDescription ?? description,
       images: [imageUrl]
     }
