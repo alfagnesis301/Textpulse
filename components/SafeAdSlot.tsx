@@ -15,7 +15,9 @@ type SafeAdSlotProps = {
   className?: string;
 };
 
-const ADS_ENABLED = process.env.NEXT_PUBLIC_ADS_ENABLED === "true";
+const ADS_ENABLED =
+  process.env.NEXT_PUBLIC_ADS_ENABLED === "true" &&
+  process.env.NEXT_PUBLIC_ADSENSE_APPROVED === "true";
 
 export function SafeAdSlot({ id, slotId, position = "content", className = "" }: SafeAdSlotProps) {
   useEffect(() => {
