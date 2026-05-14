@@ -106,6 +106,12 @@ export default function AboutPage() {
         >
           Read the methodology
         </Link>
+        <Link
+          href="/editorial-policy"
+          className="ml-3 mt-4 inline-flex rounded-2xl border border-slate-200 bg-white px-4 py-2 text-sm font-extrabold text-slate-800 hover:border-pulse-blue dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
+        >
+          Read the editorial policy
+        </Link>
       </section>
 
       <section className="mt-8 rounded-2xl border border-slate-200 bg-white/88 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/88">

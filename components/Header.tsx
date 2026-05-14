@@ -2,8 +2,8 @@ import Link from "next/link";
 import { Logo } from "@/components/Logo";
 
 const navItems = [
-  { href: "/#tool", label: "Word counter" },
-  { href: "/#publishfit", label: "PublishFit Score" },
+  { href: "/tools/word-counter", label: "Word counter" },
+  { href: "/tools/blog-post-readiness-checker", label: "PublishFit Score" },
   { href: "/guides", label: "Writing guides" },
   { href: "/methodology", label: "Methodology" },
   { href: "/about", label: "About TextPulses" },

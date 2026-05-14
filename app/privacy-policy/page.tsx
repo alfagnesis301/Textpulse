@@ -41,7 +41,8 @@ export default function PrivacyPolicyPage() {
           body: [
             "TextPulses may display advertisements through Google AdSense or related Google advertising services. Third-party vendors, including Google, use cookies to serve ads based on a user's prior visits to this website or other websites.",
             "Google's use of advertising cookies enables Google and its partners to serve ads to users based on visits to TextPulses and/or other sites on the Internet. Other third-party vendors or ad networks may also use cookies or similar technologies to serve ads, measure performance, prevent fraud, limit frequency, and support ad delivery.",
-            "Users can opt out of personalized advertising by visiting Google's Ads Settings at https://adssettings.google.com. Users may also learn about opting out of some third-party vendors' personalized advertising by visiting https://www.aboutads.info."
+            "Users can opt out of personalized advertising by visiting Google's Ads Settings at https://adssettings.google.com. Users may also learn about opting out of some third-party vendors' personalized advertising by visiting https://www.aboutads.info.",
+            "Google explains how it uses data from partner sites and apps at https://policies.google.com/technologies/partner-sites."
           ]
         },
         {

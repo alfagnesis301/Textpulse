@@ -77,6 +77,14 @@ const sections = [
     ]
   },
   {
+    title: "Edge cases and test examples",
+    body: [
+      "URLs and email addresses may be split into word-like pieces, emoji count as characters but not words, and hyphenated terms may be treated differently from some document editors.",
+      "Headings, bullets, and copied formatting are analyzed as text because they affect how a reader scans the draft. Extra blank lines can increase paragraph or line counts.",
+      "Short notes may trigger thin-content signals, long unbroken paragraphs may trigger scanability risk, and repeated product terms may trigger keyword repetition warnings even when grammar is correct."
+    ]
+  },
+  {
     title: "Limitations",
     body: [
       "TextPulses provides estimates and writing signals. It does not verify facts, check plagiarism, guarantee SEO performance, guarantee AdSense approval, replace professional editing, replace academic review, or understand every language and formatting edge case perfectly.",
@@ -230,6 +238,7 @@ export default function MethodologyPage() {
           {[
             { href: "/", label: "Use the analyzer" },
             { href: "/guides", label: "Read writing guides" },
+            { href: "/editorial-policy", label: "Editorial Policy" },
             { href: "/privacy-policy", label: "Privacy Policy" },
             { href: "/contact", label: "Contact TextPulses" }
           ].map((item) => (

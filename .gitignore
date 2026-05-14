@@ -2,6 +2,7 @@ node_modules
 .npm-cache
 .next
 dev-server*.log
+server*.log
 tsconfig.tsbuildinfo
 out
 dist

@@ -34,6 +34,7 @@ export default function CookiePolicyPage() {
           body: [
             "TextPulses may display ads through Google AdSense. Google and other advertising partners may use cookies, web beacons, or similar technologies to deliver ads, personalize ads where permitted, measure ad performance, prevent fraud, limit ad frequency, and improve advertising systems.",
             "Google advertising cookies can allow Google and its partners to serve ads based on visits to TextPulses and other websites. Users can manage personalized ads through Google's Ads Settings at https://adssettings.google.com.",
+            "Google explains how it uses data from partner sites and apps at https://policies.google.com/technologies/partner-sites.",
             "Ad placements on TextPulses should remain clearly labeled and separate from navigation, downloads, form submissions, or primary tool actions."
           ]
         },

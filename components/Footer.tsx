@@ -3,6 +3,7 @@ import { Logo } from "@/components/Logo";
 import { siteConfig } from "@/lib/seo";
 
 const legalLinks = [
+  { href: "/editorial-policy", label: "Editorial Policy" },
   { href: "/privacy-policy", label: "Privacy Policy" },
   { href: "/terms", label: "Terms" },
   { href: "/cookie-policy", label: "Cookie Policy" },
@@ -29,11 +30,17 @@ export function Footer() {
           <div>
             <h2 className="text-sm font-bold text-slate-950 dark:text-white">Product</h2>
             <div className="mt-3 grid gap-2 text-sm">
-              <Link className="text-slate-600 hover:text-pulse-blue dark:text-slate-400" href="/#tool">
+              <Link className="text-slate-600 hover:text-pulse-blue dark:text-slate-400" href="/tools/word-counter">
                 Word counter
               </Link>
-              <Link className="text-slate-600 hover:text-pulse-blue dark:text-slate-400" href="/#publishfit">
+              <Link className="text-slate-600 hover:text-pulse-blue dark:text-slate-400" href="/tools/blog-post-readiness-checker">
                 PublishFit Score
+              </Link>
+              <Link className="text-slate-600 hover:text-pulse-blue dark:text-slate-400" href="/tools">
+                All tools
+              </Link>
+              <Link className="text-slate-600 hover:text-pulse-blue dark:text-slate-400" href="/examples">
+                Examples
               </Link>
               <Link className="text-slate-600 hover:text-pulse-blue dark:text-slate-400" href="/guides">
                 Writing guides

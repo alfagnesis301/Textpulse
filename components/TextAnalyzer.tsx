@@ -99,11 +99,35 @@ function compactSentence(text: string) {
   return `${text.slice(0, 94)}...`;
 }
 
-export function TextAnalyzer() {
+type TextAnalyzerProps = {
+  initialPresetId?: PublishFitPresetId;
+};
+
+function buildReadinessReport(result: ReturnType<typeof evaluatePublishFit>) {
+  const indicatorEntries = Object.values(result.indicators);
+  const weakest = [...indicatorEntries].sort((a, b) => a.score - b.score)[0];
+
+  return [
+    "Publish Readiness Report",
+    `Main issue detected: ${weakest ? `${weakest.label} needs the most attention` : "Paste text to generate a signal"}`,
+    `Best channel fit: ${result.preset.label}`,
+    `Length risk: ${result.state}`,
+    `Readability risk: ${result.indicators.readability.status}`,
+    `Keyword repetition risk: ${result.indicators.keywordDensity.status}`,
+    `Sentence flow risk: ${result.indicators.clarity.status}`,
+    `Scanability risk: ${result.indicators.publicationReadiness.status}`,
+    "3 practical edits to improve this draft:",
+    ...result.recommendations.slice(0, 3).map((item, index) => `${index + 1}. ${item}`),
+    "Final pre-publish checklist: clear purpose; useful structure; cautious claims; natural repetition; human review complete.",
+    "Disclaimer: estimates are practical signals, not guarantees."
+  ].join("\n");
+}
+
+export function TextAnalyzer({ initialPresetId = "blog" }: TextAnalyzerProps) {
   const [text, setText] = useState("");
   const [autoSave, setAutoSave] = useState(false);
   const [theme, setTheme] = useState<"light" | "dark">("light");
-  const [presetId, setPresetId] = useState<PublishFitPresetId>("blog");
+  const [presetId, setPresetId] = useState<PublishFitPresetId>(initialPresetId);
   const [showCleanTools, setShowCleanTools] = useState(false);
   const [actionStatus, setActionStatus] = useState("");
   const [hydrated, setHydrated] = useState(false);
@@ -122,7 +146,7 @@ export function TextAnalyzer() {
     document.documentElement.classList.toggle("dark", nextTheme === "dark");
     setAutoSave(savedAutoSave);
 
-    if (savedPreset) {
+    if (savedPreset && initialPresetId === "blog") {
       setPresetId(savedPreset);
     }
 
@@ -210,6 +234,24 @@ export function TextAnalyzer() {
     link.click();
     URL.revokeObjectURL(url);
     setActionStatus("Text file created.");
+  };
+
+  const readinessReport = buildReadinessReport(publishFit);
+
+  const copyReadinessReport = async () => {
+    await navigator.clipboard.writeText(readinessReport);
+    setActionStatus("Publish Readiness Report copied.");
+  };
+
+  const downloadReadinessReport = () => {
+    const blob = new Blob([readinessReport], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "textpulses-publish-readiness-report.txt";
+    link.click();
+    URL.revokeObjectURL(url);
+    setActionStatus("Publish Readiness Report downloaded.");
   };
 
   const loadSample = () => {
@@ -346,6 +388,26 @@ export function TextAnalyzer() {
 
       <div className="mt-6 grid gap-6">
         <PublishFitPanel result={publishFit} presetId={presetId} onPresetChange={setPresetId} />
+        <section className="rounded-2xl border border-emerald-100 bg-white/90 p-5 shadow-soft dark:border-slate-800 dark:bg-slate-900/90 sm:p-6" aria-labelledby="readiness-report-title">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-pulse-green">Browser-side report</p>
+          <h2 id="readiness-report-title" className="mt-2 text-2xl font-extrabold tracking-tight text-slate-950 dark:text-white">
+            Publish Readiness Report
+          </h2>
+          <pre className="mt-4 whitespace-pre-wrap rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm leading-6 text-slate-700 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-300">
+            {readinessReport}
+          </pre>
+          <div className="mt-4 flex flex-wrap gap-2">
+            <Button onClick={copyReadinessReport} disabled={!text}>
+              Copy report
+            </Button>
+            <Button onClick={downloadReadinessReport} disabled={!text}>
+              Download report .txt
+            </Button>
+          </div>
+          <p className="mt-3 text-sm leading-6 text-slate-500 dark:text-slate-400">
+            No backend, no external AI, and no draft upload. The report is generated locally in your browser.
+          </p>
+        </section>
         <WritingHealthPanel health={analysis.writingHealth} publishFitScore={publishFit.score} />
         <KeywordDensity
           oneWord={analysis.oneWordPhrases}
