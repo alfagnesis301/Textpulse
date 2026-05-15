@@ -19,32 +19,43 @@ const routes = [
   "/disclaimer"
 ];
 
+const siteLastModified = new Date("2026-05-15");
+
+function toLastModified(value?: string) {
+  if (!value) {
+    return siteLastModified;
+  }
+
+  const date = new Date(value);
+
+  return Number.isNaN(date.getTime()) ? siteLastModified : date;
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
   const staticRoutes = routes.map((route) => ({
     url: `${siteConfig.url}${route}`,
-    lastModified: now,
+    lastModified: siteLastModified,
     changeFrequency: route === "" ? "weekly" : "monthly",
     priority: route === "" ? 1 : route === "/guides" ? 0.85 : 0.7
   })) satisfies MetadataRoute.Sitemap;
 
   const guideRoutes = guides.map((guide) => ({
     url: `${siteConfig.url}/guides/${guide.slug}`,
-    lastModified: now,
+    lastModified: toLastModified(guide.updated),
     changeFrequency: "monthly",
     priority: 0.75
   })) satisfies MetadataRoute.Sitemap;
 
   const toolRoutes = toolPages.map((tool) => ({
     url: `${siteConfig.url}/tools/${tool.slug}`,
-    lastModified: now,
+    lastModified: siteLastModified,
     changeFrequency: "monthly",
     priority: 0.8
   })) satisfies MetadataRoute.Sitemap;
 
   const exampleRoutes = examplePages.map((page) => ({
     url: `${siteConfig.url}/examples/${page.slug}`,
-    lastModified: now,
+    lastModified: siteLastModified,
     changeFrequency: "monthly",
     priority: 0.72
   })) satisfies MetadataRoute.Sitemap;

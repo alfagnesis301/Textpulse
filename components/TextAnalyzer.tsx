@@ -155,7 +155,7 @@ export function TextAnalyzer({ initialPresetId = "blog" }: TextAnalyzerProps) {
     }
 
     setHydrated(true);
-  }, []);
+  }, [initialPresetId]);
 
   useEffect(() => {
     if (!hydrated) {

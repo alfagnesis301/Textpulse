@@ -1,4 +1,8 @@
+"use client";
+
 import Script from "next/script";
+import { useEffect, useState } from "react";
+import { canLoadAds, CONSENT_UPDATED_EVENT } from "@/lib/consent";
 import { siteConfig } from "@/lib/seo";
 
 const ADS_ENABLED =
@@ -6,7 +10,20 @@ const ADS_ENABLED =
   process.env.NEXT_PUBLIC_ADSENSE_APPROVED === "true";
 
 export function AdSenseScript() {
-  if (!ADS_ENABLED) {
+  const [allowed, setAllowed] = useState(false);
+
+  useEffect(() => {
+    const syncConsent = () => setAllowed(canLoadAds());
+
+    syncConsent();
+    window.addEventListener(CONSENT_UPDATED_EVENT, syncConsent);
+
+    return () => {
+      window.removeEventListener(CONSENT_UPDATED_EVENT, syncConsent);
+    };
+  }, []);
+
+  if (!ADS_ENABLED || !allowed) {
     return null;
   }
 

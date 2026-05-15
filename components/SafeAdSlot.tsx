@@ -1,5 +1,6 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { canLoadAds, CONSENT_UPDATED_EVENT } from "@/lib/consent";
 import { siteConfig } from "@/lib/seo";
 
 declare global {
@@ -20,16 +21,29 @@ const ADS_ENABLED =
   process.env.NEXT_PUBLIC_ADSENSE_APPROVED === "true";
 
 export function SafeAdSlot({ id, slotId, position = "content", className = "" }: SafeAdSlotProps) {
+  const [allowed, setAllowed] = useState(false);
+
   useEffect(() => {
-    if (!ADS_ENABLED || !slotId) return;
+    const syncConsent = () => setAllowed(canLoadAds());
+
+    syncConsent();
+    window.addEventListener(CONSENT_UPDATED_EVENT, syncConsent);
+
+    return () => {
+      window.removeEventListener(CONSENT_UPDATED_EVENT, syncConsent);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!ADS_ENABLED || !allowed || !slotId) return;
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
     } catch {
       // ad blocker or script not loaded
     }
-  }, [slotId]);
+  }, [allowed, slotId]);
 
-  if (!ADS_ENABLED || !slotId) return null;
+  if (!ADS_ENABLED || !allowed || !slotId) return null;
 
   const sizeClass = position === "sidebar" ? "min-h-[300px]" : "min-h-[220px]";
 
