@@ -1,4 +1,5 @@
 const CONSENT_KEY = "tp-cookie-consent-v1";
+export const CONSENT_UPDATED_EVENT = "textpulses-consent-updated";
 
 type ConsentRecord = { necessary: true; ads: boolean; analytics: boolean; timestamp: number };
 

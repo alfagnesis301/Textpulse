@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { CONSENT_UPDATED_EVENT } from "@/lib/consent";
 
 const CONSENT_KEY = "tp-cookie-consent-v1";
 
@@ -18,6 +19,7 @@ export function CookieConsent() {
       CONSENT_KEY,
       JSON.stringify({ necessary: true, ads, analytics: ads, timestamp: Date.now() })
     );
+    window.dispatchEvent(new Event(CONSENT_UPDATED_EVENT));
     setVisible(false);
   }
 
