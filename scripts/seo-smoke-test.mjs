@@ -98,6 +98,7 @@ assert(jsonLd.includes("HomeJsonLd"), "Homepage JSON-LD component is missing.");
 assert(jsonLd.includes("GuideJsonLd"), "Guide JSON-LD component is missing.");
 assert(jsonLd.includes("ToolJsonLd"), "Tool JSON-LD component is missing.");
 assert(schema.includes("SiteNavigationElement"), "SiteNavigationElement schema is missing.");
+assert(schema.includes("SoftwareApplication"), "SoftwareApplication schema is missing.");
 assert(schema.includes("WebApplication"), "WebApplication schema is missing.");
 assert(schema.includes("BreadcrumbList"), "BreadcrumbList schema is missing.");
 assert(!jsonLd.includes("FAQPage"), "JSON-LD component should not emit FAQPage as primary schema.");
