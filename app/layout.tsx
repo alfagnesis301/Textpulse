@@ -14,6 +14,9 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   applicationName: siteConfig.name,
+  other: {
+    "google-adsense-account": siteConfig.adsenseClientId
+  },
   keywords: [
     "word counter",
     "character counter",
