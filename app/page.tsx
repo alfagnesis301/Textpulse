@@ -1,207 +1,276 @@
 import Link from "next/link";
-import { FAQ, faqs } from "@/components/FAQ";
-import { WebsiteJsonLd } from "@/components/JsonLd";
+import { HomeJsonLd } from "@/components/JsonLd";
 import { Logo } from "@/components/Logo";
 import { SafeAdSlot } from "@/components/SafeAdSlot";
-import { SeoSnippetChecker } from "@/components/SeoSnippetChecker";
 import { TextAnalyzer } from "@/components/TextAnalyzer";
-import { guides } from "@/lib/guides";
-import { createMetadata } from "@/lib/seo";
+import { createMetadata, siteConfig } from "@/lib/seo";
 
 export const metadata = createMetadata({
-  title: "SEO Title & Meta Description Length Checker – Free",
+  title: "TextPulses - Free Text Analysis Tools for Writers & SEO",
   description:
-    "Check SEO title length (ideal: 50–60 chars) and meta description length (max 160 chars). Free word counter, readability checker, and publish-ready text analyzer.",
+    "Free browser-based tools to count words, check SEO titles, meta descriptions, readability, keyword balance, speech time and publishing fit.",
   path: ""
 });
 
-const trustBadges = ["Private browser-based analysis", "No signup required", "SEO title & meta description checker"];
+const navigation = [
+  { name: "Word Counter", url: `${siteConfig.url}/tools/word-counter` },
+  { name: "SEO Title Checker", url: `${siteConfig.url}/tools/seo-title-checker` },
+  { name: "Meta Description Checker", url: `${siteConfig.url}/tools/meta-description-checker` },
+  { name: "Speech Time Calculator", url: `${siteConfig.url}/tools/speech-time-calculator` },
+  { name: "Guides", url: `${siteConfig.url}/guides` },
+  { name: "Privacy Policy", url: `${siteConfig.url}/privacy-policy` }
+];
 
-const analyzeItems = [
+const categories = [
   {
-    title: "Word and character counts",
-    body: "Measure words, characters with spaces, characters without spaces, lines, paragraphs, and sentence structure in real time."
+    title: "Writing Tools",
+    body: "Count words, review readability, spot repeated phrases, and clean pasted drafts before submission or publishing.",
+    links: [
+      { href: "/tools/word-counter", label: "Word Counter" },
+      { href: "/tools/readability-checker", label: "Readability Checker" },
+      { href: "/tools/keyword-density-checker", label: "Keyword Density Checker" }
+    ]
   },
   {
-    title: "Readability and timing",
-    body: "Estimate reading time, speaking time, handwriting time, average sentence length, and an approximate reading level."
+    title: "SEO Snippet Tools",
+    body: "Check title tags and meta descriptions with practical length, clarity, and truncation-risk signals.",
+    links: [
+      { href: "/tools/seo-title-checker", label: "SEO Title Checker" },
+      { href: "/tools/meta-description-checker", label: "Meta Description Checker" },
+      { href: "/guides/seo-title-length-guide", label: "SEO Title Length Guide" }
+    ]
   },
   {
-    title: "Keyword and phrase balance",
-    body: "Review top one-word, two-word, and three-word phrases so repetition becomes easier to spot before publishing."
+    title: "Social Media Tools",
+    body: "Draft posts for professional feeds without losing the hook, structure, or useful takeaway.",
+    links: [
+      { href: "/tools/linkedin-post-checker", label: "LinkedIn Post Checker" },
+      { href: "/guides/linkedin-post-length-guide", label: "LinkedIn Post Length Guide" },
+      { href: "/examples/linkedin-post-examples", label: "LinkedIn Post Examples" }
+    ]
   },
   {
-    title: "Channel fit",
-    body: "Use PublishFit presets for SEO titles, meta descriptions, social posts, emails, essays, speeches, and blog articles."
+    title: "Speech & Reading Time Tools",
+    body: "Estimate how long text takes to read or say aloud, then revise scripts for clearer delivery.",
+    links: [
+      { href: "/tools/speech-time-calculator", label: "Speech Time Calculator" },
+      { href: "/guides/speech-timing-calculator-guide", label: "Speech Timing Guide" },
+      { href: "/tools/word-counter", label: "Reading Time Counter" }
+    ]
+  },
+  {
+    title: "Publishing Readiness",
+    body: "Use PublishFit signals to check whether a draft matches the channel before a human final review.",
+    links: [
+      { href: "/tools/blog-post-readiness-checker", label: "Blog Post Readiness Checker" },
+      { href: "/guides/publishfit-score-explained", label: "PublishFit Score Guide" },
+      { href: "/methodology", label: "Methodology" }
+    ]
   }
 ];
 
-const differences = [
-  "PublishFit Score turns raw counts into channel-specific readiness guidance.",
-  "Clean Text tools help fix spacing, line breaks, quotes, and casing without leaving the page.",
-  "Writing Health cards make clarity, variety, keyword balance, sentence flow, readability, and fit easier to scan.",
-  "All analysis runs locally in the browser, with local auto-save disabled unless you turn it on."
-];
-
-const audiences = [
-  "Students",
-  "Bloggers",
-  "SEO writers",
-  "Marketers",
-  "YouTubers",
-  "Social media creators",
-  "Professionals"
+const featuredTools = [
+  {
+    href: "/tools/word-counter",
+    title: "Word Counter",
+    body: "Count words, characters, sentences, paragraphs, reading time, speaking time, and repeated phrases."
+  },
+  {
+    href: "/tools/seo-title-checker",
+    title: "SEO Title Checker",
+    body: "Review title length, clarity, repetition, and approximate snippet risk before publishing."
+  },
+  {
+    href: "/tools/meta-description-checker",
+    title: "Meta Description Checker",
+    body: "Check character count, mobile risk, desktop preview context, and whether the summary is specific."
+  },
+  {
+    href: "/tools/speech-time-calculator",
+    title: "Speech Time Calculator",
+    body: "Estimate delivery time and find sentences that may be difficult to say aloud."
+  }
 ];
 
 const popularGuides = [
   {
-    title: "SEO Title Length Guide",
     href: "/guides/seo-title-length-guide",
-    description:
-      "Learn the ideal SEO title length, pixel limits, and how to avoid Google truncation."
+    title: "SEO Title Length Guide",
+    body: "Character ranges, pixel limits, title rewrites, and examples for page titles."
   },
   {
-    title: "Meta Description Length Checker Guide",
     href: "/guides/meta-description-length-checker-guide",
-    description:
-      "Check the best meta description length for desktop and mobile snippets."
+    title: "Meta Description Length Guide",
+    body: "Desktop and mobile snippet ranges, examples, rewrite risks, and a checker workflow."
   },
   {
-    title: "LinkedIn Post Length Guide",
     href: "/guides/linkedin-post-length-guide",
-    description:
-      "Find the ideal LinkedIn post length by format, character count, and use case."
+    title: "LinkedIn Post Length Guide",
+    body: "Suggested ranges by post format, hook risk, examples, and a pre-publish checklist."
+  }
+];
+
+const whyItems = [
+  "Text analysis runs in your browser, so drafts are not uploaded for counting or scoring.",
+  "Each tool explains the signal instead of treating a character count as a ranking or performance guarantee.",
+  "The site separates general writing tools, SEO snippet tools, social post checks, and publishing guidance so pages have clearer intent.",
+  "Legal, privacy, methodology, contact, and editorial policy pages are linked in the main navigation or footer."
+];
+
+const faq = [
+  {
+    question: "Is TextPulses free to use?",
+    answer:
+      "Yes. The public tools are free to use in the browser. Ads may appear on some pages, but they should not be required to run the analyzer."
   },
   {
-    title: "Readability Scores Explained",
-    href: "/guides/readability-scores-explained",
-    description:
-      "Understand readability scores and how to make text easier to read."
+    question: "Does TextPulses upload my draft text?",
+    answer:
+      "No. The analyzer is browser-side. Local auto-save stores draft text on your device only when you turn that option on."
+  },
+  {
+    question: "Are the SEO title and meta description limits exact?",
+    answer:
+      "No. Search display can vary by query, device, layout, and rewrite behavior. TextPulses gives practical length and clarity signals, not guaranteed display results."
+  },
+  {
+    question: "Can TextPulses guarantee rankings, clicks, or engagement?",
+    answer:
+      "No. The tools help with drafting and review. They do not guarantee search rankings, social engagement, editorial acceptance, or ad approval."
+  },
+  {
+    question: "How should I use estimates such as reading time or speech time?",
+    answer:
+      "Treat them as planning ranges. Final reading and speaking time can change with audience, pauses, delivery style, and formatting."
   }
 ];
 
 export default function HomePage() {
-  const faqJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map((item) => ({
-      "@type": "Question",
-      name: item.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: item.answer
-      }
-    }))
-  };
-  const featuredGuides = guides.slice(0, 6);
-
   return (
     <main>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-      />
-      <WebsiteJsonLd />
+      <HomeJsonLd navigation={navigation} />
+
       <section className="hero-soft-bg border-b border-slate-200 dark:border-slate-800">
-        <div className="mx-auto grid max-w-7xl gap-10 px-4 pb-10 pt-12 sm:px-6 lg:grid-cols-[1.02fr_0.98fr] lg:px-8 lg:pb-14 lg:pt-16">
+        <div className="mx-auto grid max-w-7xl gap-10 px-4 pb-12 pt-12 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:pb-16 lg:pt-16">
           <div className="flex flex-col justify-center">
             <div className="mb-6">
-              <Logo className="scale-110 origin-left" />
+              <Logo className="origin-left scale-110" />
             </div>
             <p className="text-sm font-bold uppercase tracking-[0.2em] text-pulse-blue">
-              {`Count smarter. Write sharper. Publish faster.`}
+              Browser-based writing and SEO checks
             </p>
             <h1 className="mt-4 max-w-4xl text-balance text-4xl font-black tracking-tight text-slate-950 dark:text-white sm:text-5xl lg:text-6xl">
-              Free Word Counter & SEO Title Length Checker
+              Free Text Analysis Tools for Writers, Students & SEO
             </h1>
             <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-700 dark:text-slate-300">
-              Check SEO title length, meta description length, word count, readability, and
-              keyword balance. See if your text fits blogs, social posts, emails, and more.
+              Count words, check readability, review SEO snippets, estimate speech time, and
+              compare a draft with practical publishing-fit signals without uploading the text
+              for analysis.
             </p>
             <div className="mt-7 flex flex-wrap items-center gap-3">
               <Link
                 href="#tool"
                 className="rounded-2xl bg-gradient-to-r from-pulse-blue to-pulse-violet px-6 py-3 text-sm font-extrabold text-white shadow-glow hover:-translate-y-0.5"
               >
-                Start typing
+                Start writing
               </Link>
               <Link
-                href="#publishfit-explained"
+                href="/tools/word-counter"
                 className="rounded-2xl border border-slate-200 bg-white px-6 py-3 text-sm font-extrabold text-slate-800 shadow-sm hover:-translate-y-0.5 hover:border-pulse-blue dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
               >
-                See PublishFit
+                Open word counter
               </Link>
-              <Link
-                href="/methodology"
-                className="rounded-2xl border border-blue-100 bg-blue-50 px-6 py-3 text-sm font-extrabold text-pulse-blue shadow-sm hover:-translate-y-0.5 hover:border-pulse-blue dark:border-blue-900/60 dark:bg-blue-950/30 dark:text-blue-200"
-              >
-                How it works
-              </Link>
-            </div>
-            <div className="mt-7 flex flex-wrap gap-2">
-              {trustBadges.map((badge) => (
-                <span
-                  key={badge}
-                  className="rounded-full border border-slate-200 bg-white/85 px-4 py-2 text-sm font-bold text-slate-700 shadow-sm dark:border-slate-700 dark:bg-slate-900/85 dark:text-slate-200"
-                >
-                  {badge}
-                </span>
-              ))}
             </div>
           </div>
 
           <div className="grid content-center gap-4">
             <div className="rounded-2xl border border-slate-200 bg-white/88 p-5 shadow-soft dark:border-slate-800 dark:bg-slate-900/88">
-              <div className="flex items-center justify-between gap-4">
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-pulse-violet">
-                    Mini demo
-                  </p>
-                  <h2 className="mt-2 text-2xl font-black text-slate-950 dark:text-white">
-                    Publish-ready signals
-                  </h2>
-                </div>
-                <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-800 dark:bg-emerald-950/50 dark:text-emerald-200">
-                  Private
-                </span>
-              </div>
-              <div className="mt-5 grid gap-3 sm:grid-cols-2">
-                {[
-                  ["Words", "684"],
-                  ["Readability", "Clear"],
-                  ["Keyword balance", "91"],
-                  ["PublishFit", "88"]
-                ].map(([label, value]) => (
-                  <div key={label} className="rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-950/70">
-                    <p className="text-xs font-bold uppercase tracking-[0.14em] text-slate-500">{label}</p>
-                    <p className="mt-2 text-3xl font-black text-slate-950 dark:text-white">{value}</p>
-                  </div>
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-pulse-violet">
+                Tool hub
+              </p>
+              <h2 className="mt-2 text-2xl font-black text-slate-950 dark:text-white">
+                Choose the job before judging the draft
+              </h2>
+              <div className="mt-5 grid gap-3">
+                {featuredTools.map((tool) => (
+                  <Link
+                    key={tool.href}
+                    href={tool.href}
+                    className="rounded-2xl border border-slate-200 bg-slate-50 p-4 transition hover:-translate-y-0.5 hover:border-pulse-blue dark:border-slate-800 dark:bg-slate-950/70"
+                  >
+                    <span className="text-sm font-extrabold text-slate-950 dark:text-white">
+                      {tool.title}
+                    </span>
+                    <span className="mt-1 block text-sm leading-6 text-slate-600 dark:text-slate-400">
+                      {tool.body}
+                    </span>
+                  </Link>
                 ))}
-              </div>
-              <div className="mt-5 rounded-2xl bg-gradient-to-r from-blue-50 to-violet-50 p-4 dark:from-blue-950/40 dark:to-violet-950/40">
-                <p className="text-sm font-semibold leading-6 text-slate-700 dark:text-slate-300">
-                  Meta Description: Good range. Recommendation: keep the main benefit near
-                  the front and avoid repeating the same keyword.
-                </p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <SeoSnippetChecker />
+      <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8" aria-labelledby="tool-categories">
+        <div className="max-w-3xl">
+          <p className="text-sm font-bold uppercase tracking-[0.2em] text-pulse-blue">
+            Tool categories
+          </p>
+          <h2 id="tool-categories" className="mt-3 text-3xl font-extrabold tracking-tight text-slate-950 dark:text-white sm:text-4xl">
+            Start from the format you need to publish
+          </h2>
+          <p className="mt-4 text-base leading-7 text-slate-600 dark:text-slate-400">
+            A blog draft, a search snippet, a LinkedIn post, and a speech script need different
+            checks. These sections route each task to the right tool or guide.
+          </p>
+        </div>
+        <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {categories.map((category) => (
+            <section
+              key={category.title}
+              className="rounded-2xl border border-slate-200 bg-white/88 p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900/88"
+              aria-labelledby={`category-${category.title.replace(/[^a-zA-Z0-9]/g, "-")}`}
+            >
+              <h3
+                id={`category-${category.title.replace(/[^a-zA-Z0-9]/g, "-")}`}
+                className="text-lg font-extrabold text-slate-950 dark:text-white"
+              >
+                {category.title}
+              </h3>
+              <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+                {category.body}
+              </p>
+              <ul className="mt-4 grid gap-2 text-sm font-bold">
+                {category.links.map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href} className="text-pulse-blue hover:text-pulse-violet">
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))}
+        </div>
+      </section>
+
       <TextAnalyzer />
 
-      <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8" aria-labelledby="popular-guides">
+      <SafeAdSlot id="home-after-tool-ad" position="content" />
+
+      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8" aria-labelledby="popular-guides">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-3xl">
-            <p className="text-sm font-bold uppercase tracking-[0.2em] text-pulse-blue">Popular writing & SEO guides</p>
+            <p className="text-sm font-bold uppercase tracking-[0.2em] text-pulse-blue">
+              Popular guides
+            </p>
             <h2 id="popular-guides" className="mt-3 text-3xl font-extrabold tracking-tight text-slate-950 dark:text-white sm:text-4xl">
-              Practical guides for search snippets and publishing
+              Practical references for higher-intent checks
             </h2>
             <p className="mt-4 text-base leading-7 text-slate-600 dark:text-slate-400">
-              Start with the pages most writers check before publishing: title length,
-              meta descriptions, LinkedIn posts, and readability.
+              Use these guides when you need the reasoning behind a length range, example, or
+              pre-publish checklist.
             </p>
           </div>
           <Link
@@ -211,7 +280,7 @@ export default function HomePage() {
             Browse all guides
           </Link>
         </div>
-        <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-8 grid gap-4 md:grid-cols-3">
           {popularGuides.map((guide) => (
             <article
               key={guide.href}
@@ -223,180 +292,59 @@ export default function HomePage() {
                 </Link>
               </h3>
               <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
-                {guide.description}
+                {guide.body}
               </p>
             </article>
           ))}
         </div>
       </section>
 
-      <SafeAdSlot id="home-after-tool-ad" position="content" />
-
-      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8" aria-labelledby="what-analyze">
-        <div className="max-w-3xl">
-          <p className="text-sm font-bold uppercase tracking-[0.2em] text-pulse-blue">What you can analyze</p>
-          <h2 id="what-analyze" className="mt-3 text-3xl font-extrabold tracking-tight text-slate-950 dark:text-white sm:text-4xl">
-            More context than a basic counter
-          </h2>
-          <p className="mt-4 text-base leading-7 text-slate-600 dark:text-slate-400">
-            TextPulses is designed for people who publish. It keeps simple counts fast while
-            adding the quality signals that help you decide whether a draft is ready for the
-            next step.
-          </p>
-        </div>
-        <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {analyzeItems.map((item) => (
-            <article key={item.title} className="rounded-2xl border border-slate-200 bg-white/88 p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900/88">
-              <h3 className="text-lg font-extrabold text-slate-950 dark:text-white">{item.title}</h3>
-              <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">{item.body}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="bg-white/60 py-14 dark:bg-slate-950/50" aria-labelledby="why-different">
+      <section className="bg-white/60 py-14 dark:bg-slate-950/50" aria-labelledby="why-textpulses">
         <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
           <div>
-            <p className="text-sm font-bold uppercase tracking-[0.2em] text-pulse-violet">Why TextPulses is different</p>
-            <h2 id="why-different" className="mt-3 text-3xl font-extrabold tracking-tight text-slate-950 dark:text-white sm:text-4xl">
-              Publish-ready writing, not just counting
+            <p className="text-sm font-bold uppercase tracking-[0.2em] text-pulse-violet">
+              Why TextPulses
+            </p>
+            <h2 id="why-textpulses" className="mt-3 text-3xl font-extrabold tracking-tight text-slate-950 dark:text-white sm:text-4xl">
+              Clear signals without inflated promises
             </h2>
             <p className="mt-4 text-base leading-7 text-slate-600 dark:text-slate-400">
-              A word count tells you size. TextPulses also helps you understand whether the
-              draft fits the format, feels readable, and avoids obvious repetition before it
-              goes live.
+              TextPulses is built as a practical editing aid. It helps you catch length,
+              clarity, repetition, and fit issues before a final human review.
             </p>
           </div>
-          <div className="grid gap-3">
-            {differences.map((item) => (
-              <div key={item} className="rounded-2xl border border-slate-200 bg-white p-4 text-sm font-semibold leading-6 text-slate-700 shadow-sm dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300">
+          <ul className="grid gap-3">
+            {whyItems.map((item) => (
+              <li
+                key={item}
+                className="rounded-2xl border border-slate-200 bg-white p-4 text-sm font-semibold leading-6 text-slate-700 shadow-sm dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300"
+              >
                 {item}
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8" aria-labelledby="featured-guides">
-        <div className="flex flex-col justify-between gap-5 lg:flex-row lg:items-end">
-          <div className="max-w-3xl">
-            <p className="text-sm font-bold uppercase tracking-[0.2em] text-pulse-blue">Writing guides</p>
-            <h2 id="featured-guides" className="mt-3 text-3xl font-extrabold tracking-tight text-slate-950 dark:text-white sm:text-4xl">
-              Learn the ranges behind better publishing decisions
-            </h2>
-            <p className="mt-4 text-base leading-7 text-slate-600 dark:text-slate-400">
-              Use these original guides to understand word count, readability, SEO snippets,
-              subject lines, speeches, keyword density, and PublishFit Score.
-            </p>
-          </div>
-          <Link
-            href="/guides"
-            className="rounded-2xl bg-slate-950 px-5 py-3 text-sm font-extrabold text-white shadow-sm hover:-translate-y-0.5 hover:bg-pulse-blue dark:bg-white dark:text-slate-950 dark:hover:bg-slate-200"
-          >
-            View all guides
-          </Link>
-        </div>
-        <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {featuredGuides.map((guide) => (
-            <article
-              key={guide.slug}
+      <section className="mx-auto max-w-5xl px-4 py-14 sm:px-6 lg:px-8" aria-labelledby="home-faq">
+        <p className="text-sm font-bold uppercase tracking-[0.2em] text-pulse-blue">FAQ</p>
+        <h2 id="home-faq" className="mt-3 text-3xl font-extrabold tracking-tight text-slate-950 dark:text-white sm:text-4xl">
+          Common questions
+        </h2>
+        <div className="mt-8 grid gap-4">
+          {faq.map((item) => (
+            <div
+              key={item.question}
               className="rounded-2xl border border-slate-200 bg-white/88 p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900/88"
             >
-              <p className="text-xs font-bold uppercase tracking-[0.16em] text-pulse-violet">
-                {guide.category}
-              </p>
-              <h3 className="mt-3 text-lg font-extrabold text-slate-950 dark:text-white">
-                <Link href={`/guides/${guide.slug}`} className="hover:text-pulse-blue">
-                  {guide.title}
-                </Link>
+              <h3 className="text-base font-extrabold text-slate-950 dark:text-white">
+                {item.question}
               </h3>
-              <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
-                {guide.description}
+              <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">
+                {item.answer}
               </p>
-            </article>
+            </div>
           ))}
-        </div>
-      </section>
-
-      <section id="publishfit-explained" className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8" aria-labelledby="publishfit-explainer-title">
-        <div className="max-w-4xl">
-          <p className="text-sm font-bold uppercase tracking-[0.2em] text-pulse-blue">PublishFit Score explained</p>
-          <h2 id="publishfit-explainer-title" className="mt-3 text-3xl font-extrabold tracking-tight text-slate-950 dark:text-white sm:text-4xl">
-            Pick the channel before judging the draft
-          </h2>
-          <p className="mt-4 text-base leading-7 text-slate-600 dark:text-slate-400">
-            A strong email subject can be too short for a blog intro. A clear meta
-            description can be too long for a social post. PublishFit Score compares your
-            text with the expectations of the selected format, then combines length,
-            clarity, readability, keyword balance, and variety into a single readiness
-            score.
-          </p>
-          <p className="mt-4 text-base leading-7 text-slate-600 dark:text-slate-400">
-            The score is rule-based and transparent. It does not claim to predict rankings,
-            engagement, or academic grading. It gives you a practical checklist before you
-            send, submit, or publish.
-          </p>
-          <div className="mt-5 flex flex-wrap gap-3">
-            <Link
-              href="/guides/publishfit-score-explained"
-              className="rounded-2xl bg-slate-950 px-5 py-3 text-sm font-extrabold text-white shadow-sm hover:-translate-y-0.5 hover:bg-pulse-blue dark:bg-white dark:text-slate-950"
-            >
-              Read PublishFit guide
-            </Link>
-            <Link
-              href="/methodology"
-              className="rounded-2xl border border-slate-200 bg-white px-5 py-3 text-sm font-extrabold text-slate-800 shadow-sm hover:-translate-y-0.5 hover:border-pulse-blue dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
-            >
-              View methodology
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-slate-950 py-14 text-white" aria-labelledby="who-for">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <p className="text-sm font-bold uppercase tracking-[0.2em] text-emerald-300">Who is this tool for?</p>
-            <h2 id="who-for" className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
-              Useful for everyday publishing work
-            </h2>
-            <p className="mt-4 text-base leading-7 text-slate-300">
-              TextPulses supports quick checks for drafts, assignments, captions, scripts,
-              emails, snippets, and long-form web content.
-            </p>
-          </div>
-          <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {audiences.map((audience) => (
-              <div key={audience} className="rounded-2xl border border-white/10 bg-white/5 p-5 text-lg font-extrabold">
-                {audience}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-5xl px-4 py-14 text-center sm:px-6 lg:px-8">
-        <p className="text-sm font-bold uppercase tracking-[0.2em] text-pulse-violet">Privacy-first text analysis</p>
-        <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-950 dark:text-white sm:text-4xl">
-          Your draft should stay under your control
-        </h2>
-        <p className="mt-4 text-base leading-7 text-slate-600 dark:text-slate-400">
-          TextPulses performs analysis in your browser. It uses localStorage for preferences
-          such as theme, selected preset, and Auto-save locally status. Draft text is stored
-          locally only if you manually enable Auto-save locally.
-        </p>
-      </section>
-
-      <FAQ />
-
-      <section className="mx-auto max-w-5xl px-4 pb-16 text-center sm:px-6 lg:px-8">
-        <div className="rounded-2xl border border-slate-200 bg-white/88 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/88">
-          <h2 className="text-xl font-extrabold text-slate-950 dark:text-white">Accuracy disclaimer</h2>
-          <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
-            Estimates are provided for convenience and may vary depending on language,
-            formatting, and reading speed. Use TextPulses as a practical writing aid, not as
-            a guarantee of publication performance, search ranking, or editorial acceptance.
-          </p>
         </div>
       </section>
     </main>

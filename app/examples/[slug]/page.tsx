@@ -28,15 +28,8 @@ export default async function ExamplePage({ params }: Props) {
     { question: "Where should I check my own draft?", answer: "Use the related TextPulses checker linked on this page." }
   ];
 
-  const faqJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faq.map((item) => ({ "@type": "Question", name: item.question, acceptedAnswer: { "@type": "Answer", text: item.answer } }))
-  };
-
   return (
     <main className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <nav className="text-sm font-semibold text-slate-500"><Link href="/">Home</Link> / <Link href="/examples">Examples</Link> / {page.title}</nav>
       <p className="mt-8 text-sm font-bold uppercase tracking-[0.2em] text-pulse-blue">Original examples</p>
       <h1 className="mt-3 text-4xl font-black tracking-tight text-slate-950 dark:text-white">{page.title}</h1>

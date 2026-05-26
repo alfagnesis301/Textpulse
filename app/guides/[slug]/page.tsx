@@ -48,6 +48,16 @@ function slugify(value: string) {
     .replace(/(^-|-$)/g, "");
 }
 
+function toIsoDate(value: string) {
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return "2026-05-26";
+  }
+
+  return date.toISOString().slice(0, 10);
+}
+
 export default async function GuidePage({ params }: GuidePageProps) {
   const { slug } = await params;
   const guide = getGuide(slug);
@@ -89,8 +99,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
         description={schemaDescription}
         url={url}
         datePublished="2026-04-27"
-        dateModified="2026-05-09"
-        faqItems={guide.faq}
+        dateModified={toIsoDate(guide.updated)}
         breadcrumbItems={breadcrumbItems}
       />
 
@@ -298,10 +307,10 @@ export default async function GuidePage({ params }: GuidePageProps) {
             ))}
           </div>
           <Link
-            href="/"
+            href={guide.toolHref ?? "/"}
             className="mt-4 inline-flex rounded-2xl bg-gradient-to-r from-pulse-blue to-pulse-violet px-5 py-3 text-sm font-extrabold text-white shadow-glow hover:-translate-y-0.5"
           >
-            Open the analyzer
+            {guide.toolCtaLabel ?? "Open the analyzer"}
           </Link>
         </section>
 

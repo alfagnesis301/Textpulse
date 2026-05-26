@@ -8,6 +8,7 @@ export type ToolPage = {
   preset: PublishFitPresetId;
   intro: string;
   decide: string[];
+  metricMatters?: string[];
   howTo: string[];
   examples: string[];
   mistakes: string[];
@@ -25,6 +26,10 @@ export const toolPages: ToolPage[] = [
     preset: "blog",
     intro: "The TextPulses Word Counter is for writers who need more than a raw number. It counts words, characters, sentences, paragraphs, reading time, speaking time, repeated phrases, and practical publish readiness signals in one browser-based workspace. Use it when a draft needs to fit a brief, article outline, email, post, script, or page requirement without sending private text to a server. The report helps you decide whether the draft is too thin, too long, hard to scan, or repeating terms in a way that may feel forced. It is built for editorial judgement rather than automatic promises: the signals point to likely issues, but a human editor should make the final call.",
     decide: ["Whether the draft has enough useful substance for its purpose.", "Whether the text is easy to scan before publication.", "Whether repeated terms or long sentences need another edit."],
+    metricMatters: [
+      "Word count is useful because briefs, assignments, scripts, and publishing workflows often have size expectations. The number should support editorial judgement, not replace it.",
+      "Reading time, speaking time, paragraph structure, and repeated phrases add context to the raw count. A draft can be the right length and still be hard to scan or too repetitive."
+    ],
     howTo: ["Paste only the text that belongs to the final draft, not copied menus or notes.", "Use the word, sentence, paragraph, reading time, and speaking time metrics to spot size and structure issues.", "Open the Publish Readiness Report to decide whether to expand, trim, or clean the draft.", "Copy the report when you need a lightweight editorial handoff."],
     examples: ["A 950-word article draft before client handoff.", "A 180-word product update for a changelog.", "A 750-word newsletter introduction.", "A 2-minute speech draft.", "A short caption that may be too thin for a page."],
     mistakes: ["Judging value from word count alone.", "Counting copied navigation or footer text.", "Ignoring long paragraphs when the count looks acceptable.", "Treating reading time as exact for every audience."],
@@ -40,11 +45,15 @@ export const toolPages: ToolPage[] = [
   {
     slug: "seo-title-checker",
     title: "SEO Title Checker",
-    metaTitle: "SEO Title Checker",
-    description: "Check SEO title length, clarity, repetition, and truncation risk with practical browser-side signals.",
+    metaTitle: "SEO Title Checker: Free Length & SERP Preview Tool",
+    description: "Paste an SEO title to check character count, approximate pixel risk, mobile scanability, repetition, and SERP preview fit before publishing.",
     preset: "seo-title",
     intro: "The SEO Title Checker helps you review a page title before it becomes the promise shown in search results, browser tabs, and shared links. It checks length, clarity, repetition, and whether the important topic appears early enough to be understood quickly. The goal is not to chase a magic number or guarantee ranking. It is to make the title specific, readable, and aligned with the actual page. Paste a title, compare the Publish Readiness Report, then rewrite anything that sounds padded, duplicated, or vague. This is especially useful when several pages target similar topics and each title needs a clear reason to exist.",
     decide: ["Whether the title is concise enough for scanning.", "Whether the main topic appears early.", "Whether repeated terms make the title look forced."],
+    metricMatters: [
+      "The title tag is often the first search-result promise a user sees. A clear title can help the right searcher understand the page before they click.",
+      "Length is only one signal. The checker also helps you catch vague wording, repeated keywords, and titles that do not match the page type."
+    ],
     howTo: ["Paste one candidate title at a time.", "Select or keep the SEO Title preset and review the character count.", "Check whether the main entity, page type, and reader task appear without keyword stacking.", "Rewrite the title and compare the report before publishing."],
     examples: ["A guide title for a new article.", "A SaaS feature page title.", "A local service page title.", "A comparison page title."],
     mistakes: ["Repeating the same keyword twice.", "Starting with a vague brand claim.", "Using a title that does not match the page.", "Making every page title follow the same template."],
@@ -60,11 +69,15 @@ export const toolPages: ToolPage[] = [
   {
     slug: "meta-description-checker",
     title: "Meta Description Checker",
-    metaTitle: "Meta Description Checker",
-    description: "Review meta description length, clarity, benefit framing, repetition, and snippet risk before publishing.",
+    metaTitle: "Meta Description Checker: Free Length & SERP Preview Tool",
+    description: "Paste a meta description to check character count, mobile risk, desktop preview and truncation risk before publishing.",
     preset: "meta-description",
     intro: "The Meta Description Checker helps you turn a page summary into a useful search snippet candidate. It looks at character length, repeated wording, sentence flow, and whether the description gives the searcher a clear reason to visit the page. Search engines may rewrite snippets, so this tool avoids guarantees and focuses on practical editorial quality. Use it when a description feels generic, too long, too short, or too similar to another page. The report helps you cut filler, put the page benefit near the front, and avoid unsupported claims that can make a snippet feel low value.",
     decide: ["Whether the description is specific to the page.", "Whether the main benefit is visible early.", "Whether length and repetition create snippet risk."],
+    metricMatters: [
+      "A meta description is not a ranking guarantee, but it is a useful page summary for search snippets, CMS workflows, and editorial review.",
+      "A good description should match the page, avoid duplicated wording, and make the main benefit visible early enough for mobile and desktop snippets."
+    ],
     howTo: ["Paste the meta description without the page title.", "Check whether the strongest page benefit appears in the first sentence.", "Remove duplicated title wording, generic claims, or unsupported promises.", "Compare the final version with similar pages so each description stays unique."],
     examples: ["A tool page snippet.", "A guide summary.", "A product comparison description.", "A support article description."],
     mistakes: ["Using one description across many pages.", "Writing only 'learn more'.", "Overpromising outcomes.", "Repeating the title word for word."],
@@ -185,6 +198,10 @@ export const toolPages: ToolPage[] = [
     preset: "speech-script",
     intro: "The Speech Time Calculator estimates how long a script may take to deliver aloud and flags text that could be difficult to say clearly. It uses a practical words-per-minute estimate, sentence length, and Publish Readiness signals to help you prepare talks, voiceovers, podcasts, demos, and short presentations. Speaking time varies by speaker, pauses, audience, and delivery style, so the result is an estimate rather than a promise. Use the report to cut dense sentences, add breathing room, and check whether the script needs a clearer opening or closing before rehearsal.",
     decide: ["Whether the script fits the available time.", "Whether long sentences may be hard to say.", "Whether the draft needs pauses, examples, or a cleaner close."],
+    metricMatters: [
+      "Speaking time helps you plan scripts, talks, voiceovers, and demos before rehearsal. It is an estimate because real delivery changes with pauses and emphasis.",
+      "Sentence length matters for delivery because a sentence that reads well on screen can still be difficult to say aloud."
+    ],
     howTo: ["Paste only the words you plan to say aloud.", "Use the speaking time estimate as a planning range, not a final stopwatch result.", "Split sentences that feel difficult to read aloud.", "Rehearse once with pauses and compare the real time with the estimate."],
     examples: ["A two-minute intro.", "A podcast monologue.", "A product demo script.", "A conference abstract."],
     mistakes: ["Timing a script without reading it aloud.", "Ignoring pauses and audience reactions.", "Writing sentences that work on screen but not by voice.", "Counting stage notes as spoken words."],
