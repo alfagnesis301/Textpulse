@@ -54,10 +54,16 @@ export function ContactForm() {
       className="mt-8 rounded-2xl border border-slate-200 bg-white/90 p-6 shadow-soft dark:border-slate-800 dark:bg-slate-900/90"
     >
       <input type="hidden" name="form-name" value="contact" />
-      <p hidden>
-        <label>
-          Do not fill this out:
-          <input name="bot-field" />
+      <p hidden aria-hidden="true">
+        <label aria-hidden="true">
+          Leave this field empty
+          <input
+            name="bot-field"
+            type="text"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+          />
         </label>
       </p>
       <div className="grid gap-4 sm:grid-cols-2">

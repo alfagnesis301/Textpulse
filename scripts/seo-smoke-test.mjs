@@ -35,7 +35,10 @@ function findBuiltHtml(route) {
   const routePath = route === "/" ? "index.html" : `${route.replace(/^\//, "")}.html`;
   const routeIndexPath = route === "/" ? "index.html" : `${route.replace(/^\//, "")}/index.html`;
 
-  return appFiles.find((file) => file.endsWith(routePath) || file.endsWith(routeIndexPath));
+  return appFiles.find((file) => {
+    const normalised = file.replace(/\\/g, "/").replace(/^\.next\/server\/app\//, "");
+    return normalised === routePath || normalised === routeIndexPath;
+  });
 }
 
 const requiredFiles = [
@@ -52,6 +55,9 @@ for (const file of requiredFiles) {
 }
 
 const page = read("app/page.tsx");
+const toolsHub = read("app/tools/page.tsx");
+const examplesHub = read("app/examples/page.tsx");
+const contactForm = read("components/ContactForm.tsx");
 const guides = read("lib/guides.ts");
 const tools = read("lib/tools.ts");
 const schema = read("lib/seo/schema.ts");
@@ -93,6 +99,18 @@ assert(tools.includes("Meta Description Checker: Free Length & SERP Preview Tool
 assert(tools.includes("Paste a meta description to check character count, mobile risk, desktop preview and truncation risk before publishing."), "Meta description checker description is missing.");
 assert(tools.includes("SEO Title Checker: Free Length & SERP Preview Tool"), "SEO title checker title is missing.");
 assert(tools.includes("Why the metric matters") || read("app/tools/[slug]/page.tsx").includes("Why the metric matters"), "Tool education section is missing.");
+assert(toolsHub.includes("How to choose the right TextPulses tool"), "/tools hub guidance is missing.");
+assert(toolsHub.includes("Recommended workflows"), "/tools recommended workflows are missing.");
+assert(toolsHub.includes("Privacy-first text analysis"), "/tools privacy section is missing.");
+assert(toolsHub.includes("Are the tools free?"), "/tools FAQ is missing.");
+assert(examplesHub.includes("Why before-and-after examples help writers"), "/examples educational hub section is missing.");
+assert(examplesHub.includes("How to use these examples safely"), "/examples safe-use section is missing.");
+assert(examplesHub.includes("Example categories"), "/examples category section is missing.");
+assert(examplesHub.includes("Suggested workflow"), "/examples workflow section is missing.");
+assert(contactForm.includes('aria-hidden="true"'), "Contact honeypot should be hidden from assistive technology.");
+assert(contactForm.includes("tabIndex={-1}"), "Contact honeypot should not be keyboard focusable.");
+assert(contactForm.includes('autoComplete="off"'), "Contact honeypot should disable autocomplete.");
+assert(!contactForm.includes("Do not fill this out:"), "Contact honeypot warning should not be visible in source copy.");
 
 assert(jsonLd.includes("HomeJsonLd"), "Homepage JSON-LD component is missing.");
 assert(jsonLd.includes("GuideJsonLd"), "Guide JSON-LD component is missing.");
@@ -110,14 +128,27 @@ assert(robots.includes("allow: \"/\""), "robots.txt should allow public crawling
 assert(robots.includes("sitemap:"), "robots.txt should point to sitemap.xml.");
 
 const titleMatches = [
-  ...guides.matchAll(/seoTitle:\s*"([^"]+)"/g),
-  ...tools.matchAll(/metaTitle:\s*"([^"]+)"/g)
-].map((match) => match[1]);
+  ...listFiles("app")
+    .filter((file) => file.endsWith("page.tsx"))
+    .flatMap((file) => [...read(file).matchAll(/createMetadata\(\{\s*title:\s*"([^"]+)"/gs)].map((match) => match[1])),
+  ...[...guides.matchAll(/seoTitle:\s*"([^"]+)"/g)].map((match) => match[1]),
+  ...[...tools.matchAll(/metaTitle:\s*"([^"]+)"/g)].map((match) => match[1])
+];
 const duplicates = titleMatches.filter((title, index) => titleMatches.indexOf(title) !== index);
 assert(duplicates.length === 0, `Duplicate SEO titles found: ${[...new Set(duplicates)].join(", ")}`);
 
+for (const file of listFiles("app").filter((entry) => entry.endsWith(".tsx"))) {
+  const source = read(file).toLowerCase();
+
+  for (const phrase of ["todo", "coming soon", "lorem", "under construction", "test page"]) {
+    assert(!source.includes(phrase), `${file} contains placeholder-like phrase: ${phrase}`);
+  }
+}
+
 for (const route of [
   "/",
+  "/tools",
+  "/examples",
   "/guides/linkedin-post-length-guide",
   "/guides/seo-title-length-guide",
   "/guides/meta-description-length-checker-guide",
