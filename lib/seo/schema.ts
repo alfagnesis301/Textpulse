@@ -153,6 +153,36 @@ export function webApplicationSchema({
   };
 }
 
+export function softwareApplicationSchema({
+  name,
+  description,
+  url
+}: {
+  name: string;
+  description: string;
+  url: string;
+}) {
+  return {
+    "@type": "SoftwareApplication",
+    "@id": `${url}#software`,
+    name,
+    description,
+    url,
+    applicationCategory: "WritingApplication",
+    operatingSystem: "Any modern web browser",
+    browserRequirements: "Runs in a modern browser with JavaScript enabled",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD"
+    },
+    isAccessibleForFree: true,
+    publisher: {
+      "@id": `${siteConfig.url}/#organization`
+    }
+  };
+}
+
 export function graphSchema(items: unknown[]) {
   return {
     "@context": "https://schema.org",

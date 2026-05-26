@@ -4,6 +4,7 @@ import {
   graphSchema,
   organizationSchema,
   siteNavigationSchema,
+  softwareApplicationSchema,
   type BreadcrumbItem,
   type NavigationItem,
   webApplicationSchema,
@@ -76,6 +77,7 @@ export function ToolJsonLd({
         organizationSchema(),
         websiteSchema(),
         webPageSchema({ title, description, url }),
+        softwareApplicationSchema({ name: title, description, url }),
         webApplicationSchema({ name: title, description, url }),
         breadcrumbSchema(breadcrumbItems, url)
       ])}
