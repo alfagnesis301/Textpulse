@@ -8,7 +8,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "node scripts/seo-smoke-test.mjs",
+    "check:sitemap": "node scripts/seo-smoke-test.mjs --sitemap-only",
+    "seo:audit": "node scripts/seo-smoke-test.mjs"
   },
   "dependencies": {
     "next": "^15.5.18",

@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ToolJsonLd } from "@/components/JsonLd";
 import { TextAnalyzer } from "@/components/TextAnalyzer";
 import { toolPages, getToolPage } from "@/lib/tools";
-import { createMetadata } from "@/lib/seo";
+import { createMetadata, siteConfig } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -22,29 +23,16 @@ export default async function ToolPage({ params }: Props) {
   const tool = getToolPage(slug);
   if (!tool) notFound();
 
-  const faqJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: tool.faq.map((item) => ({
-      "@type": "Question",
-      name: item.question,
-      acceptedAnswer: { "@type": "Answer", text: item.answer }
-    }))
-  };
-
-  const appJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    name: tool.title,
-    applicationCategory: "WritingApplication",
-    operatingSystem: "Any",
-    offers: { "@type": "Offer", price: "0", priceCurrency: "USD" }
-  };
+  const url = `${siteConfig.url}/tools/${tool.slug}`;
+  const breadcrumbItems = [
+    { name: "Home", url: `${siteConfig.url}/` },
+    { name: "Tools", url: `${siteConfig.url}/tools` },
+    { name: tool.title, url }
+  ];
 
   return (
     <main>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(appJsonLd) }} />
+      <ToolJsonLd title={tool.title} description={tool.description} url={url} breadcrumbItems={breadcrumbItems} />
       <nav className="mx-auto max-w-7xl px-4 pt-6 text-sm font-semibold text-slate-500 sm:px-6 lg:px-8">
         <Link href="/">Home</Link> / <Link href="/tools">Tools</Link> / {tool.title}
       </nav>
@@ -57,7 +45,7 @@ export default async function ToolPage({ params }: Props) {
       <section className="mx-auto grid max-w-7xl gap-6 px-4 py-10 sm:px-6 lg:px-8">
         <div className="grid gap-4 lg:grid-cols-2">
           <article className="rounded-2xl border border-slate-200 bg-white/88 p-5 dark:border-slate-800 dark:bg-slate-900/88">
-            <h2 className="text-2xl font-extrabold text-slate-950 dark:text-white">What this checker helps you decide</h2>
+            <h2 className="text-2xl font-extrabold text-slate-950 dark:text-white">What this tool checks</h2>
             <ul className="mt-4 grid gap-2 text-sm leading-6 text-slate-600 dark:text-slate-400">{tool.decide.map((item) => <li key={item}>{item}</li>)}</ul>
           </article>
           <article className="rounded-2xl border border-slate-200 bg-white/88 p-5 dark:border-slate-800 dark:bg-slate-900/88">
@@ -67,6 +55,14 @@ export default async function ToolPage({ params }: Props) {
             </ol>
           </article>
         </div>
+        {tool.metricMatters ? (
+          <section className="rounded-2xl border border-slate-200 bg-white/88 p-5 dark:border-slate-800 dark:bg-slate-900/88">
+            <h2 className="text-2xl font-extrabold text-slate-950 dark:text-white">Why the metric matters</h2>
+            <div className="mt-4 grid gap-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+              {tool.metricMatters.map((item) => <p key={item}>{item}</p>)}
+            </div>
+          </section>
+        ) : null}
         <section>
           <h2 className="text-2xl font-extrabold text-slate-950 dark:text-white">Practical examples</h2>
           <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3">{tool.examples.map((item) => <article key={item} className="rounded-2xl border border-slate-200 bg-white/88 p-5 text-sm leading-6 text-slate-600 dark:border-slate-800 dark:bg-slate-900/88 dark:text-slate-400">{item}</article>)}</div>
@@ -91,6 +87,11 @@ export default async function ToolPage({ params }: Props) {
             {tool.relatedGuides.map((link) => <Link key={link.href} href={link.href} className="text-pulse-blue">{link.label}</Link>)}
             <Link href="/methodology" className="text-pulse-blue">Methodology</Link>
           </div>
+          {tool.relatedGuides[0] ? (
+            <Link href={tool.relatedGuides[0].href} className="mt-4 inline-flex rounded-2xl bg-slate-950 px-5 py-3 text-sm font-extrabold text-white hover:-translate-y-0.5 hover:bg-pulse-blue dark:bg-white dark:text-slate-950">
+              Learn how to improve this
+            </Link>
+          ) : null}
           <p className="mt-3 text-sm text-slate-500 dark:text-slate-400">Estimates are practical signals, not guarantees.</p>
         </section>
       </section>

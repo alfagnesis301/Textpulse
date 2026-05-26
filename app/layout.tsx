@@ -54,45 +54,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const jsonLd = [
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      name: siteConfig.name,
-      applicationCategory: "BusinessApplication",
-      operatingSystem: "Any modern web browser",
-      description: siteConfig.description,
-      offers: {
-        "@type": "Offer",
-        price: "0",
-        priceCurrency: "USD"
-      },
-      featureList: [
-        "Word and character counting",
-        "Readability estimates",
-        "Keyword density analysis",
-        "PublishFit Score by writing channel",
-        "Browser-based private text analysis"
-      ]
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      name: siteConfig.name,
-      url: siteConfig.url,
-      email: siteConfig.contactEmail
-    }
-  ];
-
   return (
     <html lang="en" suppressHydrationWarning>
       <head />
       <body>
         <AdSenseScript />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-xl focus:bg-slate-950 focus:px-4 focus:py-3 focus:text-sm focus:font-extrabold focus:text-white"
