@@ -29,10 +29,16 @@ export default async function ToolPage({ params }: Props) {
     { name: "Tools", url: `${siteConfig.url}/tools` },
     { name: tool.title, url }
   ];
+  const relatedGuides = tool.relatedGuides.filter((link) => link.href.startsWith("/guides"));
+  const relatedExamples = tool.relatedGuides.filter((link) => link.href.startsWith("/examples"));
+  const relatedTools = toolPages
+    .filter((item) => item.slug !== tool.slug)
+    .filter((item) => ["word-counter", "seo-title-checker", "meta-description-checker", "readability-checker", "keyword-density-checker", "blog-post-readiness-checker"].includes(item.slug))
+    .slice(0, 4);
 
   return (
     <main>
-      <ToolJsonLd title={tool.title} description={tool.description} url={url} breadcrumbItems={breadcrumbItems} />
+      <ToolJsonLd title={tool.title} description={tool.description} url={url} breadcrumbItems={breadcrumbItems} faq={tool.faq} />
       <nav className="mx-auto max-w-7xl px-4 pt-6 text-sm font-semibold text-slate-500 sm:px-6 lg:px-8">
         <Link href="/">Home</Link> / <Link href="/tools">Tools</Link> / {tool.title}
       </nav>
@@ -81,18 +87,39 @@ export default async function ToolPage({ params }: Props) {
           <h2 className="text-2xl font-extrabold text-slate-950 dark:text-white">FAQ</h2>
           <div className="mt-4 grid gap-3">{tool.faq.map((item) => <details key={item.question} className="rounded-2xl border border-slate-200 bg-white/88 p-5 dark:border-slate-800 dark:bg-slate-900/88"><summary className="cursor-pointer font-bold text-slate-950 dark:text-white">{item.question}</summary><p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">{item.answer}</p></details>)}</div>
         </section>
-        <section className="rounded-2xl border border-slate-200 bg-white/88 p-5 dark:border-slate-800 dark:bg-slate-900/88">
-          <h2 className="text-2xl font-extrabold text-slate-950 dark:text-white">Related resources</h2>
-          <div className="mt-3 flex flex-wrap gap-3 text-sm font-bold">
-            {tool.relatedGuides.map((link) => <Link key={link.href} href={link.href} className="text-pulse-blue">{link.label}</Link>)}
-            <Link href="/methodology" className="text-pulse-blue">Methodology</Link>
-          </div>
-          {tool.relatedGuides[0] ? (
-            <Link href={tool.relatedGuides[0].href} className="mt-4 inline-flex rounded-2xl bg-slate-950 px-5 py-3 text-sm font-extrabold text-white hover:-translate-y-0.5 hover:bg-pulse-blue dark:bg-white dark:text-slate-950">
-              Learn how to improve this
-            </Link>
-          ) : null}
-          <p className="mt-3 text-sm text-slate-500 dark:text-slate-400">Estimates are practical signals, not guarantees.</p>
+        <section className="grid gap-4 lg:grid-cols-3">
+          <article className="rounded-2xl border border-slate-200 bg-white/88 p-5 dark:border-slate-800 dark:bg-slate-900/88">
+            <h2 className="text-2xl font-extrabold text-slate-950 dark:text-white">Related tools</h2>
+            <div className="mt-3 grid gap-2 text-sm font-bold">
+              {relatedTools.map((item) => (
+                <Link key={item.slug} href={`/tools/${item.slug}`} className="text-pulse-blue hover:text-pulse-violet">
+                  {item.title}
+                </Link>
+              ))}
+            </div>
+          </article>
+          <article className="rounded-2xl border border-slate-200 bg-white/88 p-5 dark:border-slate-800 dark:bg-slate-900/88">
+            <h2 className="text-2xl font-extrabold text-slate-950 dark:text-white">Related guides</h2>
+            <div className="mt-3 grid gap-2 text-sm font-bold">
+              {(relatedGuides.length > 0 ? relatedGuides : [{ href: "/guides", label: "Writing and SEO Guides" }]).map((link) => (
+                <Link key={link.href} href={link.href} className="text-pulse-blue hover:text-pulse-violet">
+                  {link.label}
+                </Link>
+              ))}
+              <Link href="/methodology" className="text-pulse-blue hover:text-pulse-violet">Methodology</Link>
+            </div>
+          </article>
+          <article className="rounded-2xl border border-slate-200 bg-white/88 p-5 dark:border-slate-800 dark:bg-slate-900/88">
+            <h2 className="text-2xl font-extrabold text-slate-950 dark:text-white">Related examples</h2>
+            <div className="mt-3 grid gap-2 text-sm font-bold">
+              {(relatedExamples.length > 0 ? relatedExamples : [{ href: "/examples", label: "Examples Library" }]).map((link) => (
+                <Link key={link.href} href={link.href} className="text-pulse-blue hover:text-pulse-violet">
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+            <p className="mt-3 text-sm text-slate-500 dark:text-slate-400">Estimates are practical signals, not guarantees.</p>
+          </article>
         </section>
       </section>
     </main>

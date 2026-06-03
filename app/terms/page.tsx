@@ -14,6 +14,7 @@ export default function TermsPage() {
       title="Terms of Use"
       intro="These terms describe the basic conditions for using TextPulses. If you do not agree with them, please do not use the site."
       updated="April 27, 2026"
+      path="/terms"
       sections={[
         {
           title: "Operator and contact",

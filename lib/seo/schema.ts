@@ -10,6 +10,11 @@ export type NavigationItem = {
   url: string;
 };
 
+export type FaqItem = {
+  question: string;
+  answer: string;
+};
+
 export function organizationSchema() {
   return {
     "@type": "Organization",
@@ -120,6 +125,21 @@ export function articleSchema({
     mainEntityOfPage: {
       "@id": `${url}#webpage`
     }
+  };
+}
+
+export function faqPageSchema(items: FaqItem[], id: string) {
+  return {
+    "@type": "FAQPage",
+    "@id": `${id}#faq`,
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer
+      }
+    }))
   };
 }
 

@@ -14,6 +14,7 @@ export default function CookiePolicyPage() {
       title="Cookie Policy"
       intro="This policy explains how TextPulses uses browser storage, cookies, advertising technologies, and consent controls."
       updated="April 27, 2026"
+      path="/cookie-policy"
       sections={[
         {
           title: "Preference storage",

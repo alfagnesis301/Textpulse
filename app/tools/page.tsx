@@ -55,6 +55,39 @@ const workflows = [
   }
 ];
 
+const decisionRows = [
+  {
+    need: "Count words and estimate reading time",
+    tool: "Word Counter",
+    href: "/tools/word-counter"
+  },
+  {
+    need: "Check if a title is too long",
+    tool: "SEO Title Checker",
+    href: "/tools/seo-title-checker"
+  },
+  {
+    need: "Review a meta description",
+    tool: "Meta Description Checker",
+    href: "/tools/meta-description-checker"
+  },
+  {
+    need: "Improve clarity and scanability",
+    tool: "Readability Checker",
+    href: "/tools/readability-checker"
+  },
+  {
+    need: "Check keyword balance",
+    tool: "Keyword Density Checker",
+    href: "/tools/keyword-density-checker"
+  },
+  {
+    need: "Review content before publishing",
+    tool: "PublishFit Score",
+    href: "/tools/blog-post-readiness-checker"
+  }
+];
+
 const relatedGuides = [
   { href: "/guides/seo-title-length-guide", label: "SEO title length guide" },
   { href: "/guides/meta-description-length-checker-guide", label: "Meta description length guide" },
@@ -94,11 +127,22 @@ const faq = [
 export default function ToolsPage() {
   return (
     <main className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-      <WebPageJsonLd title="Free Writing and SEO Tools" description={description} url={`${siteConfig.url}/tools`} />
+      <WebPageJsonLd
+        title="Free Writing and SEO Tools"
+        description={description}
+        url={`${siteConfig.url}/tools`}
+        breadcrumbItems={[
+          { name: "Home", url: `${siteConfig.url}/` },
+          { name: "Tools", url: `${siteConfig.url}/tools` }
+        ]}
+        faq={faq}
+      />
       <p className="text-sm font-bold uppercase tracking-[0.2em] text-pulse-blue">TextPulses tools</p>
       <h1 className="mt-3 text-4xl font-black tracking-tight text-slate-950 dark:text-white">Writing and publish readiness tools</h1>
       <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600 dark:text-slate-400">
-        Each tool runs locally in your browser and includes a focused Publish Readiness Report for the channel you are checking.
+        Free browser-based tools for word count, SEO title checks, meta descriptions,
+        readability, keyword balance, speech timing and PublishFit. No login is required, and
+        the main analysis runs locally in your browser where possible.
       </p>
       <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {toolPages.map((tool) => (
@@ -110,6 +154,34 @@ export default function ToolsPage() {
           </article>
         ))}
       </div>
+
+      <section className="mt-12 rounded-2xl border border-slate-200 bg-white/88 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/88" aria-labelledby="tool-decision-table">
+        <h2 id="tool-decision-table" className="text-2xl font-extrabold tracking-tight text-slate-950 dark:text-white">
+          Choose by need
+        </h2>
+        <div className="mt-5 overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800">
+          <table className="w-full min-w-[620px] text-left text-sm">
+            <thead className="bg-slate-50 text-xs uppercase tracking-[0.12em] text-slate-500 dark:bg-slate-950 dark:text-slate-400">
+              <tr>
+                <th className="px-4 py-3">Need</th>
+                <th className="px-4 py-3">Recommended tool</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              {decisionRows.map((row) => (
+                <tr key={row.need}>
+                  <td className="px-4 py-3 leading-6 text-slate-700 dark:text-slate-300">{row.need}</td>
+                  <td className="px-4 py-3 font-extrabold">
+                    <Link href={row.href} className="text-pulse-blue hover:text-pulse-violet">
+                      {row.tool}
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
 
       <section className="mt-12 rounded-2xl border border-slate-200 bg-white/88 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/88" aria-labelledby="choose-tool">
         <h2 id="choose-tool" className="text-2xl font-extrabold tracking-tight text-slate-950 dark:text-white">

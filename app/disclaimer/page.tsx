@@ -14,6 +14,7 @@ export default function DisclaimerPage() {
       title="Disclaimer"
       intro="TextPulses is a practical writing aid. It provides estimates and signals, not guarantees."
       updated="April 27, 2026"
+      path="/disclaimer"
       sections={[
         {
           title: "Approximate metrics",

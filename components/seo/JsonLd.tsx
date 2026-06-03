@@ -1,11 +1,13 @@
 import {
   articleSchema,
   breadcrumbSchema,
+  faqPageSchema,
   graphSchema,
   organizationSchema,
   siteNavigationSchema,
   softwareApplicationSchema,
   type BreadcrumbItem,
+  type FaqItem,
   type NavigationItem,
   webApplicationSchema,
   webPageSchema,
@@ -37,7 +39,8 @@ export function GuideJsonLd({
   dateModified,
   datePublished,
   breadcrumbItems,
-  image
+  image,
+  faq
 }: {
   title: string;
   description: string;
@@ -46,6 +49,7 @@ export function GuideJsonLd({
   datePublished: string;
   breadcrumbItems: BreadcrumbItem[];
   image?: string;
+  faq?: FaqItem[];
 }) {
   return (
     <JsonLdScript
@@ -54,7 +58,8 @@ export function GuideJsonLd({
         websiteSchema(),
         webPageSchema({ title, description, url }),
         articleSchema({ title, description, url, datePublished, dateModified, image }),
-        breadcrumbSchema(breadcrumbItems, url)
+        breadcrumbSchema(breadcrumbItems, url),
+        ...(faq && faq.length > 0 ? [faqPageSchema(faq, url)] : [])
       ])}
     />
   );
@@ -64,12 +69,14 @@ export function ToolJsonLd({
   title,
   description,
   url,
-  breadcrumbItems
+  breadcrumbItems,
+  faq
 }: {
   title: string;
   description: string;
   url: string;
   breadcrumbItems: BreadcrumbItem[];
+  faq?: FaqItem[];
 }) {
   return (
     <JsonLdScript
@@ -79,7 +86,8 @@ export function ToolJsonLd({
         webPageSchema({ title, description, url }),
         softwareApplicationSchema({ name: title, description, url }),
         webApplicationSchema({ name: title, description, url }),
-        breadcrumbSchema(breadcrumbItems, url)
+        breadcrumbSchema(breadcrumbItems, url),
+        ...(faq && faq.length > 0 ? [faqPageSchema(faq, url)] : [])
       ])}
     />
   );
@@ -88,18 +96,24 @@ export function ToolJsonLd({
 export function WebPageJsonLd({
   title,
   description,
-  url
+  url,
+  breadcrumbItems,
+  faq
 }: {
   title: string;
   description: string;
   url: string;
+  breadcrumbItems?: BreadcrumbItem[];
+  faq?: FaqItem[];
 }) {
   return (
     <JsonLdScript
       data={graphSchema([
         organizationSchema(),
         websiteSchema(),
-        webPageSchema({ title, description, url })
+        webPageSchema({ title, description, url }),
+        ...(breadcrumbItems && breadcrumbItems.length > 0 ? [breadcrumbSchema(breadcrumbItems, url)] : []),
+        ...(faq && faq.length > 0 ? [faqPageSchema(faq, url)] : [])
       ])}
     />
   );
