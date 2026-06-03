@@ -13,12 +13,11 @@ export const metadata = createMetadata({
 });
 
 const navigation = [
-  { name: "Word Counter", url: `${siteConfig.url}/tools/word-counter` },
-  { name: "SEO Title Checker", url: `${siteConfig.url}/tools/seo-title-checker` },
-  { name: "Meta Description Checker", url: `${siteConfig.url}/tools/meta-description-checker` },
-  { name: "Speech Time Calculator", url: `${siteConfig.url}/tools/speech-time-calculator` },
+  { name: "Tools", url: `${siteConfig.url}/tools` },
+  { name: "Examples", url: `${siteConfig.url}/examples` },
   { name: "Guides", url: `${siteConfig.url}/guides` },
-  { name: "Privacy Policy", url: `${siteConfig.url}/privacy-policy` }
+  { name: "Methodology", url: `${siteConfig.url}/methodology` },
+  { name: "About", url: `${siteConfig.url}/about` }
 ];
 
 const categories = [
@@ -111,10 +110,12 @@ const popularGuides = [
 ];
 
 const whyItems = [
-  "Text analysis runs in your browser, so drafts are not uploaded for counting or scoring.",
-  "Each tool explains the signal instead of treating a character count as a ranking or performance guarantee.",
-  "The site separates general writing tools, SEO snippet tools, social post checks, and publishing guidance so pages have clearer intent.",
-  "Legal, privacy, methodology, contact, and editorial policy pages are linked in the main navigation or footer."
+  "Free to use",
+  "Browser-based analysis where possible",
+  "No login required",
+  "Transparent methodology",
+  "Built for writers, students, marketers and small website owners",
+  "Human review recommended before publishing"
 ];
 
 const faq = [
@@ -157,15 +158,15 @@ export default function HomePage() {
               <Logo className="origin-left scale-110" />
             </div>
             <p className="text-sm font-bold uppercase tracking-[0.2em] text-pulse-blue">
-              Browser-based writing and SEO checks
+              Free privacy-first SEO text analysis
             </p>
             <h1 className="mt-4 max-w-4xl text-balance text-4xl font-black tracking-tight text-slate-950 dark:text-white sm:text-5xl lg:text-6xl">
-              Free Text Analysis Tools for Writers, Students & SEO
+              Free browser-based SEO text checker for writers, marketers and website owners.
             </h1>
             <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-700 dark:text-slate-300">
-              Count words, check readability, review SEO snippets, estimate speech time, and
-              compare a draft with practical publishing-fit signals without uploading the text
-              for analysis.
+              Count words, check SEO titles and meta descriptions, review readability, keyword
+              balance, speech time and PublishFit signals. No login is required, and the main
+              draft analysis runs in your browser where possible.
             </p>
             <div className="mt-7 flex flex-wrap items-center gap-3">
               <Link
@@ -175,10 +176,10 @@ export default function HomePage() {
                 Start writing
               </Link>
               <Link
-                href="/tools/word-counter"
+                href="/tools"
                 className="rounded-2xl border border-slate-200 bg-white px-6 py-3 text-sm font-extrabold text-slate-800 shadow-sm hover:-translate-y-0.5 hover:border-pulse-blue dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
               >
-                Open word counter
+                Compare tools
               </Link>
             </div>
           </div>
@@ -306,11 +307,12 @@ export default function HomePage() {
               Why TextPulses
             </p>
             <h2 id="why-textpulses" className="mt-3 text-3xl font-extrabold tracking-tight text-slate-950 dark:text-white sm:text-4xl">
-              Clear signals without inflated promises
+              Why trust TextPulses?
             </h2>
             <p className="mt-4 text-base leading-7 text-slate-600 dark:text-slate-400">
-              TextPulses is built as a practical editing aid. It helps you catch length,
-              clarity, repetition, and fit issues before a final human review.
+              TextPulses is built as a practical editing aid, not an automatic publishing
+              verdict. It helps you catch length, clarity, repetition, and fit issues before a
+              final human review.
             </p>
           </div>
           <ul className="grid gap-3">

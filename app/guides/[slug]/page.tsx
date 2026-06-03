@@ -58,6 +58,40 @@ function toIsoDate(value: string) {
   return date.toISOString().slice(0, 10);
 }
 
+function inferGuideTool(guide: (typeof guides)[number]) {
+  const lookupText = `${guide.slug} ${guide.category} ${guide.title}`.toLowerCase();
+
+  if (lookupText.includes("seo-title")) {
+    return { href: "/tools/seo-title-checker", label: "Open SEO Title Checker" };
+  }
+
+  if (lookupText.includes("meta-description")) {
+    return { href: "/tools/meta-description-checker", label: "Open Meta Description Checker" };
+  }
+
+  if (lookupText.includes("readability")) {
+    return { href: "/tools/readability-checker", label: "Open Readability Checker" };
+  }
+
+  if (lookupText.includes("keyword")) {
+    return { href: "/tools/keyword-density-checker", label: "Open Keyword Density Checker" };
+  }
+
+  if (lookupText.includes("speech")) {
+    return { href: "/tools/speech-time-calculator", label: "Open Speech Time Calculator" };
+  }
+
+  if (lookupText.includes("linkedin")) {
+    return { href: "/tools/linkedin-post-checker", label: "Open LinkedIn Post Checker" };
+  }
+
+  if (lookupText.includes("blog")) {
+    return { href: "/tools/blog-post-readiness-checker", label: "Open Blog Post Readiness Checker" };
+  }
+
+  return { href: "/tools/word-counter", label: "Open Word Counter" };
+}
+
 export default async function GuidePage({ params }: GuidePageProps) {
   const { slug } = await params;
   const guide = getGuide(slug);
@@ -68,6 +102,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
 
   const url = `${siteConfig.url}/guides/${guide.slug}`;
   const relatedGuides = getRelatedGuides(guide);
+  const relatedTool = inferGuideTool(guide);
   const pageTitle = guide.h1 ?? guide.title;
   const schemaDescription = guide.articleDescription ?? guide.seoDescription ?? guide.description;
   const breadcrumbItems = [
@@ -101,6 +136,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
         datePublished="2026-04-27"
         dateModified={toIsoDate(guide.updated)}
         breadcrumbItems={breadcrumbItems}
+        faq={guide.faq}
       />
 
       <nav aria-label="Breadcrumb" className="text-sm font-semibold text-slate-500 dark:text-slate-400">
@@ -307,11 +343,25 @@ export default async function GuidePage({ params }: GuidePageProps) {
             ))}
           </div>
           <Link
-            href={guide.toolHref ?? "/"}
+            href={guide.toolHref ?? relatedTool.href}
             className="mt-4 inline-flex rounded-2xl bg-gradient-to-r from-pulse-blue to-pulse-violet px-5 py-3 text-sm font-extrabold text-white shadow-glow hover:-translate-y-0.5"
           >
-            {guide.toolCtaLabel ?? "Open the analyzer"}
+            {guide.toolCtaLabel ?? relatedTool.label}
           </Link>
+        </section>
+
+        <section className="mt-8 rounded-2xl border border-slate-200 bg-white/88 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/88">
+          <h2 className="text-2xl font-extrabold tracking-tight text-slate-950 dark:text-white">
+            Related tools
+          </h2>
+          <div className="mt-4 flex flex-wrap gap-3 text-sm font-bold">
+            <Link href={guide.toolHref ?? relatedTool.href} className="text-pulse-blue hover:text-pulse-violet">
+              {(guide.toolCtaLabel ?? relatedTool.label).replace(/^Open /, "")}
+            </Link>
+            <Link href="/tools" className="text-pulse-blue hover:text-pulse-violet">
+              All TextPulses tools
+            </Link>
+          </div>
         </section>
 
         {guide.internalLinks && guide.internalLinks.length > 0 ? (

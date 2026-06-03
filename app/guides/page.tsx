@@ -1,6 +1,7 @@
 import Link from "next/link";
+import { WebPageJsonLd } from "@/components/JsonLd";
 import { guides } from "@/lib/guides";
-import { createMetadata } from "@/lib/seo";
+import { createMetadata, siteConfig } from "@/lib/seo";
 
 export const metadata = createMetadata({
   title: "Writing, SEO, and Word Count Guides",
@@ -12,6 +13,15 @@ export const metadata = createMetadata({
 export default function GuidesPage() {
   return (
     <main className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+      <WebPageJsonLd
+        title="Writing, SEO, and Word Count Guides"
+        description="Practical guides for word count, readability, keyword density, SEO titles, meta descriptions, social posts, essays, speeches, and PublishFit Score."
+        url={`${siteConfig.url}/guides`}
+        breadcrumbItems={[
+          { name: "Home", url: `${siteConfig.url}/` },
+          { name: "Guides", url: `${siteConfig.url}/guides` }
+        ]}
+      />
       <p className="text-sm font-bold uppercase tracking-[0.2em] text-pulse-blue">Guides</p>
       <h1 className="mt-3 max-w-4xl text-4xl font-black tracking-tight text-slate-950 dark:text-white sm:text-5xl">
         Writing guides for clearer, publish-ready text

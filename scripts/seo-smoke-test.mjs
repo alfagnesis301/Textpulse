@@ -66,7 +66,7 @@ const sitemap = read("app/sitemap.ts");
 const robots = read("app/robots.ts");
 
 assert(page.includes("TextPulses - Free Text Analysis Tools for Writers & SEO"), "Homepage title is not the requested hub title.");
-assert(page.includes("Free Text Analysis Tools for Writers, Students & SEO"), "Homepage H1 is missing.");
+assert(page.includes("Free browser-based SEO text checker for writers, marketers and website owners."), "Homepage H1 is missing.");
 assert(!page.includes("SeoSnippetChecker"), "Homepage still imports or renders the old snippet checker.");
 
 for (const href of [
@@ -119,7 +119,8 @@ assert(schema.includes("SiteNavigationElement"), "SiteNavigationElement schema i
 assert(schema.includes("SoftwareApplication"), "SoftwareApplication schema is missing.");
 assert(schema.includes("WebApplication"), "WebApplication schema is missing.");
 assert(schema.includes("BreadcrumbList"), "BreadcrumbList schema is missing.");
-assert(!jsonLd.includes("FAQPage"), "JSON-LD component should not emit FAQPage as primary schema.");
+assert(schema.includes("FAQPage"), "FAQPage schema is missing.");
+assert(jsonLd.includes("faqPageSchema"), "JSON-LD component should emit FAQPage when visible FAQ content exists.");
 assert(!schema.includes("aggregateRating") && !jsonLd.includes("aggregateRating"), "Structured data must not include invented aggregateRating.");
 assert(!schema.includes("ratingValue") && !jsonLd.includes("ratingValue"), "Structured data must not include invented ratingValue.");
 

@@ -133,6 +133,11 @@ export default function MethodologyPage() {
         title="How TextPulses Calculates Writing Signals"
         description={description}
         url={`${siteConfig.url}/methodology`}
+        breadcrumbItems={[
+          { name: "Home", url: `${siteConfig.url}/` },
+          { name: "Methodology", url: `${siteConfig.url}/methodology` }
+        ]}
+        faq={faq}
       />
 
       <p className="text-sm font-bold uppercase tracking-[0.2em] text-pulse-blue">Methodology</p>

@@ -1,3 +1,6 @@
+import { WebPageJsonLd } from "@/components/JsonLd";
+import { siteConfig } from "@/lib/seo";
+
 type LegalSection = {
   title: string;
   body: string[];
@@ -9,11 +12,25 @@ type LegalPageProps = {
   intro: string;
   updated?: string;
   sections: LegalSection[];
+  path?: string;
 };
 
-export function LegalPage({ eyebrow, title, intro, updated, sections }: LegalPageProps) {
+export function LegalPage({ eyebrow, title, intro, updated, sections, path }: LegalPageProps) {
+  const url = path ? `${siteConfig.url}${path}` : undefined;
+
   return (
     <main className="mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8">
+      {url ? (
+        <WebPageJsonLd
+          title={title}
+          description={intro}
+          url={url}
+          breadcrumbItems={[
+            { name: "Home", url: `${siteConfig.url}/` },
+            { name: title, url }
+          ]}
+        />
+      ) : null}
       <p className="text-sm font-bold uppercase tracking-[0.2em] text-pulse-blue">{eyebrow}</p>
       <h1 className="mt-3 text-4xl font-black tracking-tight text-slate-950 dark:text-white sm:text-5xl">
         {title}

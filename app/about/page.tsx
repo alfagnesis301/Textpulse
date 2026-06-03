@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { WebPageJsonLd } from "@/components/JsonLd";
 import { createMetadata, siteConfig } from "@/lib/seo";
 
 export const metadata = createMetadata({
@@ -56,6 +57,15 @@ const sections = [
 export default function AboutPage() {
   return (
     <main className="mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8">
+      <WebPageJsonLd
+        title="About TextPulses"
+        description="Learn who operates TextPulses, how the editorial guidance is maintained, and why the tool uses privacy-first browser-based analysis."
+        url={`${siteConfig.url}/about`}
+        breadcrumbItems={[
+          { name: "Home", url: `${siteConfig.url}/` },
+          { name: "About", url: `${siteConfig.url}/about` }
+        ]}
+      />
       <p className="text-sm font-bold uppercase tracking-[0.2em] text-pulse-blue">About TextPulses</p>
       <h1 className="mt-3 text-4xl font-black tracking-tight text-slate-950 dark:text-white sm:text-5xl">
         A practical writing utility for publish-ready drafts

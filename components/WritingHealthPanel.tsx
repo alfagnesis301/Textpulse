@@ -3,6 +3,7 @@ import type { WritingHealth } from "@/lib/textAnalysis";
 type WritingHealthPanelProps = {
   health: WritingHealth;
   publishFitScore: number;
+  isEmpty?: boolean;
 };
 
 const scoreDescriptions: Record<string, string> = {
@@ -26,7 +27,7 @@ function scoreTone(score: number) {
   return "text-amber-700 dark:text-amber-300";
 }
 
-export function WritingHealthPanel({ health, publishFitScore }: WritingHealthPanelProps) {
+export function WritingHealthPanel({ health, publishFitScore, isEmpty = false }: WritingHealthPanelProps) {
   const cards = [
     { label: "Clarity Score", score: health.clarity },
     { label: "Variety Score", score: health.variety },
@@ -59,19 +60,25 @@ export function WritingHealthPanel({ health, publishFitScore }: WritingHealthPan
           >
             <div className="flex items-center justify-between gap-3">
               <h3 className="text-sm font-bold text-slate-700 dark:text-slate-200">{card.label}</h3>
-              <span className={`text-xl font-black ${scoreTone(card.score)}`}>{card.score}</span>
+              <span className={`text-xl font-black ${isEmpty ? "text-slate-500 dark:text-slate-400" : scoreTone(card.score)}`}>
+                {isEmpty ? "Pending" : card.score}
+              </span>
             </div>
             <div className="mt-3 h-2 rounded-full bg-slate-200 dark:bg-slate-800">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-pulse-blue via-pulse-violet to-pulse-green"
-                style={{ width: `${card.score}%` }}
+                className={`h-full rounded-full bg-gradient-to-r ${isEmpty ? "from-slate-300 to-slate-400 dark:from-slate-700 dark:to-slate-600" : "from-pulse-blue via-pulse-violet to-pulse-green"}`}
+                style={{ width: isEmpty ? "100%" : `${card.score}%` }}
               />
             </div>
           </article>
         ))}
       </div>
 
-      {health.warnings.length > 0 ? (
+      {isEmpty ? (
+        <div className="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm font-semibold text-slate-600 dark:border-slate-800 dark:bg-slate-950/60 dark:text-slate-300">
+          Paste your text to generate your report. Your analysis will appear here.
+        </div>
+      ) : health.warnings.length > 0 ? (
         <div className="mt-5 rounded-2xl border border-amber-200 bg-amber-50 p-4 dark:border-amber-900/60 dark:bg-amber-950/30">
           <h3 className="text-sm font-bold text-amber-900 dark:text-amber-200">Warnings to review</h3>
           <ul className="mt-2 grid gap-1 text-sm leading-6 text-amber-900/85 dark:text-amber-100/85">

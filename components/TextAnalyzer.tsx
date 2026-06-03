@@ -134,6 +134,7 @@ export function TextAnalyzer({ initialPresetId = "blog" }: TextAnalyzerProps) {
 
   const analysis = useMemo(() => analyzeText(text), [text]);
   const publishFit = useMemo(() => evaluatePublishFit(text, analysis, presetId), [analysis, presetId, text]);
+  const hasAnalyzableText = analysis.wordCount > 0;
 
   useEffect(() => {
     const savedTheme = window.localStorage.getItem(THEME_STORAGE_KEY) as "light" | "dark" | null;
@@ -189,31 +190,33 @@ export function TextAnalyzer({ initialPresetId = "blog" }: TextAnalyzerProps) {
   }, [hydrated, presetId]);
 
   const metricCards = [
-    { label: "Words", value: analysis.wordCount, helper: "Total detected words." },
-    { label: "Characters", value: analysis.characterCount, helper: "Including spaces." },
-    { label: "No spaces", value: analysis.characterCountNoSpaces, helper: "Characters without whitespace." },
-    { label: "Sentences", value: analysis.sentenceCount, helper: "Approximate sentence count." },
-    { label: "Paragraphs", value: analysis.paragraphCount, helper: "Separated by blank lines." },
-    { label: "Lines", value: analysis.lineCount, helper: "Visible line breaks." },
-    { label: "Unique words", value: analysis.uniqueWords, helper: "Distinct normalized words." },
-    { label: "Avg word", value: analysis.averageWordLength, helper: "Characters per word." },
-    { label: "Avg sentence", value: analysis.averageSentenceLength, helper: "Words per sentence." },
-    { label: "Reading", value: formatMinutes(analysis.estimatedReadingTime), helper: "At 225 wpm." },
-    { label: "Speaking", value: formatMinutes(analysis.estimatedSpeakingTime), helper: "At 150 wpm." },
-    { label: "Handwriting", value: formatMinutes(analysis.estimatedHandwritingTime), helper: "At 25 wpm." }
+    { label: "Words", value: hasAnalyzableText ? analysis.wordCount : "Pending", helper: "Total detected words." },
+    { label: "Characters", value: hasAnalyzableText ? analysis.characterCount : "Pending", helper: "Including spaces." },
+    { label: "No spaces", value: hasAnalyzableText ? analysis.characterCountNoSpaces : "Pending", helper: "Characters without whitespace." },
+    { label: "Sentences", value: hasAnalyzableText ? analysis.sentenceCount : "Pending", helper: "Approximate sentence count." },
+    { label: "Paragraphs", value: hasAnalyzableText ? analysis.paragraphCount : "Pending", helper: "Separated by blank lines." },
+    { label: "Lines", value: hasAnalyzableText ? analysis.lineCount : "Pending", helper: "Visible line breaks." },
+    { label: "Unique words", value: hasAnalyzableText ? analysis.uniqueWords : "Pending", helper: "Distinct normalized words." },
+    { label: "Avg word", value: hasAnalyzableText ? analysis.averageWordLength : "Pending", helper: "Characters per word." },
+    { label: "Avg sentence", value: hasAnalyzableText ? analysis.averageSentenceLength : "Pending", helper: "Words per sentence." },
+    { label: "Reading", value: hasAnalyzableText ? formatMinutes(analysis.estimatedReadingTime) : "Pending", helper: "At 225 wpm." },
+    { label: "Speaking", value: hasAnalyzableText ? formatMinutes(analysis.estimatedSpeakingTime) : "Pending", helper: "At 150 wpm." },
+    { label: "Handwriting", value: hasAnalyzableText ? formatMinutes(analysis.estimatedHandwritingTime) : "Pending", helper: "At 25 wpm." }
   ];
 
-  const warnings = [
-    analysis.repeatedWords.length > 0
-      ? `Repeated words: ${analysis.repeatedWords.slice(0, 4).join(", ")}`
-      : null,
-    analysis.overusedKeywords.length > 0
-      ? `Overused keyword: "${analysis.overusedKeywords[0].phrase}" at ${analysis.overusedKeywords[0].density}%`
-      : null,
-    analysis.longSentences.length > 0
-      ? `${analysis.longSentences.length} long sentence${analysis.longSentences.length === 1 ? "" : "s"} found`
-      : null
-  ].filter(Boolean);
+  const warnings = hasAnalyzableText
+    ? [
+        analysis.repeatedWords.length > 0
+          ? `Repeated words: ${analysis.repeatedWords.slice(0, 4).join(", ")}`
+          : null,
+        analysis.overusedKeywords.length > 0
+          ? `Overused keyword: "${analysis.overusedKeywords[0].phrase}" at ${analysis.overusedKeywords[0].density}%`
+          : null,
+        analysis.longSentences.length > 0
+          ? `${analysis.longSentences.length} long sentence${analysis.longSentences.length === 1 ? "" : "s"} found`
+          : null
+      ].filter(Boolean)
+    : [];
 
   const clearText = () => {
     setText("");
@@ -236,7 +239,9 @@ export function TextAnalyzer({ initialPresetId = "blog" }: TextAnalyzerProps) {
     setActionStatus("Text file created.");
   };
 
-  const readinessReport = buildReadinessReport(publishFit);
+  const readinessReport = hasAnalyzableText
+    ? buildReadinessReport(publishFit)
+    : "Paste your text to generate your report.\nYour analysis will appear here.";
 
   const copyReadinessReport = async () => {
     await navigator.clipboard.writeText(readinessReport);
@@ -341,9 +346,13 @@ export function TextAnalyzer({ initialPresetId = "blog" }: TextAnalyzerProps) {
 
           <div className="rounded-2xl border border-slate-200 bg-white/88 p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/88">
             <h3 className="text-sm font-extrabold text-slate-950 dark:text-white">Reading level</h3>
-            <p className="mt-2 text-2xl font-black text-slate-950 dark:text-white">{analysis.readingLevel.level}</p>
+            <p className="mt-2 text-2xl font-black text-slate-950 dark:text-white">
+              {hasAnalyzableText ? analysis.readingLevel.level : "Awaiting text"}
+            </p>
             <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
-              {analysis.readingLevel.grade} - {analysis.readingLevel.description}
+              {hasAnalyzableText
+                ? `${analysis.readingLevel.grade} - ${analysis.readingLevel.description}`
+                : "Paste your text to generate your report."}
             </p>
           </div>
 
@@ -379,7 +388,9 @@ export function TextAnalyzer({ initialPresetId = "blog" }: TextAnalyzerProps) {
               </ul>
             ) : (
               <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
-                No repeated-word, overused-keyword, or long-sentence warnings yet.
+                {hasAnalyzableText
+                  ? "No repeated-word, overused-keyword, or long-sentence warnings yet."
+                  : "Your analysis will appear here."}
               </p>
             )}
           </div>
@@ -387,7 +398,7 @@ export function TextAnalyzer({ initialPresetId = "blog" }: TextAnalyzerProps) {
       </div>
 
       <div className="mt-6 grid gap-6">
-        <PublishFitPanel result={publishFit} presetId={presetId} onPresetChange={setPresetId} />
+        <PublishFitPanel result={publishFit} presetId={presetId} onPresetChange={setPresetId} isEmpty={!hasAnalyzableText} />
         <section className="rounded-2xl border border-emerald-100 bg-white/90 p-5 shadow-soft dark:border-slate-800 dark:bg-slate-900/90 sm:p-6" aria-labelledby="readiness-report-title">
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-pulse-green">Browser-side report</p>
           <h2 id="readiness-report-title" className="mt-2 text-2xl font-extrabold tracking-tight text-slate-950 dark:text-white">
@@ -397,10 +408,10 @@ export function TextAnalyzer({ initialPresetId = "blog" }: TextAnalyzerProps) {
             {readinessReport}
           </pre>
           <div className="mt-4 flex flex-wrap gap-2">
-            <Button onClick={copyReadinessReport} disabled={!text}>
+            <Button onClick={copyReadinessReport} disabled={!hasAnalyzableText}>
               Copy report
             </Button>
-            <Button onClick={downloadReadinessReport} disabled={!text}>
+            <Button onClick={downloadReadinessReport} disabled={!hasAnalyzableText}>
               Download report .txt
             </Button>
           </div>
@@ -408,7 +419,7 @@ export function TextAnalyzer({ initialPresetId = "blog" }: TextAnalyzerProps) {
             No backend, no external AI, and no draft upload. The report is generated locally in your browser.
           </p>
         </section>
-        <WritingHealthPanel health={analysis.writingHealth} publishFitScore={publishFit.score} />
+        <WritingHealthPanel health={analysis.writingHealth} publishFitScore={publishFit.score} isEmpty={!hasAnalyzableText} />
         <KeywordDensity
           oneWord={analysis.oneWordPhrases}
           twoWord={analysis.twoWordPhrases}

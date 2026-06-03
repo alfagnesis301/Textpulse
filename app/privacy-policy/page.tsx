@@ -14,6 +14,7 @@ export default function PrivacyPolicyPage() {
       title="Privacy Policy"
       intro="This policy explains how TextPulses handles text, preferences, browser storage, contact submissions, advertising, and third-party services."
       updated="April 27, 2026"
+      path="/privacy-policy"
       sections={[
         {
           title: "Text analysis stays in your browser",

@@ -2,19 +2,11 @@ import Link from "next/link";
 import { Logo } from "@/components/Logo";
 
 const navItems = [
-  { href: "/tools/word-counter", label: "Word counter" },
-  { href: "/tools/blog-post-readiness-checker", label: "PublishFit Score" },
-  { href: "/tools", label: "All tools" },
+  { href: "/tools", label: "Tools" },
   { href: "/examples", label: "Examples" },
-  { href: "/guides", label: "Writing guides" },
+  { href: "/guides", label: "Guides" },
   { href: "/methodology", label: "Methodology" },
-  { href: "/editorial-policy", label: "Editorial Policy" },
-  { href: "/about", label: "About TextPulses" },
-  { href: "/privacy-policy", label: "Privacy Policy" },
-  { href: "/terms", label: "Terms" },
-  { href: "/cookie-policy", label: "Cookie Policy" },
-  { href: "/disclaimer", label: "Disclaimer" },
-  { href: "/contact", label: "Contact" }
+  { href: "/about", label: "About" }
 ];
 
 export function Header() {
