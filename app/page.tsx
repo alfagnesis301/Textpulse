@@ -149,7 +149,7 @@ const faq = [
 export default function HomePage() {
   return (
     <main>
-      <HomeJsonLd navigation={navigation} />
+      <HomeJsonLd navigation={navigation} faq={faq} />
 
       <section className="hero-soft-bg border-b border-slate-200 dark:border-slate-800">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 pb-12 pt-12 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:pb-16 lg:pt-16">
@@ -161,12 +161,13 @@ export default function HomePage() {
               Free privacy-first SEO text analysis
             </p>
             <h1 className="mt-4 max-w-4xl text-balance text-4xl font-black tracking-tight text-slate-950 dark:text-white sm:text-5xl lg:text-6xl">
-              Free browser-based SEO text checker for writers, marketers and website owners.
+              Free SEO Text Analyzer for Writers
             </h1>
             <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-700 dark:text-slate-300">
-              Count words, check SEO titles and meta descriptions, review readability, keyword
-              balance, speech time and PublishFit signals. No login is required, and the main
-              draft analysis runs in your browser where possible.
+              Privacy-first, browser-based text analysis for writers, marketers and website
+              owners. Check word count and readability, test your SEO title and meta description,
+              and compare keyword density. No login is required, and the main draft analysis runs
+              in your browser where possible.
             </p>
             <div className="mt-7 flex flex-wrap items-center gap-3">
               <Link
@@ -257,6 +258,22 @@ export default function HomePage() {
       </section>
 
       <TextAnalyzer />
+
+      <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8" aria-labelledby="home-educational-information">
+        <div className="max-w-3xl">
+          <p className="text-sm font-bold uppercase tracking-[0.2em] text-pulse-blue">
+            Educational information
+          </p>
+          <h2 id="home-educational-information" className="mt-3 text-3xl font-extrabold tracking-tight text-slate-950 dark:text-white sm:text-4xl">
+            How to interpret text analysis results
+          </h2>
+          <p className="mt-4 text-base leading-7 text-slate-600 dark:text-slate-400">
+            Counts, readability ranges, keyword balance, and publishing-fit signals are review
+            aids. Use them to find likely issues, then confirm facts, tone, originality, and
+            final platform requirements with human judgement before publishing.
+          </p>
+        </div>
+      </section>
 
       <SafeAdSlot id="home-after-tool-ad" position="content" />
 

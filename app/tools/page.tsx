@@ -9,7 +9,8 @@ const description =
 export const metadata = createMetadata({
   title: "Free Writing and SEO Tools",
   description,
-  path: "/tools"
+  path: "/tools",
+  image: "/og/tools-og.png"
 });
 
 const workflows = [

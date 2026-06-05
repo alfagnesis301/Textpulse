@@ -54,6 +54,26 @@ select {
     transform 160ms ease;
 }
 
+.ad-slot {
+  contain: layout paint;
+}
+
+.ad-slot-inline {
+  min-height: 90px;
+}
+
+.ad-slot-content {
+  min-height: 250px;
+}
+
+.ad-slot-sidebar {
+  min-height: 300px;
+}
+
+.ad-slot-footer {
+  min-height: 120px;
+}
+
 button:focus-visible,
 a:focus-visible,
 textarea:focus-visible,

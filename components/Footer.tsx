@@ -8,7 +8,11 @@ const legalLinks = [
   { href: "/terms", label: "Terms" },
   { href: "/cookie-policy", label: "Cookie Policy" },
   { href: "/disclaimer", label: "Disclaimer" },
-  { href: "/contact", label: "Contact" }
+  { href: "/contact", label: "Contact" },
+  { href: "/politica-de-privacidad", label: "Politica de Privacidad" },
+  { href: "/terminos-de-servicio", label: "Terminos de Servicio" },
+  { href: "/sobre-nosotros", label: "Sobre Nosotros" },
+  { href: "/contacto", label: "Contacto" }
 ];
 
 export function Footer() {
@@ -50,6 +54,9 @@ export function Footer() {
               </Link>
               <Link className="text-slate-600 hover:text-pulse-blue dark:text-slate-400" href="/about">
                 About TextPulses
+              </Link>
+              <Link className="text-slate-600 hover:text-pulse-blue dark:text-slate-400" href="/author/ricardo-diaz">
+                Author: Ricardo Diaz
               </Link>
             </div>
           </div>

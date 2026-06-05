@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { WebPageJsonLd } from "@/components/JsonLd";
 import { examplePages, getExamplePage } from "@/lib/examples";
-import { createMetadata } from "@/lib/seo";
+import { createMetadata, siteConfig } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -28,9 +29,22 @@ export default async function ExamplePage({ params }: Props) {
     { question: "Where should I check my own draft?", answer: "Use the related TextPulses checker linked on this page." }
   ];
 
+  const url = `${siteConfig.url}/examples/${page.slug}`;
+
   return (
     <main className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-      <nav className="text-sm font-semibold text-slate-500"><Link href="/">Home</Link> / <Link href="/examples">Examples</Link> / {page.title}</nav>
+      <WebPageJsonLd
+        title={page.title}
+        description={page.description}
+        url={url}
+        breadcrumbItems={[
+          { name: "Home", url: `${siteConfig.url}/` },
+          { name: "Examples", url: `${siteConfig.url}/examples` },
+          { name: page.title, url }
+        ]}
+        faq={faq}
+      />
+      <nav aria-label="Breadcrumb" className="text-sm font-semibold text-slate-500"><Link href="/" className="hover:text-pulse-blue">Home</Link> / <Link href="/examples" className="hover:text-pulse-blue">Examples</Link> / <span className="text-slate-700 dark:text-slate-300">{page.title}</span></nav>
       <p className="mt-8 text-sm font-bold uppercase tracking-[0.2em] text-pulse-blue">Original examples</p>
       <h1 className="mt-3 text-4xl font-black tracking-tight text-slate-950 dark:text-white">{page.title}</h1>
       <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600 dark:text-slate-400">{page.description}</p>
@@ -56,9 +70,27 @@ export default async function ExamplePage({ params }: Props) {
       </section>
       <section className="mt-8">
         <h2 className="text-2xl font-extrabold text-slate-950 dark:text-white">FAQ</h2>
-        <div className="mt-4 grid gap-3">{faq.map((item) => <details key={item.question} className="rounded-2xl border border-slate-200 bg-white/88 p-5 dark:border-slate-800 dark:bg-slate-900/88"><summary className="cursor-pointer font-bold text-slate-950 dark:text-white">{item.question}</summary><p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">{item.answer}</p></details>)}</div>
+        <div className="mt-4 grid gap-3">
+          {faq.map((item) => (
+            <details
+              key={item.question}
+              className="rounded-2xl border border-slate-200 bg-white/88 p-5 dark:border-slate-800 dark:bg-slate-900/88"
+            >
+              <summary className="cursor-pointer font-bold text-slate-950 dark:text-white">
+                {item.question}
+              </summary>
+              <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+                {item.answer}
+              </p>
+            </details>
+          ))}
+        </div>
       </section>
-      <p className="mt-8 text-sm font-bold"><Link href="/guides" className="text-pulse-blue">Writing guides</Link> · <Link href="/methodology" className="text-pulse-blue">Methodology</Link></p>
+      <p className="mt-8 text-sm font-bold">
+        <Link href="/guides" className="text-pulse-blue hover:text-pulse-violet">Writing guides</Link>
+        {" "}·{" "}
+        <Link href="/methodology" className="text-pulse-blue hover:text-pulse-violet">Methodology</Link>
+      </p>
     </main>
   );
 }

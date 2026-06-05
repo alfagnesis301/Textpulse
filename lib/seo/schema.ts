@@ -15,6 +15,12 @@ export type FaqItem = {
   answer: string;
 };
 
+// Official social/profile URLs for the brand. Left empty on purpose: do NOT add
+// invented or unverified profiles. When a real, owned profile exists (LinkedIn,
+// X, GitHub, etc.) add its canonical URL here and it will flow into the
+// Organization `sameAs` automatically.
+export const organizationSameAs: string[] = [];
+
 export function organizationSchema() {
   return {
     "@type": "Organization",
@@ -22,7 +28,12 @@ export function organizationSchema() {
     name: siteConfig.name,
     url: siteConfig.url,
     email: siteConfig.contactEmail,
-    logo: `${siteConfig.url}/favicon.svg`
+    logo: `${siteConfig.url}/favicon.svg`,
+    founder: {
+      "@id": `${siteConfig.url}/author/ricardo-diaz#person`
+    },
+    // Prepared for official profiles; intentionally empty until verified ones exist.
+    sameAs: organizationSameAs
   };
 }
 
@@ -35,12 +46,11 @@ export function websiteSchema() {
     description: siteConfig.description,
     publisher: {
       "@id": `${siteConfig.url}/#organization`
-    },
-    potentialAction: {
-      "@type": "SearchAction",
-      target: `${siteConfig.url}/guides?search={search_term_string}`,
-      "query-input": "required name=search_term_string"
     }
+    // NOTE: No SearchAction is emitted because TextPulses has no real site-wide
+    // search endpoint. Pointing potentialAction at a non-existent /search route
+    // would create an invalid Sitelinks Searchbox. Add a SearchAction here only
+    // after a working `/search?q={search_term_string}` route exists.
   };
 }
 
@@ -96,7 +106,7 @@ export function articleSchema({
   url,
   datePublished,
   dateModified,
-  image = `${siteConfig.url}/og/textpulses-og.svg`
+  image = `${siteConfig.url}/og/guides-og.png`
 }: {
   title: string;
   description: string;
@@ -115,9 +125,9 @@ export function articleSchema({
     datePublished,
     dateModified,
     author: {
-      "@type": "Organization",
-      name: "TextPulses Editorial",
-      url: siteConfig.url
+      "@type": "Person",
+      name: "Ricardo Diaz",
+      url: `${siteConfig.url}/author/ricardo-diaz`
     },
     publisher: {
       "@id": `${siteConfig.url}/#organization`
@@ -125,6 +135,23 @@ export function articleSchema({
     mainEntityOfPage: {
       "@id": `${url}#webpage`
     }
+  };
+}
+
+export function personSchema() {
+  return {
+    "@type": "Person",
+    "@id": `${siteConfig.url}/author/ricardo-diaz#person`,
+    name: "Ricardo Diaz",
+    url: `${siteConfig.url}/author/ricardo-diaz`,
+    jobTitle: "Independent publisher",
+    description:
+      "Independent publisher behind TextPulses, focused on privacy-first writing, SEO text analysis, and browser-based tools.",
+    worksFor: {
+      "@id": `${siteConfig.url}/#organization`
+    },
+    // Prepared for verified author profiles; intentionally empty until real ones exist.
+    sameAs: organizationSameAs
   };
 }
 
@@ -146,11 +173,13 @@ export function faqPageSchema(items: FaqItem[], id: string) {
 export function webApplicationSchema({
   name,
   description,
-  url
+  url,
+  applicationCategory = "WritingApplication"
 }: {
   name: string;
   description: string;
   url: string;
+  applicationCategory?: string;
 }) {
   return {
     "@type": "WebApplication",
@@ -158,7 +187,7 @@ export function webApplicationSchema({
     name,
     description,
     url,
-    applicationCategory: "WritingApplication",
+    applicationCategory,
     operatingSystem: "Any modern web browser",
     browserRequirements: "Runs in a modern browser with JavaScript enabled",
     offers: {
@@ -176,11 +205,13 @@ export function webApplicationSchema({
 export function softwareApplicationSchema({
   name,
   description,
-  url
+  url,
+  applicationCategory = "WritingApplication"
 }: {
   name: string;
   description: string;
   url: string;
+  applicationCategory?: string;
 }) {
   return {
     "@type": "SoftwareApplication",
@@ -188,7 +219,7 @@ export function softwareApplicationSchema({
     name,
     description,
     url,
-    applicationCategory: "WritingApplication",
+    applicationCategory,
     operatingSystem: "Any modern web browser",
     browserRequirements: "Runs in a modern browser with JavaScript enabled",
     offers: {
