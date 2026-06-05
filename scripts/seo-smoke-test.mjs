@@ -64,10 +64,36 @@ const schema = read("lib/seo/schema.ts");
 const jsonLd = read("components/seo/JsonLd.tsx");
 const sitemap = read("app/sitemap.ts");
 const robots = read("app/robots.ts");
+const layout = read("app/layout.tsx");
 
 assert(page.includes("TextPulses - Free Text Analysis Tools for Writers & SEO"), "Homepage title is not the requested hub title.");
-assert(page.includes("Free browser-based SEO text checker for writers, marketers and website owners."), "Homepage H1 is missing.");
+assert(page.includes("Free SEO Text Analyzer for Writers"), "Homepage H1 is missing or not the short SEO H1.");
 assert(!page.includes("SeoSnippetChecker"), "Homepage still imports or renders the old snippet checker.");
+
+// --- Technical SEO + AdSense consent guarantees (added in SEO/E-E-A-T pass) ---
+assert(layout.includes('<html lang="en"'), 'Root layout must set <html lang="en">.');
+assert(!layout.includes("keywords: ["), "Global meta keywords list must not be present in the root layout.");
+assert(layout.includes("AdSenseScript"), "Layout must mount the consent-gated AdSenseScript.");
+assert(
+  !layout.includes("<script"),
+  "AdSense script must NOT be hard-coded in the layout <head>; it must load via the consent-gated AdSenseScript component."
+);
+
+// --- E-E-A-T: author page + Person schema ---
+assert(exists("app/author/ricardo-diaz/page.tsx"), "Author page /author/ricardo-diaz is missing.");
+assert(schema.includes("personSchema"), "Person schema helper is missing.");
+assert(jsonLd.includes("AuthorJsonLd"), "AuthorJsonLd component is missing.");
+assert(schema.includes('name: "Ricardo Diaz"'), "Article/Person author should be Ricardo Diaz.");
+
+// --- No invented Sitelinks search box pointing at a non-existent route ---
+assert(!schema.includes('"@type": "SearchAction"'), "Do not emit a SearchAction; there is no real /search route.");
+
+// --- Structured data on examples detail pages (visible FAQ + breadcrumb) ---
+assert(read("app/examples/[slug]/page.tsx").includes("WebPageJsonLd"), "Example detail pages must emit JSON-LD.");
+
+// --- Open Graph images are social-compatible PNGs, not SVG ---
+assert(exists("public/og/textpulses-og.png"), "Default PNG OG image is missing.");
+assert(!read("lib/seo/metadata.ts").includes("textpulses-og.svg"), "Default OG image should be PNG, not SVG.");
 
 for (const href of [
   "/tools/word-counter",
@@ -125,8 +151,16 @@ assert(!schema.includes("aggregateRating") && !jsonLd.includes("aggregateRating"
 assert(!schema.includes("ratingValue") && !jsonLd.includes("ratingValue"), "Structured data must not include invented ratingValue.");
 
 assert(sitemap.includes("toolPages.map") && sitemap.includes("guides.map"), "Sitemap is not generated from canonical tools and guides.");
-assert(robots.includes("allow: \"/\""), "robots.txt should allow public crawling.");
+assert(robots.includes('allow: "/"'), "robots.txt should allow public crawling.");
+assert(robots.includes("Googlebot"), "robots.txt should explicitly allow Googlebot.");
+assert(robots.includes("Mediapartners-Google"), "robots.txt should explicitly allow Mediapartners-Google.");
 assert(robots.includes("sitemap:"), "robots.txt should point to sitemap.xml.");
+assert(read("app/privacy-policy/page.tsx").includes("DART cookie"), "Privacy policy should disclose Google's DART cookie.");
+assert(exists("app/politica-de-privacidad/page.tsx"), "Spanish privacy policy route is missing.");
+assert(exists("app/terminos-de-servicio/page.tsx"), "Spanish terms route is missing.");
+assert(exists("app/sobre-nosotros/page.tsx"), "Spanish about route is missing.");
+assert(exists("app/contacto/page.tsx"), "Spanish contact route is missing.");
+assert(contactForm.includes("privacy_accepted"), "Contact form must require privacy-policy acceptance.");
 
 const titleMatches = [
   ...listFiles("app")
@@ -154,7 +188,11 @@ for (const route of [
   "/guides/seo-title-length-guide",
   "/guides/meta-description-length-checker-guide",
   "/tools/seo-title-checker",
-  "/tools/meta-description-checker"
+  "/tools/meta-description-checker",
+  "/politica-de-privacidad",
+  "/terminos-de-servicio",
+  "/sobre-nosotros",
+  "/contacto"
 ]) {
   const htmlFile = findBuiltHtml(route);
 

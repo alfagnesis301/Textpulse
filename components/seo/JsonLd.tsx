@@ -4,6 +4,7 @@ import {
   faqPageSchema,
   graphSchema,
   organizationSchema,
+  personSchema,
   siteNavigationSchema,
   softwareApplicationSchema,
   type BreadcrumbItem,
@@ -20,13 +21,20 @@ function JsonLdScript({ data }: { data: unknown }) {
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: json }} />;
 }
 
-export function HomeJsonLd({ navigation }: { navigation: NavigationItem[] }) {
+export function HomeJsonLd({
+  navigation,
+  faq
+}: {
+  navigation: NavigationItem[];
+  faq?: FaqItem[];
+}) {
   return (
     <JsonLdScript
       data={graphSchema([
         organizationSchema(),
         websiteSchema(),
-        siteNavigationSchema(navigation)
+        siteNavigationSchema(navigation),
+        ...(faq && faq.length > 0 ? [faqPageSchema(faq, `${websiteSchema().url}/`)] : [])
       ])}
     />
   );
@@ -70,13 +78,15 @@ export function ToolJsonLd({
   description,
   url,
   breadcrumbItems,
-  faq
+  faq,
+  applicationCategory
 }: {
   title: string;
   description: string;
   url: string;
   breadcrumbItems: BreadcrumbItem[];
   faq?: FaqItem[];
+  applicationCategory?: string;
 }) {
   return (
     <JsonLdScript
@@ -84,10 +94,34 @@ export function ToolJsonLd({
         organizationSchema(),
         websiteSchema(),
         webPageSchema({ title, description, url }),
-        softwareApplicationSchema({ name: title, description, url }),
-        webApplicationSchema({ name: title, description, url }),
+        softwareApplicationSchema({ name: title, description, url, applicationCategory }),
+        webApplicationSchema({ name: title, description, url, applicationCategory }),
         breadcrumbSchema(breadcrumbItems, url),
         ...(faq && faq.length > 0 ? [faqPageSchema(faq, url)] : [])
+      ])}
+    />
+  );
+}
+
+export function AuthorJsonLd({
+  title,
+  description,
+  url,
+  breadcrumbItems
+}: {
+  title: string;
+  description: string;
+  url: string;
+  breadcrumbItems: BreadcrumbItem[];
+}) {
+  return (
+    <JsonLdScript
+      data={graphSchema([
+        organizationSchema(),
+        websiteSchema(),
+        webPageSchema({ title, description, url }),
+        personSchema(),
+        breadcrumbSchema(breadcrumbItems, url)
       ])}
     />
   );

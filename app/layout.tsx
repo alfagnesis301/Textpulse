@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { AdSenseScript } from "@/components/AdSenseScript";
 import { CookieConsent } from "@/components/CookieConsent";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
@@ -13,18 +14,12 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   applicationName: siteConfig.name,
+  // NOTE: a global `meta keywords` list was intentionally removed. Google ignores
+  // the keywords meta tag, and the SEO audit flagged a repeated global list as a
+  // "careless template" signal. Do not reintroduce it.
   other: {
     "google-adsense-account": siteConfig.adsenseClientId
   },
-  keywords: [
-    "word counter",
-    "character counter",
-    "keyword density checker",
-    "readability checker",
-    "writing analyzer",
-    "SEO title checker",
-    "meta description checker"
-  ],
   icons: {
     icon: "/favicon.svg"
   },
@@ -58,13 +53,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <script
-          async
-          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${siteConfig.adsenseClientId}`}
-          crossOrigin="anonymous"
-        />
-      </head>
       <body>
         <a
           href="#main-content"
@@ -76,6 +64,14 @@ export default function RootLayout({
         <div id="main-content">{children}</div>
         <Footer />
         <CookieConsent />
+        {/*
+          AdSense is loaded here, NOT in <head>, and only after the visitor
+          accepts ad/analytics cookies. AdSenseScript is gated by both
+          NEXT_PUBLIC_ADS_ENABLED and NEXT_PUBLIC_ADSENSE_APPROVED, uses
+          Next Script afterInteractive, and points at the async Google loader:
+          https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js
+        */}
+        <AdSenseScript />
       </body>
     </html>
   );

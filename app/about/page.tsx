@@ -3,9 +3,9 @@ import { WebPageJsonLd } from "@/components/JsonLd";
 import { createMetadata, siteConfig } from "@/lib/seo";
 
 export const metadata = createMetadata({
-  title: "About TextPulses",
+  title: "About TextPulses — Privacy-First Writing Tools",
   description:
-    "Learn who operates TextPulses, how the editorial guidance is maintained, and why the tool uses privacy-first browser-based analysis.",
+    "Learn who operates TextPulses, how the editorial guidance is tested and corrected, and why the tools use privacy-first browser-based analysis.",
   path: "/about"
 });
 
@@ -102,25 +102,49 @@ export default function AboutPage() {
         ))}
       </div>
 
+      <section className="mt-8 rounded-2xl border border-slate-200 bg-white/88 p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900/88">
+        <h2 className="text-xl font-extrabold text-slate-950 dark:text-white">Who is behind TextPulses</h2>
+        <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400">
+          TextPulses is written and maintained by Ricardo Diaz, an independent publisher. One
+          person is accountable for the tools, the calculations, and the editorial guidance,
+          including how the tools are tested, what their limitations are, and how corrections are
+          handled.
+        </p>
+        <Link
+          href="/author/ricardo-diaz"
+          className="mt-4 inline-flex rounded-2xl border border-slate-200 bg-white px-4 py-2 text-sm font-extrabold text-slate-800 hover:border-pulse-blue hover:text-pulse-blue dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
+        >
+          Read more about the author
+        </Link>
+        <div className="mt-5 flex flex-wrap gap-3 text-sm font-bold">
+          <Link href="/editorial-policy" className="text-pulse-blue hover:text-pulse-violet">
+            Editorial Policy
+          </Link>
+          <Link href="/privacy-policy" className="text-pulse-blue hover:text-pulse-violet">
+            Privacy Policy
+          </Link>
+          <Link href="/methodology" className="text-pulse-blue hover:text-pulse-violet">
+            Methodology
+          </Link>
+          <Link href="/contact" className="text-pulse-blue hover:text-pulse-violet">
+            Contact
+          </Link>
+        </div>
+      </section>
+
       <section className="mt-8 rounded-2xl border border-blue-100 bg-blue-50/80 p-6 dark:border-blue-900/60 dark:bg-blue-950/30">
         <h2 className="text-xl font-extrabold text-slate-950 dark:text-white">How scoring works</h2>
         <p className="mt-3 text-sm leading-6 text-slate-700 dark:text-slate-300">
-          PublishFit Score is rule-based. It combines signals such as length fit, clarity,
-          readability, keyword balance, lexical variety, and sentence flow. The score does not
-          claim to predict Google rankings, social engagement, conversions, academic grades, or
-          editorial acceptance. It is a revision checklist, not a guarantee.
+          Scoring is rule-based and intentionally transparent. TextPulses compares a draft with
+          practical ranges for the chosen format, then highlights readability, repetition,
+          sentence length, paragraph structure, and channel fit. The score is a review aid, not
+          a promise of rankings, approval, engagement, or editorial acceptance.
         </p>
         <Link
           href="/methodology"
-          className="mt-4 inline-flex rounded-2xl bg-slate-950 px-4 py-2 text-sm font-extrabold text-white hover:bg-pulse-blue dark:bg-white dark:text-slate-950"
+          className="mt-4 inline-flex rounded-2xl border border-blue-200 bg-white px-4 py-2 text-sm font-extrabold text-slate-800 hover:border-pulse-blue hover:text-pulse-blue dark:border-blue-900 dark:bg-slate-950 dark:text-slate-100"
         >
           Read the methodology
-        </Link>
-        <Link
-          href="/editorial-policy"
-          className="ml-3 mt-4 inline-flex rounded-2xl border border-slate-200 bg-white px-4 py-2 text-sm font-extrabold text-slate-800 hover:border-pulse-blue dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
-        >
-          Read the editorial policy
         </Link>
       </section>
 

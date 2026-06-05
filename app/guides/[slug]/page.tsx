@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: GuidePageProps) {
     description: guide.seoDescription ?? guide.description,
     path: `/guides/${guide.slug}`,
     type: "article",
-    image: guide.ogImage ?? "/og/textpulses-og.svg",
+    image: guide.ogImage ?? "/og/guides-og.png",
     openGraphTitle: guide.ogTitle,
     openGraphDescription: guide.ogDescription,
     twitterTitle: guide.twitterTitle,

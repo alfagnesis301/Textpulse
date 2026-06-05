@@ -7,7 +7,8 @@ export const metadata = createMetadata({
   title: "Writing, SEO, and Word Count Guides",
   description:
     "Practical guides for word count, readability, keyword density, SEO titles, meta descriptions, social posts, essays, speeches, and PublishFit Score.",
-  path: "/guides"
+  path: "/guides",
+  image: "/og/guides-og.png"
 });
 
 export default function GuidesPage() {

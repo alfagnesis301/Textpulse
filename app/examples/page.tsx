@@ -4,12 +4,13 @@ import { examplePages } from "@/lib/examples";
 import { createMetadata, siteConfig } from "@/lib/seo";
 
 const description =
-  "Original before and after examples for SEO titles, meta descriptions, LinkedIn posts, email subjects, and YouTube descriptions.";
+  "Original before-and-after examples for SEO titles, meta descriptions, LinkedIn posts, email subjects, and YouTube descriptions. Check yours free in your browser.";
 
 export const metadata = createMetadata({
-  title: "Examples Library",
+  title: "Text Analysis Examples for Writers & SEOs",
   description,
-  path: "/examples"
+  path: "/examples",
+  image: "/og/examples-og.png"
 });
 
 const categories = [
@@ -81,7 +82,7 @@ export default function ExamplesIndexPage() {
   return (
     <main className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
       <WebPageJsonLd
-        title="Examples Library"
+        title="Text Analysis Examples for Writers & SEOs"
         description={description}
         url={`${siteConfig.url}/examples`}
         breadcrumbItems={[

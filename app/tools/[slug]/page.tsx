@@ -24,6 +24,14 @@ export default async function ToolPage({ params }: Props) {
   if (!tool) notFound();
 
   const url = `${siteConfig.url}/tools/${tool.slug}`;
+  // SEO-focused checkers map to SEOApplication; everything else is a WritingApplication.
+  const seoSlugs = [
+    "seo-title-checker",
+    "meta-description-checker",
+    "keyword-density-checker",
+    "youtube-title-description-checker"
+  ];
+  const applicationCategory = seoSlugs.includes(tool.slug) ? "SEOApplication" : "WritingApplication";
   const breadcrumbItems = [
     { name: "Home", url: `${siteConfig.url}/` },
     { name: "Tools", url: `${siteConfig.url}/tools` },
@@ -38,7 +46,7 @@ export default async function ToolPage({ params }: Props) {
 
   return (
     <main>
-      <ToolJsonLd title={tool.title} description={tool.description} url={url} breadcrumbItems={breadcrumbItems} faq={tool.faq} />
+      <ToolJsonLd title={tool.title} description={tool.description} url={url} breadcrumbItems={breadcrumbItems} faq={tool.faq} applicationCategory={applicationCategory} />
       <nav className="mx-auto max-w-7xl px-4 pt-6 text-sm font-semibold text-slate-500 sm:px-6 lg:px-8">
         <Link href="/">Home</Link> / <Link href="/tools">Tools</Link> / {tool.title}
       </nav>
@@ -48,7 +56,20 @@ export default async function ToolPage({ params }: Props) {
         <p className="mt-5 max-w-4xl text-base leading-8 text-slate-700 dark:text-slate-300">{tool.intro}</p>
       </section>
       <TextAnalyzer initialPresetId={tool.preset} />
-      <section className="mx-auto grid max-w-7xl gap-6 px-4 py-10 sm:px-6 lg:px-8">
+      <section className="mx-auto grid max-w-7xl gap-6 px-4 py-10 sm:px-6 lg:px-8" aria-labelledby="tool-educational-information">
+        <div className="max-w-3xl">
+          <p className="text-sm font-bold uppercase tracking-[0.2em] text-pulse-blue">
+            Educational information
+          </p>
+          <h2 id="tool-educational-information" className="mt-3 text-3xl font-extrabold tracking-tight text-slate-950 dark:text-white">
+            How to use this result responsibly
+          </h2>
+          <p className="mt-4 text-base leading-7 text-slate-600 dark:text-slate-400">
+            Treat this checker as an editorial review aid. The metrics can highlight length,
+            clarity, repetition, scanability, and format fit, but they do not guarantee search
+            ranking, social engagement, approval, or professional accuracy.
+          </p>
+        </div>
         <div className="grid gap-4 lg:grid-cols-2">
           <article className="rounded-2xl border border-slate-200 bg-white/88 p-5 dark:border-slate-800 dark:bg-slate-900/88">
             <h2 className="text-2xl font-extrabold text-slate-950 dark:text-white">What this tool checks</h2>

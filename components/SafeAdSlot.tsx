@@ -43,28 +43,41 @@ export function SafeAdSlot({ id, slotId, position = "content", className = "" }:
     }
   }, [allowed, slotId]);
 
-  if (!ADS_ENABLED || !allowed || !slotId) return null;
+  if (!ADS_ENABLED || !slotId) return null;
 
-  const sizeClass = position === "sidebar" ? "min-h-[300px]" : "min-h-[220px]";
+  const sizeClass =
+    position === "inline"
+      ? "min-h-[90px]"
+      : position === "sidebar"
+        ? "min-h-[300px] md:min-h-[250px]"
+        : position === "footer"
+          ? "min-h-[120px]"
+          : "min-h-[250px]";
 
   return (
     <aside
       id={id}
-      className={`my-10 w-full rounded-2xl border border-slate-200 bg-slate-50/80 p-4 dark:border-slate-800 dark:bg-slate-900/70 ${position === "sidebar" ? "xl:sticky xl:top-24" : ""} ${className}`}
+      className={`ad-slot ad-slot-${position} my-10 w-full rounded-2xl border border-slate-200 bg-slate-50/80 p-4 dark:border-slate-800 dark:bg-slate-900/70 ${position === "sidebar" ? "xl:sticky xl:top-24" : ""} ${className}`}
       aria-label="Advertisement"
     >
       <div className="mb-3 text-center text-xs font-bold uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">
         Advertisement
       </div>
       <div className={`grid ${sizeClass} place-items-center rounded-xl bg-white/75 dark:bg-slate-950/60`}>
-        <ins
-          className="adsbygoogle"
-          style={{ display: "block" }}
-          data-ad-client={siteConfig.adsenseClientId}
-          data-ad-slot={slotId}
-          data-ad-format="auto"
-          data-full-width-responsive="true"
-        />
+        {allowed ? (
+          <ins
+            className="adsbygoogle"
+            style={{ display: "block", minHeight: "inherit", width: "100%" }}
+            data-ad-client={siteConfig.adsenseClientId}
+            data-ad-slot={slotId}
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+          />
+        ) : (
+          <span className="px-3 text-center text-xs font-semibold text-slate-400 dark:text-slate-600">
+            Advertising space reserved
+          </span>
+        )}
       </div>
     </aside>
   );

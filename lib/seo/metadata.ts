@@ -24,7 +24,9 @@ export function createMetadata({
   description,
   path = "",
   type = "website",
-  image = "/og/textpulses-og.svg",
+  // Default social card. PNG (not SVG) because X/Facebook/LinkedIn do not render
+  // SVG Open Graph images. Per-page overrides can pass a more specific PNG.
+  image = "/og/textpulses-og.png",
   openGraphTitle,
   openGraphDescription,
   twitterTitle,

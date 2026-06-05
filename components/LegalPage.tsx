@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { WebPageJsonLd } from "@/components/JsonLd";
 import { siteConfig } from "@/lib/seo";
 
@@ -31,7 +32,16 @@ export function LegalPage({ eyebrow, title, intro, updated, sections, path }: Le
           ]}
         />
       ) : null}
-      <p className="text-sm font-bold uppercase tracking-[0.2em] text-pulse-blue">{eyebrow}</p>
+      {url ? (
+        <nav aria-label="Breadcrumb" className="text-sm font-semibold text-slate-500 dark:text-slate-400">
+          <Link href="/" className="hover:text-pulse-blue">
+            Home
+          </Link>
+          <span className="mx-2">/</span>
+          <span className="text-slate-700 dark:text-slate-300">{title}</span>
+        </nav>
+      ) : null}
+      <p className="mt-6 text-sm font-bold uppercase tracking-[0.2em] text-pulse-blue">{eyebrow}</p>
       <h1 className="mt-3 text-4xl font-black tracking-tight text-slate-950 dark:text-white sm:text-5xl">
         {title}
       </h1>
