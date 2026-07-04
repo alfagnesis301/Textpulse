@@ -5,7 +5,11 @@ export const metadata = createMetadata({
   title: "Politica de Privacidad",
   description:
     "Politica de privacidad de TextPulses sobre cookies, datos de usuario, formularios, almacenamiento local y anuncios de Google AdSense.",
-  path: "/politica-de-privacidad"
+  path: "/politica-de-privacidad",
+  robots: {
+    index: false,
+    follow: true
+  }
 });
 
 export default function PoliticaDePrivacidadPage() {

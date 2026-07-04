@@ -16,10 +16,6 @@ const routes = [
   "/contact",
   "/privacy-policy",
   "/terms",
-  "/politica-de-privacidad",
-  "/terminos-de-servicio",
-  "/sobre-nosotros",
-  "/contacto",
   "/cookie-policy",
   "/disclaimer"
 ];

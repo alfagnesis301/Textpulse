@@ -6,6 +6,12 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.textpulses.com" }],
+        destination: "https://textpulses.com/:path*",
+        permanent: true
+      },
+      {
         source: "/guides/keyword-density-guide",
         destination: "/guides/keyword-density-what-is-too-much",
         permanent: true

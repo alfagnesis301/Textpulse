@@ -6,7 +6,11 @@ export const metadata = createMetadata({
   title: "Contacto",
   description:
     "Contacta con TextPulses para soporte, correcciones, preguntas de privacidad, consultas tecnicas o comentarios editoriales.",
-  path: "/contacto"
+  path: "/contacto",
+  robots: {
+    index: false,
+    follow: true
+  }
 });
 
 const spanishContactLabels = {

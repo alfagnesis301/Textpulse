@@ -109,8 +109,8 @@ for (const href of [
 
 for (const text of [
   "LinkedIn Post Length: Ideal Character Count by Format (2026)",
-  "SEO Title Length: Ideal Character & Pixel Limits (2026)",
-  "Meta Description Length: Ideal Characters & Free Checker (2026)",
+  "SEO Title Length: What Is the Ideal Title Length? (2026)",
+  "Meta Description Length: How Long Should It Be? (2026)",
   "Format\", \"Suggested range\", \"Best for\", \"Risk if too long\", \"Risk if too short",
   "SEO title length by page type",
   "Meta description by page type",
@@ -123,7 +123,7 @@ for (const text of [
 
 assert(tools.includes("Meta Description Checker: Free Length & SERP Preview Tool"), "Meta description checker title is missing.");
 assert(tools.includes("Paste a meta description to check character count, mobile risk, desktop preview and truncation risk before publishing."), "Meta description checker description is missing.");
-assert(tools.includes("SEO Title Checker: Free Length & SERP Preview Tool"), "SEO title checker title is missing.");
+assert(tools.includes("SEO Title Checker: Free Length Check & SERP Preview"), "SEO title checker title is missing.");
 assert(tools.includes("Why the metric matters") || read("app/tools/[slug]/page.tsx").includes("Why the metric matters"), "Tool education section is missing.");
 assert(toolsHub.includes("How to choose the right TextPulses tool"), "/tools hub guidance is missing.");
 assert(toolsHub.includes("Recommended workflows"), "/tools recommended workflows are missing.");

@@ -5,7 +5,11 @@ export const metadata = createMetadata({
   title: "Sobre Nosotros",
   description:
     "Conoce la mision editorial de TextPulses, quien mantiene el sitio y que valor aporta a escritores, estudiantes, creadores y equipos SEO.",
-  path: "/sobre-nosotros"
+  path: "/sobre-nosotros",
+  robots: {
+    index: false,
+    follow: true
+  }
 });
 
 export default function SobreNosotrosPage() {

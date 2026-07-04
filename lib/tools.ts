@@ -45,10 +45,10 @@ export const toolPages: ToolPage[] = [
   {
     slug: "seo-title-checker",
     title: "SEO Title Checker",
-    metaTitle: "SEO Title Checker: Free Length & SERP Preview Tool",
-    description: "Paste an SEO title to check character count, approximate pixel risk, mobile scanability, repetition, and SERP preview fit before publishing.",
+    metaTitle: "SEO Title Checker: Free Length Check & SERP Preview",
+    description: "Check your SEO title free: character count, pixel width risk (~580 px limit) and SERP preview fit for desktop and mobile. No signup, runs in your browser.",
     preset: "seo-title",
-    intro: "The SEO Title Checker helps you review a page title before it becomes the promise shown in search results, browser tabs, and shared links. It checks length, clarity, repetition, and whether the important topic appears early enough to be understood quickly. The goal is not to chase a magic number or guarantee ranking. It is to make the title specific, readable, and aligned with the actual page. Paste a title, compare the Publish Readiness Report, then rewrite anything that sounds padded, duplicated, or vague. This is especially useful when several pages target similar topics and each title needs a clear reason to exist.",
+    intro: "Paste a title and get an instant check: character count against the practical 50-60 range, estimated pixel-width risk near Google's ~580 px desktop limit, repetition warnings, and whether the main topic appears early enough for a compact search result. Everything runs in your browser, with no signup and no upload. The goal is not to chase a magic number or guarantee ranking. It is to make the title specific, readable, and aligned with the actual page. This is especially useful when several pages target similar topics and each title needs a clear reason to exist.",
     decide: ["Whether the title is concise enough for scanning.", "Whether the main topic appears early.", "Whether repeated terms make the title look forced."],
     metricMatters: [
       "The title tag is often the first search-result promise a user sees. A clear title can help the right searcher understand the page before they click.",
@@ -59,12 +59,15 @@ export const toolPages: ToolPage[] = [
     mistakes: ["Repeating the same keyword twice.", "Starting with a vague brand claim.", "Using a title that does not match the page.", "Making every page title follow the same template."],
     checklist: ["Keep the topic early.", "Remove filler adjectives.", "Make the page type clear.", "Avoid duplicate titles.", "Check the methodology note before relying on limits."],
     faq: [
-      { question: "What title length should I aim for?", answer: "A practical range is often around 40 to 60 characters, but clarity and page match matter more than a fixed number." },
+      { question: "How do I check my SEO title length?", answer: "Paste the title into the checker above. You get the character count, practical pixel-risk signals against Google's ~580 px limit, and warnings about repetition or a buried topic." },
+      { question: "Is this SEO title checker free?", answer: "Yes. It is free, requires no signup, and runs browser-side: the text never leaves your device." },
+      { question: "What is a good result?", answer: "50-60 characters, main topic in the first 40 characters, no repeated keywords, and a clear page type. If the title fails one check, the report tells you what to trim." },
+      { question: "What title length should I aim for?", answer: "A practical range is often around 50 to 60 characters, but clarity and page match matter more than a fixed number." },
       { question: "Can this predict Google truncation?", answer: "No. Search display can vary by query, device, and pixel width. The checker gives practical risk signals, not a display guarantee." },
       { question: "Should I include my brand in every title?", answer: "Use the brand when it helps recognition or trust. Avoid adding it mechanically when it makes many titles look duplicated." },
       { question: "How do I avoid keyword stuffing in a title?", answer: "Use the primary topic once, then add audience, format, location, or benefit only when it clarifies the page." }
     ],
-    relatedGuides: [{ href: "/guides/seo-title-length-guide", label: "SEO Title Length Guide" }, { href: "/examples/seo-title-examples", label: "SEO Title Examples" }]
+    relatedGuides: [{ href: "/guides/seo-title-length-guide", label: "How Long Should an SEO Title Be? (Full Guide)" }, { href: "/examples/seo-title-examples", label: "SEO Title Examples" }]
   },
   {
     slug: "meta-description-checker",

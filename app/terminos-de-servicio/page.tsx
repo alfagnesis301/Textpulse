@@ -5,7 +5,11 @@ export const metadata = createMetadata({
   title: "Terminos de Servicio",
   description:
     "Condiciones de uso de TextPulses, limitacion de responsabilidad, propiedad intelectual y uso aceptable del sitio.",
-  path: "/terminos-de-servicio"
+  path: "/terminos-de-servicio",
+  robots: {
+    index: false,
+    follow: true
+  }
 });
 
 export default function TerminosDeServicioPage() {
